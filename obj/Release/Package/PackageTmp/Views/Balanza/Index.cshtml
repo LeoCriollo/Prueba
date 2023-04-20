@@ -1,0 +1,123 @@
+﻿@model IEnumerable<DoleEcIntranet.Models.TipoEmpaqueModels>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@Styles.Render("~/bundles/datatables/css")
+
+<section class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="breadcrumb">
+                    <li>Captura Balanza</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>Tipos de Empaques</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<div class="container">
+
+    <div class="row">
+        <p>
+            @Html.ActionLink("Nuevo tipo de empaque", "Create")
+        </p>
+
+    </div>
+    <div class="row">
+        <table class="table table-striped" id="tbl_bal">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Codigo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Pais)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PesoLibraIni)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PesoLibraFin)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PesoCaja)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Codigo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Pais)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PesoLibraIni)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PesoLibraFin)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PesoCaja)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Modificar", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+@section scripts {
+
+    @Scripts.Render("~/bundles/datatables")
+
+
+    <script type="text/javascript">
+
+        //Aplicar Datatable a la tabla
+        $(document).ready(function () {
+            $('#tbl_bal').DataTable({
+                "language": {
+                    "url": "../Scripts/Datatables/Spanish_Datatable.json"
+                }
+
+            });
+        });
+
+    </script>
+}

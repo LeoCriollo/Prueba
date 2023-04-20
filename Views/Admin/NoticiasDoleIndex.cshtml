@@ -1,0 +1,117 @@
+﻿@model IEnumerable<DoleEcIntranet.Models.NoticiasDoleIndexViewModel>
+
+@Styles.Render("~/bundles/datatables/css")
+
+@{
+    ViewBag.Title = "Noticias Dole ";
+}
+
+
+
+<section class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="breadcrumb">
+                    <li class="active"><a href="@Url.Action("Index","Home")">Home</a></li>
+                    <li>Contenido</li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>Noticias Dole</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+
+   
+
+    <p class="text-center">
+        @Html.ActionLink("Crear Noticia", "CreateNoticiasDole")
+    </p>
+
+    @if (Model.Any())
+    {
+
+        <table id="tblNoticiasDole1" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TituloArticulo)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.ResumenContenido)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaCreacion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UsuarioCreador)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TituloArticulo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ResumenContenido)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaCreacion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UsuarioCreador)
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Modificar", "EditNoticiasDole", new { id = item.Id }) |
+                            @Html.ActionLink("Eliminar", "DeleteNoticiasDole", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+    else
+    {
+        <div>
+            <p class="text-center">No existen noticias. </p>
+        </div>
+
+    }
+</div>
+
+@section scripts {
+
+    @Scripts.Render("~/bundles/datatables")
+
+
+    <script type="text/javascript">
+
+        //Aplicar Datatable a la tabla
+        $(document).ready(function () {
+            $('#tblNoticiasDole1').DataTable({
+                "language": {
+                    "url": "../Scripts/Datatables/Spanish_Datatable.json"
+                }
+
+            });
+        });
+
+    </script>
+}

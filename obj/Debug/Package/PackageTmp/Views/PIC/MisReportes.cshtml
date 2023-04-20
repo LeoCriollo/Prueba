@@ -1,0 +1,132 @@
+﻿@model IEnumerable<DoleEcIntranet.Models.PicModel.MyReportModel>
+
+
+
+
+@Styles.Render("~/bundles/datatables/css")
+@Styles.Render("~/bundles/alertify/css")
+
+<div class="container">
+    <br />
+    <label style="font-size:40px;color:black;"> Mis reportes</label>
+    <hr />
+    <div class="row">
+        <div class="col-md-2">
+            <label class="control-label">Estados:</label>
+        </div>
+        <div class="col-md-4">
+            <select class="form-control" id="Estados" name="Estados">
+                <option value="P">Pendiente</option>
+                <option value="A">Aprobado</option>
+                <option value="R">Rechazado</option>
+                <option value="G">Guardado</option>
+            </select>
+
+        </div>
+
+
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-2">
+            <label>Desde:</label>
+        </div>
+        <div class="col-md-3">
+
+            <input type="date" class="form-control" name="fdesde" id="fdesde" value="" />
+
+        </div>
+        <div class="col-md-2">
+            <label>Hasta:</label>
+        </div>
+        <div class="col-md-3">
+
+            <input type="date" class="form-control" name="fhasta" id="fhasta" value="" />
+
+        </div>
+
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12" style="text-align:center">
+            <button type="button" name="name" class="btn btn-success" onclick="FiltrarReportes();" style="border-radius:10px">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-filter-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path d="M7 11.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5z" />
+                </svg>&nbsp; Filtrar
+            </button>
+            
+
+        </div>
+
+    </div>
+
+
+    <br />
+    <div id="Section_MisReportes">
+
+    </div>
+
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/datatables")
+    @Scripts.Render("~/bundles/alertify")
+    @Scripts.Render("~/bundles/SRG")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            //Aplicar datatable
+            $("#TablaMyReport").DataTable();
+
+        });
+
+    function FiltrarReportes() {
+
+              var requestConsulta = {
+
+            Estados: $("#Estados").val(),
+            fdesde: $("#fdesde").val(),
+            fhasta: $("#fhasta").val()
+        };
+  
+
+
+            $("#Section_MisReportes").empty();
+
+
+            var request = $.ajax({
+                url: "@Url.Action("SearchReportes", "PIC")",
+                type: "POST",
+                data: JSON.stringify(requestConsulta),
+                dataType: "html",
+                contentType: "application/json; charset=utf-8"
+            });
+
+        request.done(function (response) {
+
+                $('#Section_MisReportes').append(response);
+
+
+                //Aplicar datatable
+                $("#TablaMyReport").DataTable();
+                $.unblockUI();
+
+            });
+
+            request.fail(function (jqXHR, textStatus) {
+                alert("Proceso no realizado: " + textStatus);
+                $.unblockUI();
+
+            });
+
+
+       
+
+
+
+    }
+    </script>
+}

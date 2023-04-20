@@ -1,0 +1,1092 @@
+﻿@model DoleEcIntranet.Models.AnticipoEfectivoModel
+
+@{
+    ViewBag.Title = "AnticipoEfectivo";
+}
+@Styles.Render("~/bundles/alertify/css")
+<style type="text/css">
+    label {
+        color: black;
+        font-family: 'Times New Roman';
+        font-size: 17px
+    }
+
+    .error {
+        color: red
+    }
+
+    .container-input {
+        text-align: center;
+        border-radius: 6px;
+        width: 50%;
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+
+    .inputfile {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
+
+        .inputfile + label {
+            max-width: 80%;
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            cursor: pointer;
+            display: inline-block;
+            overflow: hidden;
+            padding: 0.625rem 1.25rem;
+        }
+
+            .inputfile + label svg {
+                width: 1em;
+                height: 1em;
+                vertical-align: middle;
+                fill: currentColor;
+                margin-top: -0.25em;
+                margin-right: 0.25em;
+            }
+
+    .iborrainputfile {
+        font-size: 16px;
+        font-weight: normal;
+        font-family: 'Lato';
+    }
+
+    .inputfile-1 + label {
+        color: #fff;
+        background-color: #67be63;
+    }
+
+        .inputfile-1:focus + label,
+        .inputfile-1.has-focus + label,
+        .inputfile-1 + label:hover {
+            background-color: #488545;
+        }
+</style>
+
+@Styles.Render("~/bundles/alertify/css")
+<script src="http://momentjs.com/downloads/moment.min.js"></script>
+<br />
+<br />
+
+@if (ViewBag.usuarioLog != "")
+{
+    if (ViewBag.Denegado != "1")
+    {
+        <form id="formVFAE">
+            <div class="container" style="text-align:center">
+                <h3> <u>Formulario Anticipo de efectivo <b>(FAE)</b></u> </h3>
+
+                <div class="row">
+                    <div class="col-md-7"></div>
+                    <div class="col-md-4" style=" border-color:black; text-align:center">
+                        <h3 style="font-family: 'Times New Roman'; border: 3px solid black;">SECUENCIAL: <b> 00000 @Model.Secuencial</b></h3>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-6" style="text-align:center">
+
+
+                        <label><b>Fecha de la Solicitud  : </b> </label>
+                        <label>@Model.FechaSolicitud</label>
+
+                    </div>
+                    <div class="col-md-6">
+                        <label><b>Status : </b> </label>
+                        <label>@Model.Estatus</label>
+
+                    </div>
+
+                </div>
+                <br />
+                <br />
+                <div class="row">
+                    <div class="col-md-2" style="text-align:left">
+
+                        <label style="color:red"><b>Datos del Empleado <abbr style="color:red">*</abbr></b> </label>
+                    </div>
+                    <div class="col-md-3" style="text-align:left">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                    </svg>
+                                </span>
+                            </div>
+                            <input type="number" name="codigoempleado" class="form-control" placeholder="Código empleado" id="codigoempleado" value="" />
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="col-md-3" style="text-align:left">
+
+                        <button value="" type="button" class="btn btn-primary btn-lg" id="ConsultarEmpleado" onclick="CodigoEmpleado()" name="ConsultarEmpleado"><i class="fa fa-search"></i>  Consultar datos de Empleado</button>
+                        @*<input class="btn btn-primary" type="button" id="ConsultarEmpleado" name="ConsultarEmpleado" value="Consultar datos de Empleado"> </input>*@
+                    </div>
+
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-2" style="text-align:left">
+                        <label><b>Nombre:</b></label>
+                    </div>
+                    <div class="col-md-3" style="text-align:left">
+
+                        <input type="text" name="nombre" id="nombre" class="form-control" disabled value="" />
+                    </div>
+                    <div class="col-md-2" style="text-align:left">
+                        <label><b>Departamento:</b></label>
+                    </div>
+                    <div class="col-md-4" style="text-align:left">
+
+                        <input type="text" name="departamento" id="departamento" class="form-control" disabled value="" />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-2" style="text-align:left">
+                        <label><b>Compañía:</b></label>
+                    </div>
+                    <div class="col-md-3" style="text-align:left">
+
+                        <input type="text" name="compania" id="compania" class="form-control" disabled value="" />
+                    </div>
+
+                    <div class="col-md-2" style="text-align:left">
+                        <label><b>Centro de costos:</b></label>
+                    </div>
+                    <div class="col-md-4" style="text-align:left">
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                        <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
+                                        <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                                    </svg>
+                                </span>
+                            </div>
+
+                            <input type="text" name="centrocosto" id="centrocosto" class="form-control" disabled value="" />
+                        </div>
+
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-2" style="text-align:left">
+                        <label><b>Área:</b></label>
+                    </div>
+                    <div class="col-md-3" style="text-align:left">
+
+                        <input type="text" name="area" id="area" class="form-control" disabled value="" />
+                    </div>
+
+
+                    <div class="col-md-2" style="text-align:left">
+
+                        <label><b>Centro de costo cargado a:</b></label>
+                    </div>
+                    <div class="col-md-4" style="text-align:left">
+
+
+
+                        <input type="checkbox" name="checkIn" id="checkIn" class="checkbox" onclick="checkIn1()" value="" />     &nbsp  &nbsp
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                        <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
+                                        <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                                    </svg>
+                                </span>
+                            </div>
+                            @Html.DropDownList("SlctCentroCostoa", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+
+
+                    <div class="col-md-2" style="text-align:left">
+
+                        <label id="af"><b>Autoridad Financiera: <abbr style="color:red">*</abbr></b></label>
+                    </div>
+                    <div class="col-md-3" style="text-align:left">
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend" id="afi">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-shaded" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8 14.933a.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067v13.866zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z" />
+                                    </svg>
+                                </span>
+                            </div>
+
+                            @Html.DropDownList("SlctGerentes", null, htmlAttributes: new { @class = "form-control sel1" })
+
+
+                        </div>
+
+
+
+                        <label style="font-size:14px" id="afff"><input type="checkbox" name="CheckDirect" class="sel1" id="CheckDirect" onclick="CheckDirector()" value="" /><b> En ausencia del Gerente del Área que apruebe el Director del Área</b></label>
+                    </div>
+
+
+                    <div class="col-md-2" style="text-align:left;display:none" id="dir">
+                        <label id="lblDirector"><b>Director:</b></label>
+                    </div>
+                    <div class="col-md-4" style="text-align:left;display:none" id="SlctDirectores">
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-shaded" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8 14.933a.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067v13.866zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z" />
+                                    </svg>
+                                </span>
+                            </div>
+                            @Html.DropDownList("SlctDirectores", null, htmlAttributes: new { @class = "form-control sel1", id = "SlctDirectores1" })
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+                <br />
+                <div class="col-md-12" style="text-align:center">
+                    <h4> <u>Datos del anticipo de efectivo</u> </h4>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-2" style="text-align:left">
+                        <label> <b>Destino: <abbr style="color:red">*</abbr></b></label>
+                    </div>
+                    <div class="col-md-3" style="text-align:left">
+
+                        <select class="form-control" id="slDestino" name="slDestino">
+                            <option value="0">-Seleccione-</option>
+                            <option value="1">Nacional</option>
+                            <option value="2">Exterior</option>
+
+                        </select>
+                    </div>
+                    <div class="col-md-2" style="text-align:left">
+
+                        <label><b>Motivo del anticipo de efectivo:<abbr style="color:red">*</abbr></b></label>
+                    </div>
+                    <div class="col-md-4" style="text-align:left">
+
+                        <select class="form-control" id="motanticefect" name="motanticefect">
+                            <option value="0">-Seleccione-</option>
+                            <option value="1">Capacitación</option>
+                            <option value="2">Eventos / Ferias</option>
+                            <option value="3">Otros</option>
+                            <option value="4">Reuniones de trabajo</option>
+
+                            <option value="5">Trabajos en otras cias.DOLE</option>
+                            <option value="6">Tramites Visa (trabajo)</option>
+                        </select>
+                    </div>
+
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2" style="text-align:left">
+                        <label> <b>Pais: <abbr style="color:red">*</abbr></b></label>
+                    </div>
+                    <div class="col-md-3" style="text-align:left">
+                        @Html.DropDownList("SlPais", null, htmlAttributes: new { @class = "form-control paises" })
+
+                        @*<select class="form-control" id="pais" name="pais">
+                <option value="0">-Seleccione-</option>
+                <option value="1">Afganiztan</option>
+                <option value="2">Albania</option>
+                <option value="3">Alemania</option>
+                <option value="4">Andorra</option>
+
+                  </select>*@
+                    </div>
+                    <div class="col-md-2" style="text-align:left">
+                        <label> <b>Ciudad: <abbr style="color:red">*</abbr></b></label>
+                    </div>
+                    <div class="col-md-4" style="text-align:left">
+
+                        @*@Html.DropDownList("Ciudades", null, htmlAttributes: new { @class = "form-control" })*@
+                        @Html.DropDownList("Ciudades", (IEnumerable<SelectListItem>)ViewBag.Ciudades ?? new List<SelectListItem>(), "- Seleccione-", new { @class = "form-control", name = "state" })
+
+                    </div>
+
+                </div>
+
+                <br />
+                <div class="row">
+                    <div class="col-md-2" style="text-align:left">
+                        <label><b>Desde:<abbr style="color:red">*</abbr></b></label>
+                    </div>
+                    <div class="col-md-3" style="text-align:left">
+
+                        <input type="date" name="fechadesde" id="fechadesde" class="form-control fecha" value="" />
+                    </div>
+                    <div class="col-md-2" style="text-align:left">
+                        <label><b>  Hasta:<abbr style="color:red">*</abbr></b></label>
+                    </div>
+                    <div class="col-md-4" style="text-align:left">
+
+                        <input type="date" name="fechahasta" id="fechahasta" class="form-control fecha" value="" />
+                    </div>
+                </div>
+                <br />
+
+                <div class="row" style="display:none" id="CalFecha">
+                    <div class="col-md-12">
+                        <div style="text-align:center" id="CalculoFecha">
+
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-2" style="text-align:left">
+                        <label> <b>Usara TC corporativa:<abbr style="color:red">*</abbr> </b></label>
+                    </div>
+                    <div class="col-md-3" style="text-align:left">
+
+                        <select class="form-control fecha" id="slTC" name="slTC">
+                            <option value="0">-Seleccione-</option>
+                            <option value="1">Si</option>
+                            <option value="2">No</option>
+
+
+                        </select>
+                    </div>
+
+                    <div class=" col-md-2" style="text-align:left">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <label><b>Asistentes</b>  </label>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" name="conteoAsist" class="form-control fecha" style="text-align:center;font-size:14px;background-color:white" value="1" id="conteoAsist" disabled />
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="col-md-3">
+                        <input type="text" name="asistentes-1" id="asistentes-1" class="form-control" value="" style="background-color:white" disabled />
+                    </div>
+                    <div class="col-md-1">
+
+                        <button type="button" title="Agregar Asistente" class="btn btn-success fecha" onclick="GenerarAsitente();" style="border: none; background-color: #FFFFFF">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" style="color: #52B63F" height="26" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                            </svg>
+                        </button>
+
+                    </div>
+                </div>
+
+                <div style="display:initial" id="GenerateAsistente">
+
+
+
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <div class="col-md-4 col-lg-4 col-sm-8 offset-sm-5 offset-lg-0 offset-md-0 " style="text-align:left;margin:10px;background-color:white; border-radius:6px;border:1px solid #B1B1B1;height:100%;padding:16px;box-sizing:border-box">
+
+                            <div class="file-container">
+                                <label><b>Pdf - Imágenes</b></label>
+                            </div>
+                            <div>
+                                <input type="file" class="form-control-file" name="fileAprobacion" id="fileAprobacion" value="" accept="image/*,application/pdf" />
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>
+
+                <br />
+                <br />
+
+                <div id="imagenCargada" class="col-md-12 d-flex justify-content-center">
+
+                </div>
+
+
+                @*<div class="row">
+            <div class="col-md-12" style="text-align:center">
+                <label><b>Aprobación:</b></label><br />
+                <input type="file" class="Pdfs" name="fileAprobacion" id="fileAprobacion" value="" accept="application/pdf" />
+
+            </div>
+        </div>*@
+                <br />
+                <div class="row">
+                    <div class="col-md-12" style="text-align:left">
+                        <label><b>Comentarios:<abbr style="color:red">*</abbr></b></label>
+                        <textarea class="form-control" id="Comentarios" name="Comentarios" required></textarea>
+                    </div>
+
+                </div>
+                <hr />
+                <h4 style="color:red; font-family:'Bodoni MT'"> DETALLES DE GASTOS</h4>
+                <div style="background-color: #F7F7F7;" class="col-md-12">
+                    <div style="background-color: #EEECEB; padding: 8px; border-bottom: solid black; border-block: solid black;" class="row">
+
+                        <div class="col-md-3"><label> Concepto </label></div>
+                        <div class="col-md-2"> <label>Valor</label> </div>
+
+                        <div class="col-md-2"> <label>Total</label> </div>
+                        <div class="col-md-"> <label>Comentarios</label> </div>
+                    </div>
+                    <br />
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+
+                            <select class="form-control" id="tipoconsumo" name="tipoconsumo">
+                                <option value="0" style="border-style:dotted;border-color:red ">-Seleccione-</option>
+                                <option value="1">Almuerzo</option>
+                                <option value="2">Alquiler de auto</option>
+                                <option value="3">Atenciones</option>
+                                <option value="4">Cena</option>
+                                <option value="5">Combustible</option>
+                                <option value="6">Desayuno</option>
+                                <option value="7">Hospedaje</option>
+                                <option value="9">Otros</option>
+                                <option value="10">Peajes</option>
+                                <option value="11">Servicios Financieros</option>
+                                <option value="12">Taxis</option>
+
+                            </select>
+                        </div>
+                        <div class="col-md-2" style="text-align:center">
+
+                            <input type="number" name="valor" id="valor" class="form-control fecha" value="" style="border-style:dotted;border-color:red" />
+                        </div>
+                        <div class="col-md-2" style="text-align:center">
+
+
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 17 17">
+                                            <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z" />
+                                        </svg>
+
+
+                                    </span>
+                                </div>
+                                @*<input type="text" disabled style="text-align: right ; font-size:17px ; background-color:white; border-style:dotted;border-color:red" name="valor" id="valor" class="form-control valor" value="" />*@
+                                <input type="number" name="total" id="total" class="form-control" value="" style="text-align: right ; font-size:15px ; background-color:white; border-style:dotted;border-color:red" disabled />
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-4" style="text-align:center">
+
+                            <textarea class="form-control" id="descripcionGastos"></textarea>
+                        </div>
+                        <div class="col-md-1">
+                            @*<button style="background-color:black; color:white" type="button" id="btnAdd"><i class="fas fa-plus fa-3x"></i></button>*@
+                            <button type="button" title="Agregar detalle" class="btn btn-success" id="btnAdd" style="border: none; background-color: #F7F7F7">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" style="color: #52B63F" height="40" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                                </svg>
+                            </button>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <br />
+                </div>
+
+                <br />
+
+
+                <div class="col-md-12" style="text-align:center"><label style="color:red; font-size:22px"> <b>Gastos Agregados</b></label> </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex">
+
+                            <button type="button" class="btn btn-primary btn-sm mr-2" id="editar" onclick="EditarDataTable();" disabled>EDITAR</button>
+
+                            <button type="button" class="btn btn-danger btn-sm" id="eliminar" onclick="EliminarDataTable();" disabled>ELIMINAR</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table id="tabla-DetalleFAE" class="table table-striped table-bordered" style="border-radius:6px">
+                            <thead>
+
+
+                                <tr style="background-color: #E2E0E0; color: black;text-align:center">
+
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody style="background-color: white;text-align:center ">
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <br />
+                <div class="col-md-12" style="text-align:center">
+                    <h4> <u>Registro de aprobaciones</u> </h4>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-1"> <label><b>Nivel 1:</b></label></div>
+                    <div class="col-md-10"> <textarea id="txtareanivel2" class="form-control"></textarea></div>
+
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-1"> <label><b>Nivel 2:</b></label></div>
+                    <div class="col-md-10"> <textarea id="txtareanivel3" class="form-control">Alegria.Molina@dole.com</textarea></div>
+
+                </div>
+                <br />
+
+                <br />
+                <div class="row">
+                    <div class="col-md-12" style="text-align:center">
+                        <button value="" type="button" class="btn btn-primary btn-lg" onclick="GuardarFae('G');" style="margin-right:40px">
+                            <i class="fa fa-save"></i>
+                            Guardar
+                        </button>
+
+                        <button value="" type="button" class="btn btn-primary btn-lg" onclick="GuardarFae('P');"><i class="fa fa-paper-plane"></i>  Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    }
+    else
+    {
+        <div class="container" style="text-align:center">
+            <h4>Debe liquidar todos sus Faes para continuar.</h4>
+        </div>
+
+    }
+
+
+
+}
+else
+{
+
+
+
+    <div class="container" style="text-align:center">
+        <h4>Inicie sesión para continuar</h4>
+    </div>
+
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/alertify")
+    @Scripts.Render("~/bundles/SRG")
+    <script type="text/javascript">
+
+        document.getElementById('fileAprobacion').addEventListener('change', function () {
+            $("#imagenCargada").empty();
+            var file = this.files[0];
+        
+         
+            var fileURL = URL.createObjectURL(file);
+            if (file.type.split('/')[1] == "pdf") {
+                var iconoImg = fileURL ? '<a href="' + fileURL + '" target="_blank"> <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-file-earmark-pdf-fill" viewBox="0 0 16 16"> < path d = "M5.523 12.424c.14-.082.293-.162.459-.238a7.878 7.878 0 0 1-.45.606c-.28.337-.498.516-.635.572a.266.266 0 0 1-.035.012.282.282 0 0 1-.026-.044c-.056-.11-.054-.216.04-.36.106-.165.319-.354.647-.548zm2.455-1.647c-.119.025-.237.05-.356.078a21.148 21.148 0 0 0 .5-1.05 12.045 12.045 0 0 0 .51.858c-.217.032-.436.07-.654.114zm2.525.939a3.881 3.881 0 0 1-.435-.41c.228.005.434.022.612.054.317.057.466.147.518.209a.095.095 0 0 1 .026.064.436.436 0 0 1-.06.2.307.307 0 0 1-.094.124.107.107 0 0 1-.069.015c-.09-.003-.258-.066-.498-.256zM8.278 6.97c-.04.244-.108.524-.2.829a4.86 4.86 0 0 1-.089-.346c-.076-.353-.087-.63-.046-.822.038-.177.11-.248.196-.283a.517.517 0 0 1 .145-.04c.013.03.028.092.032.198.005.122-.007.277-.038.465z" /> <path fill-rule="evenodd" d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3zM4.165 13.668c.09.18.23.343.438.419.207.075.412.04.58-.03.318-.13.635-.436.926-.786.333-.401.683-.927 1.021-1.51a11.651 11.651 0 0 1 1.997-.406c.3.383.61.713.91.95.28.22.603.403.934.417a.856.856 0 0 0 .51-.138c.155-.101.27-.247.354-.416.09-.181.145-.37.138-.563a.844.844 0 0 0-.2-.518c-.226-.27-.596-.4-.96-.465a5.76 5.76 0 0 0-1.335-.05 10.954 10.954 0 0 1-.98-1.686c.25-.66.437-1.284.52-1.794.036-.218.055-.426.048-.614a1.238 1.238 0 0 0-.127-.538.7.7 0 0 0-.477-.365c-.202-.043-.41 0-.601.077-.377.15-.576.47-.651.823-.073.34-.04.736.046 1.136.088.406.238.848.43 1.295a19.697 19.697 0 0 1-1.062 2.227 7.662 7.662 0 0 0-1.482.645c-.37.22-.699.48-.897.787-.21.326-.275.714-.08 1.103z" /></svg > </a>' : 'No hay archivo';
+            } else {
+                var iconoImg = fileURL ? '<a href="' + fileURL + '" target="_blank"><img src="' + fileURL + '" style="width: 100%; height: auto;"/></a>' : 'No hay archivo';
+            }
+            
+            var div = document.createElement('div');
+            div.classList.add("col-md-4");
+            div.innerHTML = iconoImg;
+            document.getElementById('imagenCargada').appendChild(div);
+        });
+
+
+  
+
+        var nametablaFAE = "#tabla-DetalleFAE";
+        var miTablaFAE;
+        var filaSeleccionada;
+     
+        function EliminarDataTable() {
+
+            var filaSeleccionada = miTablaFAE.row('.selected');
+            if (!filaSeleccionada.any()) {
+                alert('Por favor seleccione una fila para eliminar.');
+                return;
+            }
+            filaSeleccionada.remove().draw();
+            $('#editar').prop('disabled', true);
+            $('#eliminar').prop('disabled', true);
+        }
+
+        $(document).ready(function () {
+            miTablaFAE= $(nametablaFAE).DataTable({
+                columns: [
+
+                    { title: "Concepto" },
+                    { title: "Valor" },
+                    { title: "Dias" },
+                    { title: "Invitados" },
+                    { title: "Comentarios" },
+                    { title: "Total" }
+
+                ],
+                footerCallback: function (row, data, start, end, display) {
+                    var api = this.api(),
+                      
+                    // Obtiene la suma total de la columna 'Total' (índice 5)
+                     total = api
+                        .column(5)
+                        .data()
+                        .reduce(function (a, b) {
+                            return parseFloat(a) + parseFloat(b);
+                        }, 0);
+
+                    // Actualiza el footer con la suma total
+                    $(api.column(5).footer()).html("Total: " + total.toFixed(2));
+                },
+            });
+
+
+        });
+
+
+        function EditarDataTable() {
+        
+            console.log(filaSeleccionada)
+            $("#tipoconsumo").val(filaSeleccionada[6]);
+            $("#valor").val(filaSeleccionada[1]);
+            $("#total").val(filaSeleccionada[5]);
+            $("#descripcionGastos").val(filaSeleccionada[4]);
+            var filaSeleccionada2 = miTablaFAE.row('.selected');
+            filaSeleccionada2.remove().draw();
+            $('#editar').prop('disabled', true);
+            $('#eliminar').prop('disabled', true);
+
+
+        }
+
+        // Maneja el evento click en un tr de la tabla
+        $('#tabla-DetalleFAE tbody').on('click', 'tr', function () {
+
+            // Comprueba si la tabla tiene datos
+            if (miTablaFAE.data().any()) {
+
+                // Deselecciona todas las filas de la tabla
+                miTablaFAE.$('tr.selected').removeClass('selected');
+                filaSeleccionada = null;
+                // Selecciona la fila actual
+                $(this).addClass('selected');
+                filaSeleccionada=miTablaFAE.row(this).data();
+                       
+
+
+                $('#editar').prop('disabled', false);
+                $('#eliminar').prop('disabled', false);
+
+
+            }
+
+
+        });
+
+
+
+
+
+
+
+
+
+
+    $(document).ready(function () {
+        messageElementSol = $('#divMessageSol');
+
+
+    });
+
+        alertify.set('notifier', 'position', 'top-left');
+        var DetGastos = {
+            codigoEmpleado: "",
+            destino: "",
+            motivoAnticipo: "",
+            pais: "",
+            ciudad: "",
+            usaTc: "",
+            fechadesde: "",
+            fechahasta: "",
+            secuencial:@Model.Secuencial,
+            IdAutoridadFinanciera:"",
+
+            DetallGasto: []
+        }
+        var idDetalle = 0;
+        var SumatoriaTotal=0
+        var conteoAsist = 1;
+        var DetAsist = {
+            DetallAsist: []
+        }
+        $(document).ready(function () {
+
+            $("#formVFAE").validate({
+
+                errorElement: "em_error",
+                rules: {
+                    tipoconsumo: {
+                        required: true
+
+                    },
+                    valor: {
+                        required: true
+                    },
+                    Comentarios: {
+                        required: true
+                    },
+
+                    total: {
+                        required: true
+                    },
+                    slDestino: {
+                        required: true
+                    },
+                    motanticefect: {
+                        required: true
+                    }, SlPais: {
+                        required: true
+                    }, Ciudades: {
+                        required: true
+                    }, fechadesde: {
+                        required: true
+                    },fechahasta: {
+                        required: true
+                    }, slTC: {
+                        required: true
+                    }, 
+                    messages: {
+                        tipoconsumo: {
+                            required: "Campo requerido"
+                        },
+                        valor: {
+                            required: "Campo requerido"
+                        },
+                        Comentarios: {
+                            required: "Campo requerido"
+                        },
+                        total: {
+                            required: "Campo requerido"
+                        },
+                        motanticefect: {
+                            required: "Campo requerido"
+                        }, SlPais: {
+                            required: "Campo requerido"
+                        }, Ciudades: {
+                            required: "Campo requerido"
+                        }, fechadesde: {
+                            required: "Campo requerido"
+                        }, fechahasta: {
+                            required: "Campo requerido"
+                        }, slTC: {
+                            required: "Campo requerido"
+                        }
+                    }
+                }
+            });
+        });
+
+
+        //$("#btnAddAsistente").click(function () {
+        //    var DetallAsist = {
+        //        asistentes: $("#asistentes").val()
+        //    }
+        //    DetAsist.DetallAsist.push(DetallAsist);
+        //    RenderTable(DetAsist.DetallAsist);
+        //    $("#asistentes").val("");
+        //});
+
+
+    $(document).on('change', '.paises', function () {
+        var id = $("#SlPais option:selected").val();
+            Refresh1(id);
+
+
+    });
+
+         function Refresh1(ide) {
+            fetch("@Url.Content("~/PIC/RefreshCiudades")" + "?Id=" + ide)
+            .then(function (result) {
+                if (result.ok) {
+                    return result.json();
+                }
+            })
+            .then(function (data) {
+
+                cbo = document.getElementById("Ciudades");
+                cbo.innerHTML = "";
+                data.forEach(function (element) {
+
+                    let opt = document.createElement("option");
+                    opt.appendChild(document.createTextNode(element.Text));
+                    opt.value = element.Value;
+
+
+                    cbo.appendChild(opt);
+                })
+            })
+        }
+
+
+
+        $("#btnAdd").click(function () {
+
+
+
+
+            if ($("#formVFAE").valid()) {
+
+               
+                var result = CalcularTotal();
+                var idtipoconsumo = $("#tipoconsumo option:selected").val();
+                var tipoconsumo = $("#tipoconsumo option:selected").text();
+                var valor = $("#valor").val();
+                var total = result.total;
+                var dias = result.calFecha;
+                var cantInvitados = conteoAsist;
+                var descripcionGastos = $("#descripcionGastos").val();
+
+
+
+
+                var data = [
+                    tipoconsumo,
+                    valor,
+                    dias,
+                    cantInvitados,
+                    descripcionGastos,
+                    total,
+                    idtipoconsumo
+                ];
+                toastr.success("Consumo agregado.");
+            miTablaFAE.row.add(data).draw();
+            LimpiarVariableFAE();
+                    
+
+
+            } else {
+                toastr.error("Complete todos los campos.")
+            }
+
+
+        });
+
+
+
+
+
+        function BuscarRepetidos(tipoconsumo) {
+
+            if (DetGastos.DetallGasto.length > 0) {
+
+                for (var i = 0; i < DetGastos.DetallGasto.length; i++) {
+
+
+                    if (DetGastos.DetallGasto[i].tipoconsumo == tipoconsumo) {
+
+
+                        return false;
+
+                    }
+                }
+
+                return true;
+            } else {
+                return true;
+            }
+
+        }
+
+        function RenderTable(producto) {
+
+            $("#tbl_list1").empty();
+
+
+
+            var html = '<table id="tbl_detalleConsumo" class="table"><thead><tr>';
+            html += '<th>#</th>';
+            html += '<th>Tipo de consumo</th>';
+            html += '<th>Valor</th>';
+            html += '<th>Total</th>';
+            html += '<th>Asistente</th>';
+            html += '<th>Descripcion</th>';
+            html += '</tr></thead>';
+
+
+            $.each(DetGastos.DetallGasto, function (index, item) {
+
+                html += '<tbody> <tr>';
+                html += '<td>' + index + '</td>';
+                html += '<td>' + item.tipoconsumo + '</td>';
+                html += '<td>' + item.valor + '</td>';
+                html += '<td>' + item.total + '</td>';
+                html += '<td>' + item.cantInvitados + '</td>';
+                html += '<td>' + item.descripcionGastos + '</td>';
+                html += '<td  style = "display:none" >' + item.tipoconsumo + '<class="hide"/td>';
+                html += '<td><button type="button" id="btnDelete" onClick="Delete(\'' + item.tipoconsumo + '\')"><i class="fas fa-trash"></i ></button></td>';
+                html += '</tr> ';
+            });
+            html += '</tbody></table>';
+
+            /*SetTipoUsuario(listU.tipoUsuario);*/
+
+
+
+            $("#tbl_list").append(html);
+            //Appy Datatable
+            //$("#tbl_cias").DataTable({
+            //    "language": {
+            //        "url": "Scripts/datatables/Spanish_Datatable.json"
+            //    }
+
+            //});
+        }
+
+        function RenderTable(producto) {
+
+            $("#tbl_list").empty();
+
+
+
+            var html = '<table id="tbl_detalleConsumo" class="table"><thead><tr>';
+            html += '<th>#</th>';
+            html += '<th>Tipo de consumo</th>';
+            html += '<th>Valor</th>';
+            html += '<th>Total</th>';
+            html += '<th>Asistente</th>';
+            html += '<th>Descripcion</th>';
+            html += '</tr></thead>';
+
+
+            $.each(DetGastos.DetallGasto, function (index, item) {
+
+                html += '<tbody> <tr>';
+                html += '<td>' + index + '</td>';
+                html += '<td>' + item.tipoconsumo + '</td>';
+                html += '<td>' + item.valor + '</td>';
+                html += '<td>' + item.total + '</td>';
+                html += '<td>' + item.cantInvitados + '</td>';
+                html += '<td>' + item.descripcionGastos + '</td>';
+                html += '<td  style = "display:none" >' + item.tipoconsumo + '<class="hide"/td>';
+                html += '<td><button type="button" id="btnDelete" onClick="Delete(\'' + item.id + '\')"><i class="fas fa-trash"></i ></button></td>';
+                html += '</tr> ';
+            });
+            html += '</tbody></table>';
+
+            /*SetTipoUsuario(listU.tipoUsuario);*/
+
+
+
+            $("#tbl_list").append(html);
+            //Appy Datatable
+            //$("#tbl_cias").DataTable({
+            //    "language": {
+            //        "url": "Scripts/datatables/Spanish_Datatable.json"
+            //    }
+
+            //});
+        }
+        function Delete(index1) {
+
+
+            for (var i = 0; i < DetGastos.DetallGasto.length; i++) {
+
+                if (DetGastos.DetallGasto[i].id == index1) {
+                    SumatoriaTotal = SumatoriaTotal - parseInt(DetGastos.DetallGasto[i].total);
+                    document.getElementById('SumatoriaTotal').innerHTML = parseInt(SumatoriaTotal);
+
+                }
+
+
+            }
+
+              /*  if (detalle[i] !== undefined) {*/
+
+
+
+            DetGastos.DetallGasto = $.grep(DetGastos.DetallGasto, function (element, index) {
+            return element.id !== parseInt(index1);
+
+            });
+            RenderTable(DetGastos);
+
+        }
+
+
+
+     
+
+    </script>
+}

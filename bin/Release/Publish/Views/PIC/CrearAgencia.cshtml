@@ -1,0 +1,88 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-12" style="text-align:center">
+            <h3>AGENCIAS DE VIAJES</h3>
+        </div>
+
+    </div>
+
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-md-3">
+            <label> <b>Nombre de Agencia:</b></label>
+        </div>
+        <div class="col-md-6">
+            <input type="text" name="nameAgencia" id="nameAgencia" class="form-control" value="" />
+
+        </div>
+
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-3">
+            <label> <b>Correos:</b></label>
+        </div>
+        <div class="col-md-6">
+            <textarea id="textarea-input" rows="5" cols="30" class="form-control" placeholder="Ingrese valores separados por líneas"></textarea>
+        </div>
+
+
+    </div>
+    <br />
+    <br />
+
+    <div class="col-md-12" style="text-align:center">
+        <button id="submit-button" class="btn btn-success">Enviar</button>
+    </div>
+
+
+</div>
+
+
+@section Scripts {
+    @*@Scripts.Render("~/bundles/alertify")
+        @Scripts.Render("~/bundles/SRG")*@
+
+    <script type="text/javascript">
+
+
+
+
+        $("#submit-button").on("click", function () {
+            var textareaContent = $("#textarea-input").val();
+            var lines = textareaContent.split(/\r?\n/);
+            var nameAgencia = $("#nameAgencia").val();
+
+            // Procesar cada línea del textarea y guardar en una lista
+            var valuesList = [];
+            for (var i = 0; i < lines.length; i++) {
+                if (lines[i].trim() !== "") {
+                    valuesList.push(lines[i].trim());
+                }
+            }
+
+            // Enviar la lista al servidor (ASP.NET MVC) junto con el nombre de la agencia
+            $.ajax({
+                url: "/PIC/CrearAgencia",
+                type: "POST",
+                data: {
+                    values: valuesList,
+                    nameAgencia: nameAgencia
+                },
+                success: function (response) {
+                    // Manejar la respuesta del servidor
+                    window.location.href = "/PIC/Home";
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    // Manejar errores
+                    console.error("Error al enviar datos al servidor: " + textStatus);
+                }
+            });
+        });
+
+
+
+    </script>
+
+}

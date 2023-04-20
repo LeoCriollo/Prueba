@@ -1,0 +1,621 @@
+﻿@model DoleEcIntranet.Models.GastosPersonalesModel
+
+
+@{
+    ViewBag.Title = "Gastos Personales";
+    string vlue = Model.classReadOnly;
+}
+
+<section class="page-header no-print">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="breadcrumb">
+                    <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    <li class="active">Zona Personal</li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>Gastos Personales</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<div class="container" style="background-color: aliceblue;">
+
+    @using (Html.BeginForm("GastosPersonalesIndex", "ZonaPersonal", FormMethod.Post, new { onkeydown = "return event.keyCode!=13" }))
+    {
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(model => model.Year);
+        @Html.HiddenFor(model => model.Cedula);
+        @Html.HiddenFor(model => model.RazonSocial);
+        @Html.HiddenFor(model => model.NombresApellidos);
+        @Html.HiddenFor(model => model.RucEmpleador);
+        @Html.HiddenFor(model => model.Estado)
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="text-center heading-light col-lg-12 background-color-primary" style="padding: 8px;">DECLARACIÓN DE GASTOS PERSONALES A SER UTILIZADOS POR EL EMPLEADOR EN EL CASO DE INGRESOS EN RELACIÓN DE DEPENDENCIA</h4>
+
+            </div>
+        </div>
+
+        <hr />
+        <div class="row">
+            <div class="col-md-3">
+                <label>EJERCICIO FISCAL</label>
+            </div>
+            <div class="col-md-2">
+                <h4> @Html.DisplayFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })</h4>
+            </div>
+            <div class="col-md-4">
+                <label>CIUDAD Y FECHA DE ENTREGA/RECEPCIÓN</label>
+            </div>
+            <div class="col-md-3">
+                <h4>
+                    @Html.DisplayFor(model => model.FechaEntrega, new { htmlAttributes = new { @class = "form-control" } })
+                </h4>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-3">
+                <label>101 CÉDULA O PASAPORTE</label>
+            </div>
+            <div class="col-md-2">
+                <h4>@Html.DisplayFor(model => model.Cedula, new { htmlAttributes = new { @class = "form-control" } })</h4>
+            </div>
+            <div class="col-md-4">
+                <label>102 APELLIDOS Y NOMBRES COMPLETOS</label>
+            </div>
+            <div class="col-md-3">
+                <h5>
+                    @Html.DisplayFor(model => model.NombresApellidos, new { htmlAttributes = new { @class = "form-control" } })
+                </h5>
+
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <h5 class="text-center heading-light col-lg-12 background-color-primary" style="padding: 8px;">INGRESOS GRAVADOS PROYECTADOS (sin decimotercera y decimocuarta remuneración) (ver Nota 1)</h5>
+
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-8">
+                <h6>(+) TOTAL INGRESOS GRAVADOS CON ESTE EMPLEADOR (con el empleador que más ingresos perciba)</h6>
+            </div>
+            <div class="col-md-1">
+                <h6>103</h6>
+            </div>
+            <div class="col-md-1">
+                <h6>USD$</h6>
+            </div>
+
+            @if (Model.Estado.Equals("1"))
+            {
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.C_103, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+
+                </div>
+
+            }
+            else
+            {
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.C_103, new { htmlAttributes = new { @class = "form-control calculo1", data_toggle = "tooltip", title = "Corresponde a la Remuneración Mensual Unificada multiplicada por el tiempo en la Institución en el período 2019,  NO descuente el valor del aporte al IESS" } })
+                    @Html.ValidationMessageFor(model => model.C_103, "", new { @class = "text-danger" })
+
+                </div>
+
+            }
+
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <h6>(+) TOTAL INGRESOS CON OTROS EMPLEADORES (en caso de haberlos)</h6>
+            </div>
+            <div class="col-md-1">
+                <h6>104</h6>
+            </div>
+            <div class="col-md-1">
+                <h6>USD$</h6>
+            </div>
+
+            @if (Model.Estado.Equals("1"))
+            {
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.C_104, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+
+
+                </div>
+            }
+            else
+            {
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.C_104, new { htmlAttributes = new { @class = "form-control calculo1" } })
+                    @Html.ValidationMessageFor(model => model.C_104, "", new { @class = "text-danger" })
+
+                </div>
+            }
+
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <h6><strong>(=) TOTAL INGRESOS PROYECTADOS</strong></h6>
+            </div>
+            <div class="col-md-1">
+                <h6>105</h6>
+            </div>
+            <div class="col-md-1">
+                <h6><strong>USD$</strong></h6>
+            </div>
+
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.C_105, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                @Html.ValidationMessageFor(model => model.C_105, "", new { @class = "text-danger" })
+
+            </div>
+
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                <h5 class="text-center heading-light col-lg-12 background-color-primary" style="padding: 8px;">GASTOS PROYECTADOS</h5>
+
+            </div>
+        </div>
+
+        <br />
+        <div class="row">
+            <div class="col-md-8">
+                <h6>(+) GASTOS DE VIVIENDA</h6>
+            </div>
+            <div class="col-md-1">
+                <h6>106</h6>
+            </div>
+            <div class="col-md-1">
+                <h6>USD$</h6>
+            </div>
+
+            @if (Model.Estado.Equals("1"))
+            {
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.C_106, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+
+                </div>
+            }
+            else
+            {
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.C_106, new { htmlAttributes = new { @class = "form-control calculo2" } })
+                    @Html.ValidationMessageFor(model => model.C_106, "", new { @class = "text-danger" })
+
+                </div>
+            }
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <h6>(+) GASTOS DE EDUCACIÓN, ARTE Y CULTURA</h6>
+            </div>
+            <div class="col-md-1">
+                <h6>107</h6>
+            </div>
+            <div class="col-md-1">
+                <h6>USD$</h6>
+            </div>
+
+            @if (Model.Estado.Equals("1"))
+            {
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.C_107, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+
+
+                </div>
+            }
+            else
+            {
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.C_107, new { htmlAttributes = new { @class = "form-control calculo2" } })
+                    @Html.ValidationMessageFor(model => model.C_107, "", new { @class = "text-danger" })
+
+                </div>
+            }
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <h6>(+) GASTOS DE SALUD</h6>
+            </div>
+            <div class="col-md-1">
+                <h6>108</h6>
+            </div>
+            <div class="col-md-1">
+                <h6>USD$</h6>
+            </div>
+
+            @if (Model.Estado.Equals("1"))
+            {
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.C_108, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+
+
+                </div>
+            }
+            else
+            {
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.C_108, new { htmlAttributes = new { @class = "form-control calculo2" } })
+                    @Html.ValidationMessageFor(model => model.C_108, "", new { @class = "text-danger" })
+
+                </div>
+            }
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <h6>(+) GASTOS DE VESTIMENTA</h6>
+            </div>
+            <div class="col-md-1">
+                <h6>109</h6>
+            </div>
+            <div class="col-md-1">
+                <h6>USD$</h6>
+            </div>
+
+            @if (Model.Estado.Equals("1"))
+            {
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.C_109, new { htmlAttributes = new { @class = "form-control ", disabled = "disabled" } })
+
+
+                </div>
+            }
+            else
+            {
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.C_109, new { htmlAttributes = new { @class = "form-control calculo2" } })
+                    @Html.ValidationMessageFor(model => model.C_109, "", new { @class = "text-danger" })
+
+                </div>
+            }
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <h6>(+) GASTOS DE ALIMENTACIÓN</h6>
+            </div>
+            <div class="col-md-1">
+                <h6>110</h6>
+            </div>
+            <div class="col-md-1">
+                <h6>USD$</h6>
+            </div>
+
+            @if (Model.Estado.Equals("1"))
+            {
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.C_110, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+
+
+                </div>
+
+            }
+            else
+            {
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.C_110, new { htmlAttributes = new { @class = "form-control calculo2" } })
+                    @Html.ValidationMessageFor(model => model.C_110, "", new { @class = "text-danger" })
+
+                </div>
+            }
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <h6>(+) GASTOS DE TURISMO</h6>
+            </div>
+            <div class="col-md-1">
+                <h6>111</h6>
+            </div>
+            <div class="col-md-1">
+                <h6>USD$</h6>
+            </div>
+
+            @if (Model.Estado.Equals("1"))
+            {
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.C_111, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+
+
+                </div>
+
+            }
+            else
+            {
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.C_111, new { htmlAttributes = new { @class = "form-control calculo2" } })
+                    @Html.ValidationMessageFor(model => model.C_111, "", new { @class = "text-danger" })
+
+                </div>
+            }
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h6><strong>(=) TOTAL GASTOS PROYECTADOS </strong></h6>
+            </div>
+            <div class="col-md-2">
+                
+            </div>
+            <div class="col-md-1">
+                <h6>112</h6>
+            </div>
+            <div class="col-md-1">
+                <h6><strong>USD$</strong></h6>
+            </div>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.C_112, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                @Html.ValidationMessageFor(model => model.C_112, "", new { @class = "text-danger" })
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h6><strong>REBAJA DE IMPUESTO A LA RENTA POR GASTOS PERSONALES PROYECTADOS </strong></h6>
+            </div>
+            <div class="col-md-2">
+                <h6>(ver Nota 2)</h6>
+            </div>
+            <div class="col-md-1">
+                <h6>113</h6>
+            </div>
+            <div class="col-md-1">
+                <h6><strong>USD$</strong></h6>
+            </div>
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.C_113, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                @Html.ValidationMessageFor(model => model.C_113, "", new { @class = "text-danger" })
+
+            </div>
+
+        </div>
+
+        <hr />
+        @*<div class="row">
+                <div class="col-md-12" style="font-size:small">
+                    <p>Notas:</p>
+                    <p style="text-align:justify">
+                        1.- Cuando un contribuyente trabaje con DOS O MÁS empleadores, presentará este informe al empleador con el que perciba mayores ingresos, el que efectuará la retención considerando los ingresos gravados y deducciones (aportes personales al IESS) con todos los empleadores.  Una copia certificada, con la respectiva firma y sello del empleador, será presentada a los demás empleadores para que se abstengan de efectuar retenciones sobre los pagos efectuados por concepto de remuneración del trabajo en relación de dependencia.
+                    </p>
+                    <p style="text-align:justify">
+                        2. La deducción total por gastos personales no podrá superar el 50% del total de sus ingresos gravados (casillero 105), y en ningún caso  será mayor al equivalente a 1,3 veces la fracción básica exenta de Impuesto a la Renta de personas naturales. La cuantía máxima para cada tipo de gasto es el monto equivalente a la fracción básica exenta de Impuesto a la Renta en: vivienda 0,325 veces; educación, arte y cultura 0,325  veces; alimentación 0,325 veces; vestimenta 0,325 veces; turismo 0,325 veces; y salud 1,3 veces.
+                    </p>
+                    <p style="text-align:justify">
+                        3. En el caso de gastos de salud por enfermedades catastróficas, raras o huérfanas debidamente certificadas o avaladas por la autoridad sanitaria nacional competente, se los reconocerá para su deducibilidad hasta en un valor equivalente a dos (2) fracciones básicas gravadas con tarifa cero de Impuesto a la Renta de personas naturales.
+                    </p>
+                    <p style="text-align:justify">
+                        4. Solo podrá deducirse gastos personales las personas naturales con ingresos netos inferiores a USD 100.000,00 (cálculo de la diferencia entre el total de ingresos gravados menos el total de gastos deducibles y rebajas para personas de tercera edad o con discapacidad). Si los ingresos son superiores a USD 100.000,00 podrán deducirse gastos personales de turismo hasta 0,325 veces la fracción básica desgravada y de salud por enfermedades catastróficas, raras o huérfanas por el valor equivalente hasta 1,3 veces la fracción básica desgravada; sin que la deducción por los dos rubros supere 1,3 veces la fracción básica desgravada.
+                    </p>
+                </div>
+            </div>*@
+        @*<div class="row">
+                <div class="col-md-6">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>Vivienda</td>
+                                <td>0.325</td>
+                                <td>3643.90</td>
+                            </tr>
+                            <tr>
+                                <td>Educación</td>
+                                <td>0.325</td>
+                                <td>3643.90</td>
+                            </tr>
+                            <tr>
+                                <td>Salud</td>
+                                <td>1.3</td>
+                                <td>14575.60</td>
+                            </tr>
+                            <tr>
+                                <td>Alimentación</td>
+                                <td>0.325</td>
+                                <td>3643.90</td>
+                            </tr>
+                            <tr>
+                                <td>Vestimenta</td>
+                                <td>0.325</td>
+                                <td>3643.90</td>
+                            </tr>
+                            <tr>
+                                <td>Turismo</td>
+                                <td>0.325</td>
+                                <td>3643.90</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="col-md-6">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Grado de Discapacidad</th>
+                                <th>Porcentaje para aplicación del beneficio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Del 30% al 49%</td>
+                                <td>60</td>
+                            </tr>
+                            <tr>
+                                <td>Del 50% al 74%</td>
+                                <td>70</td>
+                            </tr>
+                            <tr>
+                                <td>Del 75% al 84%</td>
+                                <td>80</td>
+                            </tr>
+                            <tr>
+                                <td>Del 85% al 100%</td>
+                                <td>100</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>*@
+        <hr />
+
+        <div class="row">
+            <div class="col-md-1">
+                <label>RUC</label>
+            </div>
+            <div class="col-md-2">
+                <h4>@Html.DisplayFor(model => model.RucEmpleador, new { htmlAttributes = new { @class = "form-control" } })</h4>
+            </div>
+            <div class="col-md-5" style="font-size:small">
+                <label>RAZON SOCIAL, DENOMINACIÓN O APELLIDOS Y NOMBRES COMPLETOS</label>
+            </div>
+            <div class="col-md-4">
+                <h4>
+                    @Html.DisplayFor(model => model.RazonSocial, new { htmlAttributes = new { @class = "form-control" } })
+                </h4>
+            </div>
+        </div>
+
+        <br />
+        <br />
+
+        if (Model.Estado.Equals("0"))
+        {
+            <div class="row no-print">
+                <div class="col-md-2 offset-5" style="text-align:center">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Registrar</button>
+
+                </div>
+            </div>
+        }
+    }
+    <br />
+
+    @if (Model.Estado.Equals("1") && Model.endPeriod.Equals("final1"))
+    {
+
+        using (Html.BeginForm("DescargarDeclaracionGastos", "ZonaPersonal", FormMethod.Get))
+        {
+
+            <div class="row no-print">
+                <div class="col-md-3"></div>
+                <div class="col-md-6" style="text-align:center">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-print"></i> Descargar Formulario</button>
+
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        }
+    }
+
+
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        $(".calculo1").focusout(function () {
+
+            let c103 = parseFloat($("#C_103").val());
+            let c104 = parseFloat($("#C_104").val());
+
+            if (c103 !== undefined && c104 !== undefined) {
+                totalIngresos(c103, c104);
+                $("#C_103").val(c103.toFixed(2));
+                $("#C_104").val(c104.toFixed(2));
+            }
+
+        });
+
+
+        $(".calculo2").focusout(function () {
+
+            let c106 = parseFloat($("#C_106").val());
+            let c107 = parseFloat($("#C_107").val());
+            let c108 = parseFloat($("#C_108").val());
+            let c109 = parseFloat($("#C_109").val());
+            let c110 = parseFloat($("#C_110").val());
+            let c111 = parseFloat($("#C_111").val());
+
+
+            if (c106 != undefined && c107 != undefined) {
+                totalGastos(c106, c107, c108, c109, c110, c111);
+                $("#C_106").val(c106.toFixed(2));
+                $("#C_107").val(c107.toFixed(2));
+                $("#C_108").val(c108.toFixed(2));
+                $("#C_109").val(c109.toFixed(2));
+                $("#C_110").val(c110.toFixed(2));
+                $("#C_111").val(c111.toFixed(2));
+            }
+
+        });
+
+
+        function totalIngresos(tc103, tc104) {
+            let LineIng = tc103 + tc104;
+            let lineIngD = LineIng.toFixed(2);
+            let TopeG = parseFloat(@Model.topeG).toFixed(2);
+            $("#C_105").val(lineIngD);
+            
+            if (lineIngD > 24090.30) {
+
+                let perce10 = TopeG * 0.10;
+                $("#C_113").val(perce10.toFixed(2));
+
+            } else { 
+                let perce20 = TopeG * 0.20;
+                $("#C_113").val(perce20.toFixed(2));
+            }
+
+
+        };
+
+
+        function totalGastos(tc106, tc107, tc108, tc109, tc110, tc111) {
+            let LineGast = tc106 + tc107 + tc108 + tc109 + tc110 + tc111;
+            $("#C_112").val(LineGast.toFixed(2));
+        };
+
+    </script>
+
+
+
+
+}

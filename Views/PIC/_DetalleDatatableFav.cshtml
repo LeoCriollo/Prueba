@@ -1,0 +1,25 @@
+﻿
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 offset-1">
+            <label>Agencias:</label>
+        </div>
+        <div class="col-md-6">
+            @Html.DropDownList("ListaAgencias", null, htmlAttributes: new { @class = "form-control " })
+
+        </div>
+
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-3 offset-1">
+            <label>Costo:</label>
+        </div>
+        <div class="col-md-6">
+            <input type="number" class="form-control" name="costo" id="costo" value="" />
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,59 @@
+﻿@model List<DoleEcIntranet.Models.ResponseBusquedaEmpleado>
+
+
+
+
+@if (Model != null && Model.Any())
+{
+   
+        <div class="col-md-12">
+
+
+            <table class="table table-striped" id="tbl_consultSplip">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().codigoEmpleado)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().nombreEmpleado)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(model => item.codigoEmpleado)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.nombreEmpleado)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Consultar", "ConsultaSlip1", new { id = item.codigoEmpleado}, new { @target = "_blank" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    
+
+
+
+
+
+}
+else
+{
+    <div class="col-md-12">
+        <p>
+            No se encontraron datos.
+        </p>
+    </div>
+
+}
+

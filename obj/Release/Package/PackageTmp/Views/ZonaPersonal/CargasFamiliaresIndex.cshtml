@@ -1,0 +1,145 @@
+﻿@model DoleEcIntranet.Models.CargasFamiliaresModel
+
+
+@{
+    ViewBag.Title = "Cargas Familiares";
+
+
+}
+
+
+<section class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="breadcrumb">
+                    <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                    <li class="active"><a href="@Url.Action("Index","ZonaPersonal")">Zona Personal</a></li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>Cargas Familiares</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+
+            @if (Model != null && Model.detalle != null)
+            {
+                <div class="row">
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.nomCia, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.nomCia, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.nomEmpleado, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.nomEmpleado, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.area, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.area, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.segMedico, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.segMedico, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.activo, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.activo, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    </div>
+                  
+                </div>
+                <hr />
+                <div class="row">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    RELACION
+                                </th>
+                                <th>
+                                    CODIGO
+                                </th>
+                                <th>
+                                    NOMBRE
+                                </th>
+                                <th>
+                                    SEXO
+                                </th>
+                                <th>
+                                    FECHA NACIMIENTO
+                                </th>
+                                <th>
+                                    EDAD
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var item in Model.detalle.OrderBy(o=>o.fechaNacimiento))
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(model => item.relacion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.codigo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.nombreCarga)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.sexo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.fechaNacimiento)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.edad) 
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+
+
+
+            }
+            else
+            {
+                <p class="text-center">No se encontró información de cargas familiares para el empleado.</p>
+            }
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+

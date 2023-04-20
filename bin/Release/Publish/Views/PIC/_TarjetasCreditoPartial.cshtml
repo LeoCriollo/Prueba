@@ -1,0 +1,129 @@
+﻿@model IEnumerable<DoleEcIntranet.Models.PicModel.ViewTCModel>
+
+@foreach (var datos in Model)
+{
+
+
+    <br />
+    <div class="col-md-12">
+        <button class="btn btn-success col-md-12" id="btnFecha" onclick="DesplegarNivel1(@datos.Corte);" style="text-align:left" id="@datos.Corte" data-id="@datos.Corte">
+            <svg style="color:black" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-end" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M14.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 1 0v-13a.5.5 0 0 0-.5-.5z" />
+                <path d="M13 7a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7z" />
+            </svg> <b>CORTE: </b>  @datos.Corte | (@datos.SumTC)
+        </button>
+    </div>
+
+
+    <div class="col-md-12" id="nivel1-@datos.Corte" style="display:none;padding-left:100px">
+
+
+        @foreach (var i in datos.Tc)
+        {
+            <br />
+            <button class="btn btn-primary col-md-11 offset-1" id="btnTc" onclick="DesplegarNivel2(@datos.Corte@i.Tcredito);" style="text-align:left">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
+                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z" />
+                    <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z" />
+                </svg> <b> NUMERO DE TC:</b> @i.Tcredito | (@i.SumItem)
+            </button>
+            <br />
+
+            <div class="col-md-12" id="nivel2-@datos.Corte@i.Tcredito" style="display:none;padding-left:100px">
+
+                <div class="col-md-12" style="text-align:right">
+                    <h4>Suma de valores: <label>@i.SumaValor</label></h4>
+                </div>
+
+               
+
+                @foreach (var e in i.Consumos)
+                {
+
+                    if (e.Estado == 1)
+                    {
+                        <div class="row">
+                            <div class="col-md-2" style="text-align:right">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" style="color:dodgerblue" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                </svg>
+                                <br />
+                                <br />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-paperclip" viewBox="0 0 16 16">
+                                    <path d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0V3z" />
+                                </svg>
+
+                            </div>
+                            <div class="col-md-10" style="text-align: left; cursor: pointer">
+                                <a href="~/PIC/TcJustificar?ids=@e.Id">
+
+                                    <p class="link-justificar" style="border-radius: 3px; box-sizing: border-box; padding: 20px">
+                                        <label><b>CEDULA:</b></label>  @e.Cedula<br />
+                                        <label><b>NOMBRE:</b> </label>@e.Nombre <br />
+                                        <label><b>DESCRIPCION:</b> </label>@e.Descripcion<br />
+                                        <label><b>VALOR:</b> </label> @e.Valor<br />
+                                        <label><b>FECHA:</b> </label> @e.Fecha<br />
+
+                                    </p>
+
+
+                                </a>
+
+
+                            </div>
+                        </div>
+
+
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col-md-2" style="text-align:right">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" style="color:dodgerblue" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                </svg>
+                                <br />
+                                <br />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-paperclip" viewBox="0 0 16 16">
+                                    <path d="M4.5 3a2.5 2.5 0 0 1 5 0v9a1.5 1.5 0 0 1-3 0V5a.5.5 0 0 1 1 0v7a.5.5 0 0 0 1 0V3a1.5 1.5 0 1 0-3 0v9a2.5 2.5 0 0 0 5 0V5a.5.5 0 0 1 1 0v7a3.5 3.5 0 1 1-7 0V3z" />
+                                </svg>
+
+                            </div>
+                            <div class="col-md-10" style="text-align: left; cursor: pointer">
+                                <a href="~/PIC/TcJustificar?ids=@e.Id">
+
+                                    <p style="border-radius: 3px; box-sizing: border-box; padding: 20px">
+                                        <label><b>CEDULA:</b></label>  @e.Cedula<br />
+                                        <label><b>NOMBRE:</b> </label>@e.Nombre <br />
+                                        <label><b>DESCRIPCION:</b> </label>@e.Descripcion<br />
+                                        <label><b>VALOR:</b> </label> @e.Valor<br />
+                                        <label><b>FECHA:</b> </label> @e.Fecha<br />
+
+                                    </p>
+
+
+                                </a>
+
+
+                            </div>
+                        </div>
+
+
+                    }
+
+                }
+
+                <br />
+            </div>
+
+
+        }
+
+
+
+
+    </div>
+
+}

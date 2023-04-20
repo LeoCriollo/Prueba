@@ -1,0 +1,50 @@
+﻿
+<div class="row">
+    <div class="col-md-12" style="text-align:center">
+        <h2><b>LISTA DE AGENCIAS</b></h2>
+    </div>
+
+</div>
+
+<div class="container">
+
+
+    @foreach (string item in ViewBag.listaAgencia)
+    {
+
+
+        <li style="color:black">@item</li>
+    }
+
+
+<br />
+<br />
+<div class="row">
+    <div class="col-md-12" style="text-align:right">
+        <button type="button" class="btn btn-success" id="btnCrear" name="btnCrear"> Crear nueva Agencia</button>
+    </div>
+
+</div>
+
+</div>
+
+
+
+
+@section Scripts {
+    @*@Scripts.Render("~/bundles/alertify")
+        @Scripts.Render("~/bundles/SRG")*@
+
+    <script type="text/javascript">
+
+
+        $("#btnCrear").on("click", function () {
+            window.location.href = "/PIC/CrearAgencia";
+        });
+
+      
+
+
+    </script>
+
+    }

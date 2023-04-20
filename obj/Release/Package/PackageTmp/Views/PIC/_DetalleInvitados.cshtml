@@ -1,0 +1,42 @@
+﻿@model IEnumerable<DoleEcIntranet.Models.PicModel.InvitadosModel>
+
+
+<table class="table">
+    <tr>
+        
+        <th>
+            #
+        </th>
+
+        <th>
+           Nombre
+        </th>
+        <th>
+            Cargo
+        </th>
+        <th>
+            Empresa
+        </th>
+       
+    </tr>
+    
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.id) 
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cargo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.empresa)
+        </td>
+      
+    </tr>
+}
+
+</table>

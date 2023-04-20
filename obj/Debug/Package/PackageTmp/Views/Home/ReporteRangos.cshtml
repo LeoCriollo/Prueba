@@ -1,0 +1,182 @@
+﻿@model DoleEcIntranet.Models.GenerarXmlModel
+
+
+<h2 class="text-center color-dole-font-title">REPORTES DE RANGOS</h2>
+
+
+
+@Styles.Render("~/bundles/datatables/css"),
+@Styles.Render("~/bundles/Toastr/css"),
+@Styles.Render("~/bundles/Date/css")
+
+
+
+<div class="container">
+
+    <form id="formV">
+
+        <div class="row">
+            <div class="col-md-1 offset-md-2">
+                <label class="control-label"  ><b>Ruc</b></label>
+            </div>
+
+            <div class="col-md-2">
+                <input type="number" class="form-control" id="Ruc" name="Ruc" minlength="1" maxlength="13">
+            </div>
+
+            <div class="col-md-2">
+                <label class="control-label"><b>Cod.Tipo de Tramite</b></label>
+            </div>
+
+            <div class="col-md-2">
+                <SELECT type="text" class="form-control" id="Cod_Trans" name="Cod_Trans">
+                    <OPTION VALUE="">--Seleccione--</OPTION>
+                    <OPTION VALUE="6">[6]-Solicitud de Autorización</OPTION>
+                    <OPTION VALUE="7">[7]-Solicitud de Autorización por Cambio de Software</OPTION>
+                    <OPTION VALUE="8">[8]-Renovación de Autorización</OPTION>
+                    <OPTION VALUE="9">[9]-Baja de Autorización</OPTION>
+                    <OPTION VALUE="10">[10]-Inclusión de Puntos de Emisión y/o Tipos de Documentos</OPTION>
+                    <OPTION VALUE="11">[11]-Eliminación de Puntos de Emisión y/o Tipos de Documentos</OPTION>
+          
+
+                </SELECT>
+               
+            </div>
+
+        </div>
+
+        <br />
+        <div class="row">
+
+            <div class="col-md-1 offset-md-2">
+                <label class="control-label"><b>Fecha Autorizacion</b></label>
+            </div>
+
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "date-picker form-control",@id="Fecha" ,@Name = "Fecha", @PlaceHolder = "dd/mm/yyyy" } })
+                @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-2">
+                <label class="control-label"> <b>Autoizacion Anterior</b></label>
+            </div>
+
+            <div class="col-md-2">
+                <input type="number" class="form-control" id="Cod_Viejo" name="Cod_Viejo" minlength="1" maxlength="10">
+            </div>
+        </div>
+        <br />
+        <div class="row">
+
+            <div class="col-md-1 offset-md-2">
+                <label class="control-label"><b>Autorizacion Nueva</b></label>
+            </div>
+            <div class="col-md-2">
+                <input type="number" class="form-control" id="Cod_Nuevo" name="Cod_Nuevo" minlength="1" maxlength="10">
+            </div>
+
+        </div>
+
+
+
+        <hr />
+
+        <br />
+        <div class="row">
+
+            <div class="col-md-1 offset-md-2">
+                <label class="control-label"><b>Codigo Documento</b></label>
+            </div>
+
+            <div class="col-md-2">
+
+                <SELECT NAME="Cod_Doc"  class="form-control" id="Cod_Doc" SIZE=1>
+                    <OPTION VALUE="">--Seleccione--</OPTION>
+                    <OPTION VALUE="1">[1]-Factura </OPTION>
+                    <OPTION VALUE="2">[2]-Nota de Venta</OPTION>
+                    <OPTION VALUE="3">[3]-Liquidación</OPTION>
+                    <OPTION VALUE="4">[4]-Nota de Crédito</OPTION>
+                    <OPTION VALUE="5">[5]-Nota de Débito</OPTION>
+                    <OPTION VALUE="6">[6]-Guía de remisión</OPTION>
+                    <OPTION VALUE="7">[7]-Comprobante de Retención </OPTION>
+                    <OPTION VALUE="8">[8]-Entradas a Espectáculos Públicos   </OPTION>
+
+                </SELECT> 
+            </div>
+
+            <div class="col-md-2 ">
+                <label class="control-label"><b>Establecimiento</b></label>
+            </div>
+
+            <div class="col-md-2">
+                <input type="number" class="form-control" maxlength="3" id="Estab" name="Estab">
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-1 offset-md-2">
+                <label class="control-label"><b>Punto de Emision</b></label>
+            </div>
+            <br />
+            <br />
+            <div class="col-md-2">
+                <input type="number" class="form-control" maxlength="3" id="Pto_Emi" name="Pto_Emi">
+            </div>
+
+            <div class="col-md-2">
+                <label class="control-label"><b>Finalizacion Anterior</b></label>
+            </div>
+            <div class="col-md-2">
+                <input type="number" class="form-control" id="Fin_Old" name="Fin_Old"  minlength="1" maxlength="9">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1 offset-md-2">
+                <label class="control-label"><b>Inicializacion Nueva</b></label>
+            </div>
+            <div class="col-md-2">
+                <input type="number" class="form-control" id="Ini_New" name="Ini_New"  minlength="1" maxlength="9">
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 offset-md-6">
+                <button type="button" id="btnAdd"><i class="fas fa-plus"></i></button>
+            </div>
+
+            <div class="col-md-3 offset-md-0">
+                <input type="button" value="Generar" id="inputProcesar" class="btn btn-primary">
+            </div>
+
+        </div>
+
+
+        <br />
+
+        <h4 class="col-md-6 offset-md-5">TABLA DETALLES</h4>
+
+        <div class="align-content-lg-center " id="tbl_list">
+        </div>
+
+
+    </form>
+
+    <div>
+        @Html.ActionLink("Regresar", "Index")
+    </div>
+      
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/Toastr")
+    @Scripts.Render("~/bundles/datepicker")
+    @Scripts.Render("~/bundles/add")
+    @Scripts.Render("~/bundles/datatables")
+
+
+
+
+}

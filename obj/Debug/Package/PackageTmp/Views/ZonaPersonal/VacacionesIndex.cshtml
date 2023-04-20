@@ -1,0 +1,96 @@
+﻿@model IEnumerable<DoleEcIntranet.Models.VacacionesModel>
+
+@{
+    ViewBag.Title = "Vacaciones";
+}
+
+
+<div class="container">
+    <section class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <ul class="breadcrumb">
+                        <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                        <li class="active">Zona Personal</li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h1>Vacaciones</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br />
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Jefe de Area</th>
+                <th>Nombre</th>
+                <th>Area</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@ViewBag.JefeArea</td>
+                <td>@ViewBag.Nombre</td>
+                <td>@ViewBag.Area</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr />
+    <table class="table table-striped" id="tbl_vacaciones">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.subordinado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.puesto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.cicloLaboral)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.vacXCiclo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.vacDisfrutadas)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.vacProgramadas)
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.subordinado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.puesto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.cicloLaboral)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vacXCiclo) dias
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vacDisfrutadas) dias
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.vacProgramadas) dias
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

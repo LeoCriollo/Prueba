@@ -1,0 +1,40 @@
+﻿@model DoleEcIntranet.Models.DocumentoBajaModel
+
+@{
+    ViewBag.Title = "Documento De Baja Ok";
+}
+
+
+<section class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="breadcrumb">
+                    <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    <li class="active">Zona Personal</li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>Facturación Elect. Perú</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <p>
+            @ViewBag.Message
+        </p>
+    </div>
+
+    <hr />
+    <div class="row">
+        <div>
+            @Html.ActionLink("Nueva Baja", "DocumentoDeBaja")
+        </div>
+    </div>
+</div>

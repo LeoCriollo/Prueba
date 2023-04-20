@@ -1,0 +1,264 @@
+﻿@model DoleEcIntranet.Models.SlipPago
+
+
+@if (Model.detalles.Any())
+{
+    
+    <div class="col-md-12">
+       
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.cabecera.compania, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.cabecera.compania, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.cabecera.fechaPago, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.cabecera.fechaPago, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.cabecera.nombre, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.cabecera.nombre, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.cabecera.codEmpleado, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.cabecera.codEmpleado, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.cabecera.cedula, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.cabecera.cedula, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.cabecera.cuenta, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.cabecera.cuenta, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.cabecera.mes, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.cabecera.mes, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.cabecera.centroCosto, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.cabecera.centroCosto, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.cabecera.cargo, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.cabecera.cargo, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="container">
+                <h5 class="text-center heading-light col-lg-12 background-color-primary" style="padding: 8px;">HABERES</h5>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-sm table-striped" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.LabelFor(model => model.detalles.First().idConcepto, new { @class = "control-label" })
+
+                                    </th>
+                                    <th>
+                                        @Html.LabelFor(model => model.detalles.First().descConcepto, new { @class = "control-label" } )
+
+                                    </th>
+                                    <th style="text-align:right">
+                                        @Html.LabelFor(model => model.detalles.First().tiempo, htmlAttributes: new { @class = "control-label" })
+
+                                    </th>
+                                    <th style="text-align:right">
+                                        @Html.LabelFor(model => model.detalles.First().importe, new { @class = "control-label " })
+
+                                    </th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.detalles.Where(w => w.tipoMov == (int)DoleEcIntranet.Tools.Enum.Transacciones.Debitos_1 || w.tipoMov == (int)DoleEcIntranet.Tools.Enum.Transacciones.Debitos_2).OrderBy(o => o.idConcepto))
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(model => item.idConcepto, new { htmlAttributes = new { @class = "form-control" } })
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => item.descConcepto, new { htmlAttributes = new { @class = "form-control" } })
+                                        </td>
+                                        <td style="text-align:right">
+                                            @if (item.tiempo > 0)
+                                            {
+                                                @Html.DisplayFor(model => item.tiempo, new { htmlAttributes = new { @class = "form-control" } })
+
+                                            }
+
+                                        </td>
+                                        <td style="text-align:right">
+                                            @Html.DisplayFor(model => item.importe, new { htmlAttributes = new { @class = "form-control" } })
+                                        </td>
+
+
+                                    </tr>
+
+                                }
+
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                        <strong>
+                            @Html.LabelFor(model => model.totalHaberes, htmlAttributes: new { @class = "control-label" })
+                        </strong>
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3" style="text-align:right">
+                        <strong>
+                            @Html.DisplayFor(model => model.totalHaberes, new { htmlAttributes = new { @class = "form-control" } })
+                        </strong>
+                    </div>
+                </div>
+
+
+                <br />
+                <h5 class="text-center heading-light col-lg-12 background-color-primary" style="padding: 8px;">DESCUENTOS</h5>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-sm table-striped" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.LabelFor(model => model.detalles.First().idConcepto, htmlAttributes: new { @class = "control-label" })
+                                    </th>
+                                    <th style="text-align:left">
+                                        @Html.LabelFor(model => model.detalles.First().descConcepto, new { @class = "control-label" } )
+                                    </th>
+                                   
+                                    <th style="text-align:right">
+                                        @Html.LabelFor(model => model.detalles.First().importe, new { @class = "control-label " })
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.detalles.Where(w => w.tipoMov == (int)DoleEcIntranet.Tools.Enum.Transacciones.Creditos_1).OrderBy(o => o.idConcepto))
+                                {
+                                    <tr>
+                                        <td>
+
+                                            @Html.DisplayFor(model => item.idConcepto, new { htmlAttributes = new { @class = "form-control" } })
+                                        </td>
+                                        <td style="text-align:left">
+                                            @Html.DisplayFor(model => item.descConcepto, new { htmlAttributes = new { @class = "form-control" } })
+                                        </td>
+                                       
+                                        <td style="text-align:right">
+                                            @Html.DisplayFor(model => item.importe, new { htmlAttributes = new { @class = "form-control" } })
+
+                                        </td>
+                                    </tr>
+
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                        <strong>
+                            @Html.LabelFor(model => model.totalDescuentos, htmlAttributes: new { @class = "control-label" })
+                        </strong>
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3" style="text-align:right">
+                        <strong>
+                            @Html.DisplayFor(model => model.totalDescuentos, new { htmlAttributes = new { @class = "form-control" } })
+                        </strong>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                        <strong>
+                            @Html.LabelFor(model => model.netoAPagar, htmlAttributes: new { @class = "control-label" })
+                        </strong>
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3" style="text-align:right">
+                        <strong>
+                            @Html.DisplayFor(model => model.netoAPagar, new { htmlAttributes = new { @class = "form-control" } })
+                        </strong>
+                    </div>
+                </div>
+
+                <br />
+                <div class="row no-print">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6" style="text-align:center">
+                        <button type="button" class="btn btn-primary" onclick="print();"><i class="fas fa-print"></i> Imprimir</button>
+                        
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+
+            </div>
+      
+
+    </div>
+
+}
+else
+{
+    <div class="col-md-12">
+        <p>
+            No se encontraron datos.
+        </p>
+    </div>
+
+}
+

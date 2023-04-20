@@ -1,0 +1,194 @@
+﻿@model IEnumerable<DoleEcIntranet.Models.PicModel.ViewTCModel>
+
+
+<style type="text/css">
+    p:hover {
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.07);
+        
+    }
+    label{
+        color:black
+    }
+    #btnFecha, #btnTc{
+        border-radius:10px
+    }
+    #btnTc {
+        background-color: #1592DF;
+        border-color: #1592DF
+    }
+    .link-justificar {
+        background-color: rgba(0, 128, 0, 0.5);
+       
+        /* otros estilos que quieras aplicar */
+    }
+    .link-justificar:hover {
+        background-color: rgba(0, 128, 0, 0.4);
+    
+        /* otros estilos que quieras aplicar */
+    }
+    .filter-container {
+        position: relative;
+        border: 1px solid black;
+        padding: 15px;
+        width: 300px;
+    }
+
+    .filter-title {
+        position: absolute;
+        top: -12px;
+        left: 10px;
+        background-color: white;
+        padding: 0 5px;
+    }
+    
+</style>
+
+<div class="container">
+
+    <br />
+    <div class="row">
+        <div class="col-md-12" style="text-align:center">
+            <h3>ESTADO DE CUENTA TC CORPORATIVA</h3>
+        </div>
+        <div class="filter-container col-md-10 offset-1" style="box-sizing: border-box; padding: 20px">
+            <div class="filter-title" style="color:black"><b>Filtros</b></div>
+            <br />
+            <div class="row">
+                <div class="col-md-1" style="margin-right:0px;color:black"><b> Estado Cuenta:</b></div>
+                <div class="col-md-3">
+                    <select id="estado" name="estado" class="form-control">
+                        <option value="100">Todos</option>
+                        <option value="1">Justificado</option>
+                        <option value="0">No Justificado</option>
+
+                    </select>
+                </div>
+
+                <div class="col-md-1" style="margin-right:0px;color:black"><b> Desde:</b></div>
+                <div class="col-md-3">
+                    @Html.DropDownList("ListaFechas", null, htmlAttributes: new { @class = "form-control", Styles = "font-size: 15px" })
+
+                </div>
+                <div class="col-md-1" style="margin-right:0px;color:black"><b> Hasta:</b></div>
+                <div class="col-md-3">
+                    @Html.DropDownList("ListaFechas", null, htmlAttributes: new { @class = "form-control", Styles = "font-size: 15px" })
+
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12" style="text-align:center">
+                    <button class="btn btn-success" onclick="Filtrar();"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
+                        <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+                        </svg>  FILTRAR
+                    </button>
+                </div>
+
+            </div>
+            <br />
+        </div>
+
+    </div>
+
+   
+     
+     
+
+
+  
+    <div id="tarjetasCreditoContainer">
+        @Html.Partial("_TarjetasCreditoPartial", Model)
+
+    </div>
+    <br />
+
+ 
+
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+       
+        function Filtrar() {
+            var obj = {
+                estado: $("#estado").val(),
+                fechaDesde: $("#fdesde").val(),
+                fechaHasta: $("#fhasta").val()
+            }
+
+            $.ajax({
+                type: "GET",
+                url: "/PIC/ActualizarTarjetasCredito",
+                data: obj,
+                dataType: "html"
+            }).done(function (response) {
+                $("#tarjetasCreditoContainer").html(response);
+            }).fail(function (error) {
+                console.log("error");
+                $.unblockUI();
+            });
+        }
+
+
+
+
+        @*function Detalle(id) {
+            var obj = {ids : id};
+
+            var request = $.ajax({
+                url: "@Url.Action("TcJustificar", "Home")",
+                type: "POST",
+                data: JSON.stringify(obj),
+                dataType: "html",
+                contentType: "application/json; charset=utf-8"
+
+            });
+
+           request.done(function (response) {
+
+
+
+            });
+
+            request.fail(function (jqXHR, textStatus) {
+                alert("Proceso no realizado: " + textStatus);
+
+            });
+
+        }*@
+
+        function DesplegarNivel1(id) {
+
+            var myDiv = document.getElementById("nivel1-" + id);
+            if (myDiv.style.display === "none") {
+
+                document.getElementById("nivel1-" + id).style.display = "Initial";
+            } else {
+
+                document.getElementById("nivel1-" + id).style.display = "none";
+            }
+
+
+        }
+
+        function DesplegarNivel2(id) {
+
+            var myDiv = document.getElementById("nivel2-" + id);
+            if (myDiv.style.display === "none") {
+
+                document.getElementById("nivel2-" + id).style.display = "Initial";
+            } else {
+
+                document.getElementById("nivel2-" + id).style.display = "none";
+            }
+
+
+        }
+
+
+    </script>
+}
+
+

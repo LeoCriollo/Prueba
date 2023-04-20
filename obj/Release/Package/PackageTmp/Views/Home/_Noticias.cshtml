@@ -1,0 +1,52 @@
+﻿@model List<DoleEcIntranet.Models.ArticuloViewModel>
+
+@if (Model != null)
+{
+
+    foreach (var item in Model)
+    {
+        <hr />
+        <div class="row">
+
+            <div class="col-md-9">
+                <div class="recent-posts mt-4">
+
+                    <article class="post">
+                        <div class="date">
+                            <span class="day">@item.dia</span>
+                            <span class="month">@item.mes</span>
+                        </div>
+                        <a href="@Url.Action("MostrarArticulo", "Home", new { id = item.idArticulo })">
+                            <h4 style="color:#00346D;">@item.titulo</h4>
+                        </a>
+
+                        <p class="justify-content-end">@item.contenidoResumen</p>
+
+                        <div style="text-align:center">
+                            <a style="margin-left:150px" class="pos btn btn-primary mb-0" href="@Url.Action("MostrarArticulo", "Home", new { id = item.idArticulo })">
+                                Leer más
+                            </a>
+                        </div>
+                       
+                    </article>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-3">
+
+
+                <img src="@Url.Action("MostrarImagen", "Home",new { id = item.idArticulo })"
+                     
+                      class="img-fluid appear-animation animated bounceIn appear-animation-visible" 
+                         data-appear-animation="bounceIn" data-appear-animation-delay="0" 
+                         data-appear-animation-duration="1s" style="animation-duration: 1s; 
+                         animation-delay: 0ms; width:500px;margin-top:20px"                    
+                     />
+
+
+            </div>
+        </div>
+    }
+}

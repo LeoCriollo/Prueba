@@ -1,0 +1,166 @@
+﻿@model DoleEcIntranet.Models.ReclutamientoInternoViewModel
+
+@Styles.Render("~/bundles/datepicker/css")
+
+@{
+
+    ViewBag.Title = "Editar Reclutamiento Interno";
+
+}
+
+
+<section class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="breadcrumb">
+                    <li class="active">Contenido</li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>Reclutamiento Interno</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="container">
+    
+
+    @using (Html.BeginForm("EditReclutamientoInterno", "Admin", FormMethod.Post, new { novalidate = "novalidate" }))
+    {
+       
+        @Html.AntiForgeryToken()
+
+
+        <h4>@ViewBag.nombreCategoria</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="row">
+
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.fechaPublicacion, htmlAttributes: new { @class = "control-label col-md-3 " })
+                <div class="col-md-9">
+                    <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fas fa-calendar-alt"></i>
+                            </span>
+                        </span>
+                        @Html.EditorFor(model => model.fechaPublicacion, new { htmlAttributes = new { @class = "date-picker form-control",@PlaceHolder = "mm/dd/yyyy" } })
+                        @Html.ValidationMessageFor(model => model.fechaPublicacion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.fechaExpiracion, htmlAttributes: new { @class = "control-label col-md-3 " })
+
+                <div class="col-md-9">
+                    <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fas fa-calendar-alt"></i>
+                            </span>
+                        </span>
+                        @Html.EditorFor(model => model.fechaExpiracion, new { htmlAttributes = new { @class = "date-picker form-control", @PlaceHolder = "mm/dd/yyyy" } })
+                        @Html.ValidationMessageFor(model => model.fechaExpiracion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <br />
+
+        <div class="row">
+            @Html.LabelFor(model => model.Contenido, htmlAttributes: new { @class = "control-label col-md-2" })
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                @Html.TextAreaFor(model => model.Contenido, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Contenido, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            <div class="row justify-content-center">
+                <input type="submit" value="Publicar" class="btn btn-primary" />
+            </div>
+        </div>
+
+    }
+
+    <div>
+        @Html.ActionLink("Regresar", "Index", "Home")
+    </div>
+
+</div>
+
+@section scripts {
+
+    @Scripts.Render("~/bundles/datepicker")
+
+    @Scripts.Render("~/bundles/texteditor")
+
+    <script type="text/javascript">
+        tinyMCE.baseURL = "/Scripts/tinymce/";
+        tinymce.init({
+            selector: "textarea#Contenido",
+            language: 'es_MX',
+            branding: false,
+            theme: "modern",
+            height: 300,
+            plugins: [
+                "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                "save table contextmenu directionality emoticons template paste textcolor"
+            ],
+            relative_urls: false,
+            content_css: "css/metro-bootstrap.min.css",
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
+            file_browser_callback: function (field, url, type, win) {
+                tinyMCE.activeEditor.windowManager.open({
+                    url: '/FileBrowser/FileBrowser.aspx?caller=tinymce4&langCode=es&type=' + type,
+                    title: 'File Browser',
+                    width: 700,
+                    height: 500,
+                    inline: true,
+                    close_previous: false
+                }, {
+                        window: win,
+                        field: field
+                    });
+                return false;
+            }
+
+        });
+
+
+        $(function () {
+            $('.date-picker').datepicker(
+                {
+                    format: "mm/dd/yyyy",
+                    showTodayButton: true,
+                    orientation: "auto",
+                    autoclose: true,
+                    todayHighlight: true,
+                    language: 'es',
+                }).on('changeDate', function (ev) {
+                    $(this).datepicker('hide');
+                }); //Initialise any date pickers
+
+        });
+
+    </script>
+
+}

@@ -1,0 +1,114 @@
+﻿@model IEnumerable<DoleEcIntranet.Models.PicModel.MyReportModel>
+
+
+@if (ViewBag.Usuario != "")
+{
+    <div class="container">
+ 
+        <div>
+            <div style="overflow-x:auto;">
+
+                <table class="table table-striped" width="100%" name="TablaFlujo" id="TablaFlujo">
+                    <thead>
+                        <tr>
+                            <th style="text-align:center">
+                                #
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.motivogasto)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.secuencial)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.slctTipo)
+                            </th>
+
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.fechasolicitud)
+                            </th>
+                            <th style="text-align:center">
+                                @Html.DisplayNameFor(model => model.estado)
+                            </th>
+                            <th style="text-align:center"> -Opciones-</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.indice)
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.motivogasto)
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.secuencial)
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.slctTipo)
+                                </td>
+
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.fechasolicitud)
+                                </td>
+                                <td style="text-align:center">
+                                    @Html.DisplayFor(modelItem => item.estado)
+                                </td>
+                                <td style="text-align:center">
+                                    @if (item.formulario == "RPG")
+                                    {
+
+                                        if (item.estado == "P" || item.estado == "APROBADO")
+                                        {
+                                            @*@Html.ActionLink("Reporte", "RevisarReporteUser", new { id = item.id })*@
+                                            @Html.ActionLink("Reporte", "EditReport", new { id = item.id, readOnly = true, aprobador = true })
+                                        }
+                                        else
+                                        {
+                                            @Html.ActionLink("Reporte", "EditReport", new { id = item.id, readOnly = true, aprobador = true })
+                                        }
+
+
+
+
+
+                                    }
+                                    else
+                                    {
+                                        if (item.estado == "APROBADO")
+                                        {
+                                            @Html.ActionLink("Reporte", "RevisarReporteFae", new { id = item.id })
+                                        }
+                                        else
+                                        {
+                                            @Html.ActionLink("Reporte", "EditReportFae", new { id = item.id })
+                                        }
+
+
+                                    }
+                                </td>
+                            </tr>
+                        }
+
+
+
+                    </tbody>
+
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+}
+else
+{
+    <label style="color:red">Inicie sesion para continuar</label>
+}
+
+

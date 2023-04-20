@@ -1,0 +1,173 @@
+﻿@model DoleEcIntranet.Models.PicModel.ConsumoViewModel
+<style type="text/css">
+    label {
+        color: black;
+        font-family: 'Times New Roman';
+        font-size: 17px
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+
+            <div class="row">
+                <div class="col-md-6" style="text-align:left">
+                    <label style="color: red; text-align: left"> <b>Tipo consumo:</b> </label>
+                </div>
+                <div class="col-md-6">
+                    <label> @Model.tipoconsumo</label>
+                </div>
+             
+
+            </div>
+            <div class="row">
+                <div class="col-md-6" style="text-align:left">
+                    <label style="color:red; text-align:left"> <b>Moneda:</b> </label>
+                </div>
+                <div class="col-md-6">
+                    <label> @Model.idmoneda</label>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6" style="text-align:left">
+                    <label style="color:red; text-align:left"> <b>Tipo cambio:</b> </label>
+                </div>
+                <div class="col-md-6">
+                    <label> @Model.tcambio</label>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6" style="text-align:left">
+                    <label style="color:red; text-align:left"> <b>Monto:</b> </label>
+                </div>
+                <div class="col-md-6">
+                    <label> @Model.monto</label>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6" style="text-align:left">
+                    <label style="color:red; text-align:left"> <b>Valor:</b> </label>
+                </div>
+                <div class="col-md-6">
+                    <label><b>$ @Model.valor</b></label>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6" style="text-align:left">
+                    <label style="color:red; text-align:left"> <b>Tipo proveedor:</b> </label>
+                </div>
+                <div class="col-md-6">
+                    <label> @Model.tipoproveedor</label>
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-6" style="text-align:left">
+                    <label style="color:red; text-align:left"> <b>Ruc proveedor:</b> </label>
+                </div>
+                <div class="col-md-6">
+                    <label> @Model.rucproveedor</label>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6" style="text-align:left">
+                    <label style="color:red; text-align:left"> <b>Razon social:</b> </label>
+                </div>
+                <div class="col-md-6">
+                    <label> @Model.razonsocial</label>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6" style="text-align:left">
+                    <label style="color:red; text-align:left"> <b>Tipo factura:</b> </label>
+                </div>
+                <div class="col-md-6">
+                    <label> @Model.tipofactura</label>
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-6" style="text-align:left">
+                    <label style="color:red; text-align:left"> <b>Fecha factura:</b> </label>
+                </div>
+                <div class="col-md-6">
+                    <label> @Model.fechafactura</label>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6" style="text-align:left">
+                    <label style="color:red; text-align:left"> <b>N.º factura:</b> </label>
+                </div>
+                <div class="col-md-6">
+                    <label> @Model.numerofactura</label>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6" style="text-align:left">
+                    <label style="color:red; text-align:left"> <b>Descripción gasto:</b> </label>
+                </div>
+                <div class="col-md-6">
+                    <label> @Model.descripcionGastos</label>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7" style="text-align:left">
+                    <label style="color:red; text-align:left"> <b>Atención de negocios:</b> </label>
+                </div>
+                <div class="col-md-5" style="text-align:left">
+                    <label> @Model.AtencionNegocios</label>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="col-md-12" style="text-align:left">
+
+                @if (Model.idDetFile != null)
+                {
+                    <a href="@Url.Action("MostrarImagenDet", "Pic", new { id = Model.idDetFile})" target="_blank" style="border-color: red">
+                        <img id="blah" alt="Imagen" src="data:image/png;base64, @Model.Archive" height="200" width="150" />
+                    </a>
+                }
+                else
+                {
+                    if (Model.file != "")
+                        {
+                        if (Model.file == "pdf")
+                        {
+                            <img id="blah" alt="Imagen" target="_blank" src="~/Content/images/pdf.jpg" height="200" width="150" />
+
+                        }
+                        else
+                        {
+                            <img id="blah" alt="Imagen" target="_blank" src="data:image/png;base64, @Model.Archive" height="200" width="150" />
+                        }
+
+                    }
+
+
+
+
+                }
+
+            </div>
+        </div>
+
+    </div>
+    
+
+</div>

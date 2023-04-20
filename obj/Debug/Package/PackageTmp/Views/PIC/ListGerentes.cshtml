@@ -1,0 +1,222 @@
+﻿@model IEnumerable<DoleEcIntranet.Models.PicModel.AutoridadModel>
+
+
+@Styles.Render("~/bundles/alertify/css")
+@Styles.Render("~/bundles/datatables/css")
+        <style type="text/css">
+            th td {
+                text-align: center;
+            }
+        </style>
+<div class="container">
+
+    @*<span class="thumb-info thumb-info-side-image thumb-info-no-zoom">
+
+            <br />
+            <br />
+        </span>*@
+<div class="container" style="background-color: #F2F2F2 ">
+    <br />
+    <label style="color: black" > <B>AGREGAR GERENTES </B></label>
+    <div class="row">
+        <div class="col-md-12">
+            @Html.DropDownList("Lista", null, htmlAttributes: new { @class = "form-control js-example-basic-multiple", multiple = "multiple", name = "states[]"})
+
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12" style="text-align:right">
+            <button onclick="EnviarGerentes()" class="btn btn-success">Agregar</button>
+        </div>
+    </div>
+    <br />
+</div>
+
+    <br />
+    <div>
+        <div style="overflow-x:auto;">
+            <table class="table table-striped" width="100%" name="TablaGerentes" id="TablaGerentes">
+                <thead>
+                    <tr>
+                        <th scope="row">
+                            @Html.DisplayNameFor(model => model.NombreTrab)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AreaDesc)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.CodTrabajador)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NombreCia)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NombrePuesto)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Depto_Desc)
+                        </th>
+                        <th>
+                            Eliminar
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NombreTrab)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AreaDesc)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CodTrabajador)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NombreCia)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NombrePuesto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Depto_Desc)
+                            </td>
+                            <td style="text-align:center">
+                                <a href="javascript:EliminarGerente( '@item.NombreTrab')"><i class="fas fa-trash-alt fa-2x"></i></a>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+
+
+
+            </table>
+        </div>
+    </div>
+
+
+</div>
+
+
+<br />
+<div class="modal fade" id="ModelAddGerente" tabindex="-1" role="dialog" aria-labelledby="smallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="smallModalLabel">Detalles Producto</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body" id="sectionAddGerente">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/datatables")
+    @Scripts.Render("~/bundles/alertify")
+    @Scripts.Render("~/bundles/SRG")
+<script type="text/javascript">
+        $(document).ready(function () {
+
+            //Aplicar datatable
+            $("#TablaGerentes").DataTable();
+
+        });
+        $(document).ready(function () {
+            $('.js-example-basic-multiple').select2();
+            theme: "classic";
+        });
+
+
+    function EnviarGerentes() {
+
+
+        var length = $("#Lista").val().length;
+
+        var Gerentes = {
+            codigo: []
+        }
+        for (var i = 0; i < $("#Lista").val().length; i++) {
+            Gerentes.codigo.push($("#Lista").val()[i]);
+            console.log($("#Lista").val()[i]);
+        }
+        
+        
+          
+               var request = $.ajax({
+                    url: "@Url.Action("AddGerente", "PIC")",
+                    type: "POST",
+                    data: JSON.stringify(Gerentes),
+                    dataType: "html",
+                    contentType: "application/json; charset=utf-8"
+                });
+                 request.done(function (tpm) {
+
+                     window.location.reload();
+
+                 });
+                    request.fail(function (jqXHR, textStatus) {
+
+
+                    });
+
+            toastr.success("Se agregaron " + length + " gerentes");
+        }
+        function EliminarGerente(name) {
+            var codigo = {
+              cod:  name
+            }
+
+
+
+
+
+            alertify.confirm('<b style="color:black;font-size:20px">CONFIRMAR </b>', 'Seguro desea <b style="color:red"> ELIMINAR</b> a: <b> ' + name + "</b>",
+                function () {
+
+                     var request = $.ajax({
+                    url: "@Url.Action("EliminarGerente", "PIC")",
+                    type: "POST",
+                    data: JSON.stringify(codigo),
+                    dataType: "html",
+                    contentType: "application/json; charset=utf-8"
+                });
+                 request.done(function (tpm) {
+
+                     window.location.reload();
+
+                 });
+                    request.fail(function (jqXHR, textStatus) {
+
+
+                    });
+
+
+                    toastr.success(name + 'a sido eliminado con éxito.');
+
+                }
+                , function () {
+
+                    toastr.error('Cancel')
+                });
+
+        }
+</script>
+
+
+}
+

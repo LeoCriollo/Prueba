@@ -1,0 +1,542 @@
+﻿@{
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intranet Dole Ecuador</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/css2")
+    @Styles.Render("~/Content/css3")
+    @Styles.Render("~/Content/css4")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div id="divMessageSol" style="display: none;">
+        Procesando.....
+    </div>
+
+    <header id="header" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyStartAt': 55, 'stickySetTop': '-55px', 'stickyChangeLogo': true}">
+        <div class="header-body">
+
+            <div class="header-container container">
+                <div class="header-row">
+                    <div class="header-column">
+                        <div class="header-row">
+                            <div class="header-logo">
+                                <a href="~/">
+                                    <img alt="Dole" width="150" height="100" src="~/Content/img/dole_logo_new.png">
+
+                                    @*   <img alt="Dole" width="150" height="100" data-sticky-width="125" data-sticky-height="50" data-sticky-top="40" src="~/Content/img/dole_logo_new.png">*@
+
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-column justify-content-end">
+                        <div class="header-row">
+                            <div class="header-nav">
+                                <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1">
+                                    <nav class="collapse">
+                                        <ul class="nav nav-pills" id="mainNav">
+                                            <li class="dropdown">
+                                                @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "dropdown-item active" })
+
+                                            </li>
+                                            <li class="dropdown">
+                                                <a class="dropdown-item dropdown-toggle" href="#">
+                                                    Acerca de Dole
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li class="dropdown-submenu">
+                                                        @Html.ActionLink("Dole Ecuador", "DoleEcuador", "Home", null, new { @class = "dropdown-item" })
+
+                                                        <ul class="dropdown-menu">
+                                                            <li>
+                                                                @Html.ActionLink("Noticias Dole", "NoticiasDole", "Home", null, new { @class = "dropdown-item" })
+                                                            </li>
+                                                        </ul>
+
+                                                    </li>
+
+                                                    <li class="dropdown-submenu">
+                                                        @Html.ActionLink("Fundación Dale", "FundacionDale", "Home", null, new { @class = "dropdown-item" })
+
+                                                        <ul class="dropdown-menu">
+                                                            <li>
+                                                                @Html.ActionLink("Noticias Fundación Dale", "NoticiasDale", "Home", null, new { @class = "dropdown-item" })
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    @*
+                                                        <li>@Html.ActionLink("Organigramas", "ShowOrganigrama", "Home", null, new { @class = "dropdown-item" })</li>*@
+                                                    @*
+                                                        <li> @Html.ActionLink("Identidad Corporativa", "IdentidadCorporativa", "Home", null, new { @class = "dropdown-item" })</li>*@
+                                                    <li> @Html.ActionLink("Certificaciones", "Certificaciones", "Home", null, new { @class = "dropdown-item" })</li>
+                                                    @*
+                                                        <li> @Html.ActionLink("Mapas Oficinas Dole", "Index", "Home", null, new { @class = "dropdown-item" })</li>*@
+                                                    <li> @Html.ActionLink("Manual Operativo de Trazabilidad", "ManualOperativoTraza", "Home", null, new { @class = "dropdown-item" })</li>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a class="dropdown-item dropdown-toggle" href="#">
+                                                    IT Sistemas
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li class="dropdown-submenu">
+                                                        <a class="dropdown-item dropdown-toggle" href="#">
+                                                            Reportes
+                                                        </a>
+
+                                                        <ul class="dropdown-menu">
+                                                            <li>
+                                                                @Html.ActionLink("Proyectos", "BiProyecto", "Home", null, new { @class = "dropdown-item" })
+                                                            </li>
+                                                            <li>
+                                                                @Html.ActionLink("Calidad", "BiCalidad", "Home", null, new { @class = "dropdown-item" })
+                                                            </li>
+
+                                                        </ul>
+
+                                                    </li>
+                                                    <li> @Html.ActionLink("Equipos de Computo", "EquiposComputo", "Home", null, new { @class = "dropdown-item" })</li>
+                                                    <li> @Html.ActionLink("Tendencias Tecnológicas 2020", "NewsIt", "Home", null, new { @class = "dropdown-item" })</li>
+                                                    <li><a class="dropdown-item" href="https://dolefoods.sharepoint.com/sites/One_Dole" target="_blank">Status Proyecto OneDole</a></li>
+
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown">
+                                                @Html.ActionLink("Productos", "Productos", "Home", null, new { @class = "dropdown-item" })
+
+                                            </li>
+                                            <li class="dropdown">
+                                                @Html.ActionLink("Empresas", "Empresas", "Home", null, new { @class = "dropdown-item" })
+
+                                            </li>
+                                            <li class="dropdown">
+                                                <a class="dropdown-item dropdown-toggle" href="#">
+                                                    PIC
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        @Html.ActionLink("Reporte de Gastos", "ReporteGastos", "PIC", null, new { @class = "dropdown-item" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.ActionLink("Anticipo de Efectivo", "AnticipoEfectivo", "PIC", null, new { @class = "dropdown-item" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.ActionLink("Gerentes", "ListGerentes", "PIC", null, new { @class = "dropdown-item" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.ActionLink("Directores", "ListDirector", "PIC", null, new { @class = "dropdown-item" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.ActionLink("Agencias Viaje", "ListAgenciaViajes", "PIC", null, new { @class = "dropdown-item" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.ActionLink("Flujos", "Flujos", "PIC", null, new { @class = "dropdown-item" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.ActionLink("Mis Reportes", "MisReportes", "PIC", null, new { @class = "dropdown-item" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.ActionLink("Tarjetas de Credito", "TarjetasCredito", "PIC", null, new { @class = "dropdown-item" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.ActionLink("Fav", "Fav", "PIC", null, new { @class = "dropdown-item" })
+                                                    </li>
+
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a class="dropdown-item dropdown-toggle" href="#">
+                                                    RRHH
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li class="dropdown-submenu">
+                                                        <a class="dropdown-item dropdown-toggle" href="#">
+                                                            Selección y Desempeño
+                                                        </a>
+                                                        <ul class="dropdown-menu">
+                                                            <li>
+                                                                @Html.ActionLink("Nuevo Colaboradores del Mes", "NuevoColaboradorMes", "Home", null, new { @class = "dropdown-item" })
+                                                            </li>
+                                                            @*
+                                                                <li>
+                                                                    @Html.ActionLink("Promociones del Mes", "Index", "Home", null, new { @class = "dropdown-item" })
+                                                                </li>*@
+                                                            <li>
+                                                                @Html.ActionLink("Reclutamiento Interno", "ReclutamientoInterno", "Home", null, new { @class = "dropdown-item" })
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    @*
+                                                        <li class="dropdown-submenu">
+                                                            <a class="dropdown-item dropdown-toggle" href="#">
+                                                                Salud Ocupacional
+                                                            </a>
+                                                            <ul class="dropdown-menu">
+                                                                <li>
+                                                                    @Html.ActionLink("Notas de Seguridad Industrial", "NotasSeguridad", "Home", null, new { @class = "dropdown-item" })
+                                                                </li>
+                                                                <li>
+                                                                    @Html.ActionLink("Notas de Salud Ocupacional", "NotasSalud", "Home", null, new { @class = "dropdown-item" })
+                                                                </li>
+                                                            </ul>
+                                                        </li>*@
+                                                    <li>
+                                                        @Html.ActionLink("Seguro Medico", "SeguroMedico", "Home", null, new { @class = "dropdown-item" })
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="dropdown">
+                                                <a class="dropdown-item dropdown-toggle" href="#">
+                                                    Personal
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li class="dropdown-submenu">
+                                                        <a class="dropdown-item dropdown-toggle" href="#">
+                                                            Servicios Administrativos
+                                                        </a>
+
+                                                        <ul class="dropdown-menu">
+                                                            <li>
+                                                                @Html.ActionLink("Servicio de Lavado de Vehículos", "CarWash", "Home", null, new { @class = "dropdown-item" })
+                                                            </li>
+                                                            <li>
+                                                                @Html.ActionLink("Talleres Mant. de Vehículos", "MantVehiculos", "Home", null, new { @class = "dropdown-item" })
+                                                            </li>
+                                                            <li>
+                                                                @Html.ActionLink("Servicios de Taxis", "ServicioTaxis", "Home", null, new { @class = "dropdown-item" })
+                                                            </li>
+                                                            <li>
+                                                                @Html.ActionLink("Feria de Servicios", "FeriaServicios", "Home", null, new { @class = "dropdown-item" })
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                        @Html.ActionLink("Recorrido Expreso", "RecorridoExpresos", "Home", null, new { @class = "dropdown-item" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.ActionLink("Gimnasio", "Gimnasio", "Home", null, new { @class = "dropdown-item" })
+                                                    </li>
+
+                                                    <li>
+                                                        @Html.ActionLink("Menú del Comedor", "MenuComedor", "Home", null, new { @class = "dropdown-item" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.ActionLink("Cartera de Hoteles", "CarteraHoteles", "Home", null, new { @class = "dropdown-item" })
+                                                    </li>
+
+
+                                                </ul>
+
+
+                                            </li>
+
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                <li class="dropdown">
+                                                    @Html.ActionLink("Zona Personal", "Index", "ZonaPersonal", null, new { @class = "dropdown-item dropdown-toggle" })
+                                                    <ul class="dropdown-menu">
+                                                        @* Menu Fact Peru *@
+                                                        @if (User.IsInRole(DoleEcIntranet.Tools.Enum.RolFactPeru))
+                                                        {
+
+                                                            <li class="dropdown-submenu">
+                                                                <a class="dropdown-item dropdown-toggle" href="#">
+                                                                    Fact. Elect. Peru
+                                                                </a>
+                                                                <ul class="dropdown-menu">
+                                                                    <li>
+                                                                        @Html.ActionLink("Documento Baja", "DocumentoDeBaja", "ZonaPersonal", null, new { @class = "dropdown-item" })
+                                                                    </li>
+
+                                                                </ul>
+
+                                                            </li>
+
+                                                        }
+                                                        @* Menu Administrador *@
+                                                        @if (User.IsInRole(DoleEcIntranet.Tools.Enum.RolAdmin))
+                                                        {
+
+                                                            <li class="dropdown-submenu">
+                                                                <a class="dropdown-item dropdown-toggle" href="#">
+                                                                    Admin
+                                                                </a>
+                                                                <ul class="dropdown-menu">
+                                                                    <li>
+                                                                        @Html.ActionLink("Registrar Usuario", "Register", "Account", null, new { @class = "dropdown-item" })
+                                                                    </li>
+
+                                                                    <li>
+                                                                        @Html.ActionLink("Noticias Dole", "NoticiasDoleIndex", "Admin", null, new { @class = "dropdown-item" })
+                                                                    </li>
+
+                                                                    <li>
+                                                                        @Html.ActionLink("Noticias Dale", "NoticiasDaleIndex", "Admin", null, new { @class = "dropdown-item" })
+                                                                    </li>
+                                                                    <li>
+                                                                        @Html.ActionLink("Reclutamiento Interno", "EditReclutamientoInterno", "Admin", null, new { @class = "dropdown-item" })
+                                                                    </li>
+
+                                                                </ul>
+
+                                                            </li>
+
+                                                        }
+                                                        @* Menu Administrador Slip Pago *@
+                                                        @if (User.IsInRole(DoleEcIntranet.Tools.Enum.RolAdminSlipPago) || User.IsInRole(DoleEcIntranet.Tools.Enum.RolAdminSlipPagoPuerto))
+                                                        {
+
+                                                            <li class="dropdown-submenu">
+                                                                <a class="dropdown-item dropdown-toggle" href="#">
+                                                                    Admin Slip
+                                                                </a>
+                                                                <ul class="dropdown-menu">
+                                                                    <li>
+                                                                        @Html.ActionLink("Consulta Slip Pago", "ConsultaSlipPagoIndex", "ZonaPersonal", null, new { @class = "dropdown-item" })
+                                                                    </li>
+
+                                                                </ul>
+
+                                                            </li>
+
+                                                        }
+
+                                                    </ul>
+
+                                                </li>
+
+                                                if (User.IsInRole("ENVIOCORREOS") || User.IsInRole("REPORTNAPORTEC"))
+                                                {
+                                                    <li class="dropdown">
+                                                        <a class="dropdown-item dropdown-toggle" href="#">
+                                                            Naportec
+                                                        </a>
+                                                        <ul class="dropdown-menu">
+                                                            @if (User.IsInRole("ENVIOCORREOS"))
+                                                            {
+
+                                                                <li>
+                                                                    @Html.ActionLink("Envios Estados Cta.", "IndexEnvio", "NaportecMenu", null, new { @class = "dropdown-item" })
+                                                                </li>
+
+                                                            }
+                                                            @if (User.IsInRole("REPORTNAPORTEC"))
+                                                            {
+                                                                <li class="dropdown-submenu">
+                                                                    <a class="dropdown-item dropdown-toggle" href="#">
+                                                                        Reportes Naportec
+                                                                    </a>
+
+                                                                    <ul class="dropdown-menu">
+                                                                        <li>
+                                                                            @Html.ActionLink("Despacho de Importación", "DespachoImportacion", "NaportecMenu", null, new { @class = "dropdown-item" })
+                                                                        </li>
+                                                                        <li>
+                                                                            @Html.ActionLink("Embarque de Exportación", "EmbarqueExportacion", "NaportecMenu", null, new { @class = "dropdown-item" })
+                                                                        </li>
+                                                                        <li>
+                                                                            @Html.ActionLink("Almac. Deposito Temporal", "AlmaDepositoTemp", "NaportecMenu", null, new { @class = "dropdown-item" })
+                                                                        </li>
+                                                                        <li>
+                                                                            @Html.ActionLink("Despacho de Exportacion", "DespachoExportacion", "NaportecMenu", null, new { @class = "dropdown-item" })
+                                                                        </li>
+                                                                    </ul>
+                                                                </li>
+
+
+                                                            }
+                                                        </ul>
+
+                                                    </li>
+
+                                                }
+                                                if (User.IsInRole("ADMINBALANZA") || User.IsInRole("REPORTBALANZA"))
+                                                {
+                                                    <li class="dropdown">
+                                                        <a class="dropdown-item dropdown-toggle" href="#">
+                                                            Control Peso
+                                                        </a>
+                                                        <ul class="dropdown-menu">
+
+                                                            <li class="dropdown-submenu">
+                                                                @if (User.IsInRole("ADMINBALANZA"))
+                                                                {
+                                                                    <a class="dropdown-item dropdown-toggle" href="#">
+                                                                        Mantenimientos
+                                                                    </a>
+
+                                                                    <ul class="dropdown-menu">
+
+                                                                        <li>
+                                                                            @Html.ActionLink("Tipos de Empaques", "Index", "Balanza", null, new { @class = "dropdown-item" })
+                                                                        </li>
+
+
+
+
+
+                                                                    </ul>
+                                                                }
+                                                            </li>
+                                                            @if (User.IsInRole("REPORTBALANZA"))
+                                                            {
+                                                                <li>
+                                                                    @Html.ActionLink("Reportes Balanza", "ReportBalanza", "Balanza", null, new { @class = "dropdown-item" })
+                                                                </li>
+                                                                <li>
+                                                                    @Html.ActionLink("Cajas Procesadas", "ConsultCupo", "Balanza", null, new { @class = "dropdown-item" })
+                                                                </li>
+                                                            }
+
+
+
+                                                        </ul>
+
+                                                    </li>
+                                                }
+
+                                            }
+
+
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+
+                                                if (User.IsInRole(DoleEcIntranet.Tools.Enum.ReporteCompras))
+                                                {
+                                                    <li>
+                                                        @Html.ActionLink("Compras", "BiCompras", "Home", null, new { @class = "dropdown-item" })
+                                                    </li>
+                                                }
+                                            }
+
+
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                <li class="dropdown signin logged" id="headerAccount">
+                                                    <a class="dropdown-item dropdown-toggle">
+                                                        <i class="fas fa-user"><span style="color:white">_</span></i> @User.Identity.Name
+                                                        <i class="fas fa-caret-down"></i>
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+
+                                                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar" }))
+                                                        {
+
+                                                            @Html.AntiForgeryToken()
+                                                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar Sesión</a></li>
+
+                                                        }
+
+                                                        @*
+                                                            <li>
+                                                                <div class="dropdown-mega-content">
+
+                                                                    <div class="row">
+                                                                        <div class="col-lg-8">
+                                                                            <div class="user-avatar">
+
+                                                                                <p><strong>@User.Identity.Name</strong></p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-4">
+                                                                            <ul class="list-account-options">
+
+                                                                                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                                                                {
+
+                                                                                @Html.AntiForgeryToken()
+                                                                                <li><a href="javascript:document.getElementById('logoutForm').submit()">Cerrar Sesión</a></li>
+
+                                                                                }
+
+
+
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>*@
+                                                    </ul>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li class="dropdown dropdown-mega dropdown-mega-signin signin" id="headerAccount">
+
+                                                    @*<i class="fas fa-user"></i>*@
+                                                    @Html.ActionLink("Iniciar Sesión", "Login", "Account", null, new { @class = "dropdown-item" })
+
+
+                                                </li>
+                                            }
+
+
+
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <ul class="header-social-icons social-icons d-none d-sm-block">
+                                    <li class="social-icons-facebook"><a href="http://www.facebook.com/Dole" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li class="social-icons-twitter"><a href="http://www.twitter.com/DoleBananas    " target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                </ul>
+                                <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main nav">
+                                    <i class="fas fa-bars"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div role="main" class="main">
+
+        @RenderBody()
+
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <footer id="footer" class="no-print">
+        <div class="footer-copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-1">
+                        <a href="#" class="logo">
+                            <img alt="Dole" class="img-fluid" src="~/Content/img/logo2.jpeg">
+                        </a>
+                    </div>
+                    <div class="col-lg-7">
+                        <p>© Copyright 2019. Sistemas Dole Ecuador.</p>
+                    </div>
+                    <div class="col-lg-4">
+                        <nav id="sub-menu">
+                            <ul>
+                                <li><a href="#">FAQ's</a></li>
+                                <li><a href="#">Sitemap</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

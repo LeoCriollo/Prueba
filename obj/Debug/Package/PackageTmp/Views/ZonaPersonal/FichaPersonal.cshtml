@@ -1,0 +1,181 @@
+﻿@model DoleEcIntranet.Models.FichaPersonalViewModel
+
+@{
+    ViewBag.Title = "Ficha Personal";
+}
+<section class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="breadcrumb">
+                    <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    <li class="active">Zona Personal</li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>Perfil Usuario</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    
+    <div class="col-md-offset-6 card  border-success ">
+        <div class="card-header">
+        <h2 class="text-center"><i class="fa fa-user"></i>  Ficha Personal</h2>
+            </div>
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-3">
+                    <h5>@Html.DisplayNameFor(model => model.IdPersonal)</h5>
+                </div>
+                <div class="col-md-3">
+                    @Html.DisplayFor(model => model.IdPersonal)
+                </div>
+                <div class="col-md-3">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-3">
+                    <h5> @Html.DisplayNameFor(model => model.Nombre)</h5>
+                </div>
+                <div class="col-md-3">
+                    @Html.DisplayFor(model => model.Nombre)
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-3">
+                    <h5>@Html.DisplayNameFor(model => model.Empresa)</h5>
+                </div>
+                <div class="col-md-3">
+                    @Html.DisplayFor(model => model.Empresa)
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-3">
+                    <h5>@Html.DisplayNameFor(model => model.ZonaGeo)</h5>
+                </div>
+                <div class="col-md-3">
+                    @Html.DisplayFor(model => model.ZonaGeo)
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-3">
+                    <h5>@Html.DisplayNameFor(model => model.Area)</h5>
+                </div>
+                <div class="col-md-3">
+                    @Html.DisplayFor(model => model.Area)
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-3">
+                    <h5>@Html.DisplayNameFor(model => model.Cargo)</h5>
+                </div>
+                <div class="col-md-3">
+                    @Html.DisplayFor(model => model.Cargo)
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-3">
+                    <h5>@Html.DisplayNameFor(model => model.JefeInmediato)</h5>
+                </div>
+                <div class="col-md-3">
+                    @Html.DisplayFor(model => model.JefeInmediato)
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-3">
+                    <h5>@Html.DisplayNameFor(model => model.FechaDeIngreso)</h5>
+                </div>
+                <div class="col-md-3">
+                    @Html.DisplayFor(model => model.FechaDeIngreso)
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-3">
+                    <h5>@Html.DisplayNameFor(model => model.FechaDeAntiguedad)</h5>
+                </div>
+                <div class="col-md-3">
+                    @Html.DisplayFor(model => model.FechaDeAntiguedad)
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-3">
+                    <h5>@Html.DisplayNameFor(model => model.GrupoDeNomina)</h5>
+                </div>
+                <div class="col-md-4">
+                    @Html.DisplayFor(model => model.GrupoDeNomina)
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-3">
+                    <h5>@Html.DisplayNameFor(model => model.CentroDeCosto)</h5>
+                </div>
+                <div class="col-md-3">
+                    @Html.DisplayFor(model => model.CentroDeCosto)
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            @Html.ActionLink("Regresar", "Index")
+        </div>
+
+    </div>
+
+    <hr/>
+    <div class="col-md-12">
+        <p>
+            
+        </p>
+    </div>
+</div>

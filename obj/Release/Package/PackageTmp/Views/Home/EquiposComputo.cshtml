@@ -1,0 +1,100 @@
+﻿@model IEnumerable<DoleEcIntranet.Models.EquiposIt>
+
+@{
+    ViewBag.Title = "Equipos Computo";
+}
+@Styles.Render("~/bundles/datatables/css")
+
+<section class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="breadcrumb">
+                    <li>IT Sistemas</li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>Equipos de Computo</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <table class="table table-striped" id="tblComputo" style="font-size:13px">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.item)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.caracteristicas)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.tipoCategoria)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.comentarios)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.precios)
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.item)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.caracteristicas)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tipoCategoria)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.comentarios)
+                            </td>
+                            <td>
+                               $ @Html.DisplayFor(modelItem => item.precios)
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts {
+
+    @Scripts.Render("~/bundles/datatables")
+
+
+    <script type="text/javascript">
+
+        //Aplicar Datatable a la tabla
+        $(document).ready(function () {
+            $('#tblComputo').DataTable({
+                "language": {
+                    "url": "../Scripts/Datatables/Spanish_Datatable.json"
+                }
+
+            });
+        });
+
+    </script>
+}

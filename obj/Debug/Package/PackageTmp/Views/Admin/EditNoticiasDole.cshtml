@@ -1,0 +1,132 @@
+﻿@model DoleEcIntranet.Models.NoticiasDoleIndexViewModel
+
+@{
+
+    ViewBag.Title = "Editar Noticias Dole";    
+
+}
+
+<div class="container">
+
+    @using (Html.BeginForm("EditNoticiasDole", "Admin", FormMethod.Post, new { encType = "multipart/form-data", novalidate = "novalidate" }))
+    {
+        <h2>Editar</h2>
+        @Html.AntiForgeryToken()
+
+
+        <h4>@ViewBag.nombreCategoria</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="row">
+
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.TituloArticulo, htmlAttributes: new { @class = "control-label col-md-3 " })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.TituloArticulo, new { htmlAttributes = new { @class = "form-control", @maxlength = "80" } })
+                    @Html.ValidationMessageFor(model => model.TituloArticulo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.ImageFile, htmlAttributes: new { @class = "control-label col-md-3 " })
+
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.ImageFile, new { @class = "form-control", type = "file", name = "Files", @accept = ".jpg" })
+                    @Html.ValidationMessageFor(model => model.ImageFile, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.ResumenContenido, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextAreaFor(model => model.ResumenContenido, new { @class = "form-control", @maxlength = "200" })
+                    @Html.ValidationMessageFor(model => model.ResumenContenido, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <br />
+                <img height="100" src="@Url.Action("MostrarImagen", "Home",new { id = Model.Id })" />
+
+            </div>
+
+        </div>
+        <br />
+
+        <div class="row">
+            @Html.LabelFor(model => model.Contenido, htmlAttributes: new { @class = "control-label col-md-2" })
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                @Html.TextAreaFor(model => model.Contenido, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Contenido, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Contenido, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Contenido, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Contenido, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+
+
+        <div class="form-group">
+            <div class="row justify-content-center">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </div>
+
+    }
+
+    <div>
+        @Html.ActionLink("Regresar", "NoticiasDoleIndex")
+    </div>
+
+</div>
+
+@section scripts {
+
+
+    @Scripts.Render("~/bundles/texteditor")
+
+    <script type="text/javascript">
+        tinyMCE.baseURL = "/Scripts/tinymce/";
+        tinymce.init({
+            selector: "textarea#Contenido",
+            language: 'es_MX',
+            branding: false,
+            theme: "modern",
+            height: 300,
+            plugins: [
+                "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                "save table contextmenu directionality emoticons template paste textcolor"
+            ],
+            relative_urls: false,
+            content_css: "css/metro-bootstrap.min.css",
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
+            file_browser_callback: function (field, url, type, win) {
+                tinyMCE.activeEditor.windowManager.open({
+                    url: '/FileBrowser/FileBrowser.aspx?caller=tinymce4&langCode=es&type=' + type,
+                    title: 'File Browser',
+                    width: 700,
+                    height: 500,
+                    inline: true,
+                    close_previous: false
+                }, {
+                        window: win,
+                        field: field
+                    });
+                return false;
+            }
+
+        });
+    </script>
+
+}

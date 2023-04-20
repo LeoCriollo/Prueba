@@ -1,0 +1,64 @@
+﻿@model DoleEcIntranet.Models.HotelDetalle
+
+
+@if (Model != null)
+{
+
+    
+        <div class="col-sm-12">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <td>Hotel</td>
+                        <td colspan="3">@Model.hotel</td>
+                       
+                       
+
+                    </tr>
+                    <tr>
+                        <td>Ciudad</td>
+                        <td colspan="3">@Model.ciudad</td>
+                    </tr>
+                    <tr>
+                        <td>Dirección</td>
+                        <td colspan="3">@Model.direccion</td>
+                        
+                        
+                    </tr>
+                    <tr>
+                        <td>Tarifas</td>
+                        <td colspan="3">@Model.tarifas</td>
+                    </tr>
+                    <tr>
+                        <td>Servicios</td>
+                        <td colspan="3">@Model.servicios</td>
+                    </tr>
+                    <tr>
+                        <td>Contacto</td>
+                        <td colspan="3">@Model.contacto</td>
+                       
+
+
+                    </tr>
+                    <tr>
+                        <td>Sitio Web </td>
+                        <td colspan="3"><a href="@Model.paginaweb">Acceder</a></td>
+                    </tr>
+                   
+                    <tr>
+                        <td>Telefono</td>
+                        <td>@Model.telefono</td>
+
+                        <td>E-mail </td>
+                        <td>@Model.email</td>
+                    </tr>
+                </tbody>
+
+
+            </table>
+
+        </div>
+  
+
+
+}

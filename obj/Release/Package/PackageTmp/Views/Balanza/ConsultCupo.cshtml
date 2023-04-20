@@ -1,0 +1,133 @@
+﻿@model DoleEcIntranet.Models.ConsultaCupo
+
+@Styles.Render("~/bundles/Toastr/css")
+@Styles.Render("~/bundles/datepicker/css")
+
+
+
+@{
+    ViewBag.Title = "Consulta Balanza - Cupo";
+}
+
+<section class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="breadcrumb">
+                    <li>Balanza</li>
+                    <li>Cajas Procesadas - Cupo</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>Consulta</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<br />
+<br />
+<div class="container">
+    <section>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="col-md-6 control-label">Finca-Empacadora:</label>
+                @Html.DropDownList("IdFincaEmpacadora", null, htmlAttributes: new { @class = "form-control col-md-6" })
+            </div>
+            <div class="col-md-6">
+                <label class="col-md-6 control-label">Fecha:</label>
+                @Html.EditorFor(model => model.fechaConsulta, new { htmlAttributes = new { @class = "form-control date-picker col-md-6", @PlaceHolder = "mm/dd/yyyy" } })
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-4">
+                <button type="button" onclick="ConsultarInformacion();" class="btn btn-primary"><i class="fas fa-search"> Consultar</i> </button>
+
+            </div>
+        </div>
+    </section>
+    <hr />
+    <section id="consulta">
+    </section>
+</div>
+@section scripts {
+
+
+    @Scripts.Render("~/bundles/datepicker")
+    @Scripts.Render("~/bundles/Toastr")
+
+
+<script type="text/javascript">
+
+        let messageElementSol;
+
+        $(document).ready(function () {
+            messageElementSol = $('#divMessageSol');
+        });
+
+        $(function () {
+            $('.date-picker').datepicker(
+                {
+                    format: "mm/dd/yyyy",
+                    showTodayButton: true,
+                    autoclose: true,
+                    language: 'es',
+                }).on('changeDate', function (ev) {
+                    $(this).datepicker('hide');
+                }); //Initialise any date pickers
+
+        });
+
+        function ConsultarInformacion() {
+
+            let idFincaEmpaca = $("#IdFincaEmpacadora").val();
+
+            if (idFincaEmpaca == 0) {
+
+                toastr.error("Debe Escoger una finca-empacadora", "Error");
+                return;
+            }
+
+            let filter = {
+                fechaConsulta: $("#fechaConsulta").val(),
+                idFincaEmpacadora: idFincaEmpaca
+
+            };
+            $('#consulta').empty();
+
+            $.blockUI({ message: messageElementSol });
+            //Call ajax
+            var request = $.ajax({
+                url: "@Url.Action("ConsultCupo", "Balanza")",
+                type: "POST",
+                data: JSON.stringify(filter),
+                dataType: "html",
+                contentType: "application/json; charset=utf-8",
+            });
+
+            request.done(function (response) {
+                $.unblockUI();
+                $('#consulta').append(response);
+
+            });
+
+            request.fail(function (jqXHR, textStatus) {
+                $.unblockUI();
+                alert("Proceso no realizado: " + textStatus);
+
+            });
+
+
+
+
+        }
+
+
+
+</script>
+
+}
+
+

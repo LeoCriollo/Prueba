@@ -1,0 +1,256 @@
+﻿
+@{
+    ViewBag.Title = "Zona de Personal";
+}
+
+<section class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="breadcrumb">
+                    <li class="active"><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>Zona Personal</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+
+    <section id="team" class="py-3">
+        <div class="container">
+
+            <div class="row mb-5 pb-2">
+                <div class="col-12 col-sm-6 col-lg-3 mb-4 mb-lg-0 text-center">
+
+                    <span class="thumb-info thumb-info-hide-wrapper-bg">
+
+
+                        <span class="thumb-info-wrapper text-center">
+
+                            <a href="@Url.Action("FichaPersonal", "ZonaPersonal")">
+
+                                <i class="far fa-id-card fa-10x"></i>
+
+                            </a>
+                        </span>
+                        <span class="thumb-info-caption-text">
+                            <strong>Ficha Personal</strong>
+                            <br />
+                            <span class="thumb-info-caption-text">Información del empleado, tales como Id Personal, Nombre etc.</span>
+
+                        </span>
+                    </span>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3 mb-4 mb-lg-0 text-center">
+                    <span class="thumb-info thumb-info-hide-wrapper-bg">
+                        <span class="thumb-info-wrapper">
+                            <a href="@Url.Action("SlipPagoIndex", "ZonaPersonal")">
+                                <i class="far fa-money-bill-alt fa-10x" aria-hidden="true"></i>
+                            </a>
+                        </span>
+                        <span class="thumb-info-caption-text">
+                            <strong>Slip de Pago</strong>
+                            <br />
+                            <span class="thumb-info-caption-text">Información de los pagos del empleado.</span>
+
+                        </span>
+                    </span>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3 mb-4 mb-lg-0 text-center">
+                    <span class="thumb-info thumb-info-hide-wrapper-bg">
+                        <span class="thumb-info-wrapper">
+                            <a href="@Url.Action("ImpuestoRentaIndex", "ZonaPersonal")">
+                                <i class="fa fa-university fa-10x"></i>
+                            </a>
+                        </span>
+                        <span class="thumb-info-caption-text">
+                            <strong>Impuesto a la Renta</strong>
+                            <br />
+                            <span class="thumb-info-caption-text">Información del impuesto a la renta del empleado.</span>
+
+                        </span>
+                    </span>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3 mb-4 mb-lg-0 text-center">
+                    <span class="thumb-info thumb-info-hide-wrapper-bg">
+                        <span class="thumb-info-wrapper">
+                            <a href="@Url.Action("VacacionesIndex", "ZonaPersonal")">
+                                <i class="fa fa-plane fa-10x"></i>
+                            </a>
+                        </span>
+                        <span class="thumb-info-caption-text">
+                            <strong>Vacaciones</strong>
+                            <br />
+                            <span class="thumb-info-caption-text">Información de las vacaciones pendientes del empleado.</span>
+
+                        </span>
+                    </span>
+                </div>
+
+
+
+
+            </div>
+            <div class="row mb-5 pb-2">
+                <div class="col-12 col-sm-6 col-lg-3 mb-4 mb-lg-0 text-center">
+
+                    <span class="thumb-info thumb-info-hide-wrapper-bg">
+
+
+                        <span class="thumb-info-wrapper text-center">
+
+                            <a href="https://www.coopstandardfruit.com.ec/" target="_blank">
+
+                                <i class="fa fa-dollar-sign fa-10x"></i>
+                            </a>
+
+
+                        </span>
+                        <span class="thumb-info-caption-text">
+                            <strong>Cooperativa de ahorro</strong>
+                            <br />
+                            <span class="thumb-info-caption-text">Consultar saldos, movimientos y demas servicios.</span>
+
+                        </span>
+                    </span>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3 mb-4 mb-lg-0 text-center">
+
+                    <span class="thumb-info thumb-info-hide-wrapper-bg">
+
+
+                        <span class="thumb-info-wrapper text-center">
+
+                            <a href="@Url.Action("RedirectToUrl1", "ZonaPersonal")" target="_blank">
+
+                                <i class="fa fa-phone fa-10x"></i>
+
+                            </a>
+                        </span>
+                        <span class="thumb-info-caption-text">
+                            <strong>Consumo Telefónico Gerencial</strong>
+                            <br />
+                            <span class="thumb-info-caption-text">Información consumo telefónico gerencial.</span>
+
+                        </span>
+                    </span>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3 mb-4 mb-lg-0 text-center">
+                    <span class="thumb-info thumb-info-hide-wrapper-bg">
+                        <span class="thumb-info-wrapper">
+                            <a href="@Url.Action("RedirectToUrl2", "ZonaPersonal")" target="_blank">
+                                <i class="fa fa-phone-square fa-10x" aria-hidden="true"></i>
+                            </a>
+                        </span>
+                        <span class="thumb-info-caption-text">
+                            <strong>Consumo Telefónico</strong>
+                            <br />
+                            <span class="thumb-info-caption-text">Información consumo telefónico del empleado.</span>
+
+                        </span>
+                    </span>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3 mb-4 mb-lg-0 text-center">
+                    <span class="thumb-info thumb-info-hide-wrapper-bg">
+                        <span class="thumb-info-wrapper">
+                            <a href="@Url.Action("CargasFamiliaresIndex", "ZonaPersonal")">
+                                <i class="fa fa-users fa-10x"></i>
+                            </a>
+                        </span>
+                        <span class="thumb-info-caption-text">
+                            <strong>Cargas Familiares</strong>
+                            <br />
+                            <span class="thumb-info-caption-text">Información de las cargas familiares del empleado.</span>
+
+                        </span>
+                    </span>
+                </div>
+
+
+
+
+
+            </div>
+            <div class="row mb-5 pb-2">
+                <div class="col-12 col-sm-6 col-lg-3 mb-4 mb-lg-0 text-center">
+
+                    <span class="thumb-info thumb-info-hide-wrapper-bg">
+
+
+                        <span class="thumb-info-wrapper text-center">
+
+                            <a href="notes://172.28.90.16/Applications/Human Resources/EcuTer.nsf" target="_blank">
+
+                                <i class="fa fa-street-view fa-10x"></i>
+                            </a>
+
+
+                        </span>
+                        <span class="thumb-info-caption-text">
+                            <strong>Terminación Relación Laboral</strong>
+                            <br />
+                            <span class="thumb-info-caption-text">Terminación Relación Laboral.</span>
+
+                        </span>
+                    </span>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3 mb-4 mb-lg-0 text-center">
+
+                    <span class="thumb-info thumb-info-hide-wrapper-bg">
+
+
+                        <span class="thumb-info-wrapper text-center">
+
+                            <a href="@Url.Action("GastosPersonalesIndex", "ZonaPersonal")">
+
+                                <i class="fa fa-file-alt fa-10x"></i>
+
+                            </a>
+                        </span>
+                        <span class="thumb-info-caption-text">
+                            <strong>Declaración de Gastos Personales</strong>
+                            <br />
+                            <span class="thumb-info-caption-text">Declaración de gastos personales.</span>
+
+                        </span>
+                    </span>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3 mb-4 mb-lg-0 text-center">
+
+                    <span class="thumb-info thumb-info-hide-wrapper-bg">
+
+
+                        <span class="thumb-info-wrapper text-center">
+
+                            <a href="@Url.Action("Formulario107", "ZonaPersonal")" target="_blank">
+
+                                <i class="fa fa-file-alt fa-10x"></i>
+
+                            </a>
+                        </span>
+                        <span class="thumb-info-caption-text">
+                            <strong>Formulario 107</strong>
+                            <br />
+                            <span class="thumb-info-caption-text">Descargar Formulario 107.</span>
+
+                        </span>
+                    </span>
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+
+
+
+</div>
+

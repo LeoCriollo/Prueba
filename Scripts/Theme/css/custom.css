@@ -1,0 +1,13 @@
+/* Add here all your CSS customizations */
+/*Css para no mostrar elementos html en impresion*/
+@media print {
+    .no-print, .no-print * {
+        display: none !important;
+    }
+}
+
+
+
+.aligntable {
+    vertical-align:middle
+}

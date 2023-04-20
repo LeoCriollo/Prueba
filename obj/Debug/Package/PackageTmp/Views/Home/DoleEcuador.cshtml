@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "Dole Ecuador";
+}
+
+
+<style type="text/css">
+    .vid-border {
+        position: relative;
+        height: 480px;
+        width: 854px;
+        border: 5px solid black;
+        overflow: hidden;
+    }
+
+    #vid {
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        height: 480px;
+        width: 854px;
+    }
+</style>
+
+<section class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="breadcrumb">
+                    <li class="active"><a href="@Url.Action("DoleEcuador","Home")">Inicio</a></li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>Dole Ecuador</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+
+            <div class="embed-responsive embed-responsive-4by3 mb-0">
+
+
+                <video  controls="controls" autoplay="autoplay">
+                    <source src="~/Content/media/presentacion_dole.mp4" type="video/mp4" />
+                </video>
+
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <br />
+            <br />
+            <p class="text-justify">
+                <strong>La división DOLE Ecuador</strong> forma parte de la Corporación DOLE Food Company, Inc. cuyas oficinas corporativas están situadas en Westlake, EE.UU. Ecuador pertenece a la región Latinoamérica y nuestra casa matriz está ubicada en San José de Costa Rica.
+
+            </p>
+            <p class="text-justify">
+                <strong>DOLE Food Company</strong> es una corporación de renombre mundial, productora y suplidora de más de 170 frutas y vegetales, frescos y elaborados en el mundo entero. Cuenta con oficinas en todo el mundo y esta geográficamente dividida en 4 zonas:
+            </p>
+            <ul>
+                <li>DOLE Europa con sede en París, Francia </li>
+                <li>DOLE Latinoamérica con sede en San José, Costa Rica</li>
+                <li>DOLE Asia con sede en Manila, Philipinas</li>
+                <li>DOLE Norteamérica con sede en Salinas, EE.UU.</li>
+            </ul>
+        </div>
+      
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-lg-6">
+            <img class="float-left" width="200" src="~/Content/img/foto_ceo.jpg" />
+            <p class="text-justify"><strong>La Corporación DOLE</strong> fue fundada en Hawai, Estados Unidos, en el año 1851, por James Drummond Dole.
+            </p>
+            <p class="text-justify">
+                Inicialmente, la empresa se dedicó a la siembra de piña y llegó a tener una industria tecnificada para su producción, elaboración y exportación. Luego se diversificó la producción y se incursionó en la comercialización de diferentes frutas y vegetales, teniendo actualmente operaciones en más de 90 países alrededor del mundo. J.D. Dole construyó su reputación gracias a su firme compromiso con la calidad, y sus principios son la base de la filosofía de la corporación hasta nuestros días.
+            </p>
+            <p class="text-justify">
+                Desde el año 2003, el total de las acciones de la empresa fueron adquiridas por David H. Murdock, quien ha sido su Presidente y Director General desde 1985.
+            </p>
+            <p class="text-justify">En Latinoamérica, la compañía tiene divisiones en Costa Rica, Honduras, Guatemala, Colombia, Ecuador y Perú, donde adquiere y produce frutas que luego vende en Norteamérica, Europa, Asia y Nueva Zelanda.</p>
+            
+        </div>
+        <div class="col-lg-6">
+            <h5>Nuestra Misión</h5>
+            <img class="float-right" width="200" src="~/Content/img/foto_mision.jpg" />
+            <p class="text-justify">
+                Dole Food Company, Inc. está comprometida a suplir a los consumidores y nuestros clientes los mejores productos y la más alta calidad y conducir a la industria a la investigación nutricional y educación. Dole sustenta estos objetivos en una filosofía corporativa de adherirse a la conducta ética más alta en todos sus negocios, en el tratamiento de sus empleados, y políticas sociales y ambientales. Nuestra división contribuye con diversos productos para la exportación, siendo el Banano de variedad Cavendish el más importante y las Piñas, Banano orgánico entre otros productos.
+                
+            </p>
+        </div>
+    </div>
+</div>
+

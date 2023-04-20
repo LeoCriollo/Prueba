@@ -1,0 +1,62 @@
+﻿@model DoleEcIntranet.Models.FilterSlipPago
+
+@{
+    ViewBag.Title = "Consulta Slip Pagos";
+}
+@Styles.Render("~/bundles/datatables/css")
+
+<section class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="breadcrumb">
+                    <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    <li class="active">Zona Personal</li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>Consulta Slip Pagos</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <label class="control-label col-md-4">Tipo de Busqueda</label>
+            <div class="col-md-8">
+                @Html.DropDownList("tipoBusqueda", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-md-6">
+            @Html.LabelFor(model => model.busqueda, htmlAttributes: new { @class = "control-label col-md-4 " })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.busqueda, new { htmlAttributes = new { @class = "form-control", @maxlength = "80" } })
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-2 offset-4">
+            <button type="button" class="btn btn-primary no-print" onclick="ConsultarEmpleados();"><i class="fas fa-search"></i>  Consultar </button>
+
+        </div>
+
+    </div>
+
+    <hr />
+
+    <div id="consultaSlipSection" class="row">
+
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/datatables")
+    @Scripts.Render("~/bundles/slippagoadmin")
+
+}

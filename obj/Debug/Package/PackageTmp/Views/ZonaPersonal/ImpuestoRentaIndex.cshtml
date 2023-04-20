@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Impuesto a la renta - Consulta";
+}
+<section class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="breadcrumb">
+                    <li><a href="@Url.Action("Index","Home")">Inicio</a></li>
+                    <li class="active">Zona Personal</li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>Impuesto a la renta</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="col-md-12">
+
+        <div class="row">
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-2">
+                <label>Escoja Año-Periodo</label>
+            </div>
+            <div class="col-md-2">
+                @Html.DropDownList("YearPer", null, htmlAttributes: new { @class = "form-control" })
+
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary no-print" onclick="ConsultarImptoRta();"><i class="fas fa-search"></i>  Consultar </button>
+
+            </div>
+            <div class="col-md-3">
+
+            </div>
+
+
+
+        </div>
+        <hr />
+
+        <div id="consultaSectionImpto" class="row">
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/imptorta")
+}
+

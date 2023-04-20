@@ -1,0 +1,1191 @@
+﻿@model DoleEcIntranet.Models.PicModel.FaeViewModel
+@Styles.Render("~/bundles/alertify/css")
+<style type="text/css">
+    label {
+        color: black;
+        font-family: 'Times New Roman';
+        font-size: 17px
+    }
+
+    .error {
+        color: red
+    }
+
+    .container-input {
+        text-align: center;
+        border-radius: 6px;
+        width: 50%;
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+
+    .inputfile {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
+
+        .inputfile + label {
+            max-width: 80%;
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            cursor: pointer;
+            display: inline-block;
+            overflow: hidden;
+            padding: 0.625rem 1.25rem;
+        }
+
+            .inputfile + label svg {
+                width: 1em;
+                height: 1em;
+                vertical-align: middle;
+                fill: currentColor;
+                margin-top: -0.25em;
+                margin-right: 0.25em;
+            }
+
+    .iborrainputfile {
+        font-size: 16px;
+        font-weight: normal;
+        font-family: 'Lato';
+    }
+
+    .inputfile-1 + label {
+        color: #fff;
+        background-color: #67be63;
+    }
+
+        .inputfile-1:focus + label,
+        .inputfile-1.has-focus + label,
+        .inputfile-1 + label:hover {
+            background-color: #488545;
+        }
+</style>
+
+@Styles.Render("~/bundles/alertify/css")
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+</script>
+
+<script src="https://malsup.github.io/jquery.blockUI.js">
+</script>
+<script src="http://momentjs.com/downloads/moment.min.js"></script>
+<br />
+<br />
+<form id="formVFAE">
+    <div class="container" style="text-align:center">
+        <h3> <u>Formulario Anticipo de efectivo <b>(FAE)</b></u> </h3>
+
+        <div class="row">
+            <div class="col-md-7"></div>
+            <div class="col-md-4" style=" border-color:black; text-align:center">
+                <h3 style="font-family: 'Times New Roman'; border: 3px solid black;">SECUENCIAL: <b>FAE-00000 @Model.secuencial </b></h3>
+            </div>
+        </div>
+        <br />
+        @*<div class="row">
+            <div class="col-md-6" style="text-align:center">
+
+
+                <label><b>Fecha de la Solicitud  : </b> </label>
+                <label>@Model.FechaSolicitud</label>
+
+            </div>
+            <div class="col-md-6">
+                <label><b>Status : </b> </label>
+                <label>@Model.Estatus</label>
+
+            </div>
+
+        </div>*@
+        <br />
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-3" style="text-align:left">
+
+                        <label style="color:red"><b>Datos del Empleado <abbr style="color:red">*</abbr></b> </label>
+                    </div>
+                    <div class="col-md-4" style="text-align:left">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                    </svg>
+                                </span>
+                            </div>
+                            <input type="number" name="codigoempleado" class="form-control" placeholder="Código empleado" id="codigoempleado" value="@Model.codigoEmpleado" disabled />
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="col-md-3" style="text-align:left">
+
+                        @*<button value="" type="button" class="btn btn-primary btn-lg" id="ConsultarEmpleado" onclick="CodigoEmpleado()" name="ConsultarEmpleado"><i class="fa fa-search"></i>  Consultar datos de Empleado</button>*@
+                        @*<input class="btn btn-primary" type="button" id="ConsultarEmpleado" name="ConsultarEmpleado" value="Consultar datos de Empleado"> </input>*@
+                    </div>
+
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-2" style="text-align:left">
+                        <label><b>Nombre:</b></label>
+                    </div>
+                    <div class="col-md-3" style="text-align:left">
+
+                        <input type="text" name="nombre" id="nombre" class="form-control" disabled value="@Model.nombre" />
+                    </div>
+                    <div class="col-md-2" style="text-align:left">
+                        <label><b>Departamento:</b></label>
+                    </div>
+                    <div class="col-md-4" style="text-align:left">
+
+                        <input type="text" name="departamento" id="departamento" class="form-control" disabled value="@Model.departamento" />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-2" style="text-align:left">
+                        <label><b>Compañía:</b></label>
+                    </div>
+                    <div class="col-md-3" style="text-align:left">
+
+                        <input type="text" name="compania" id="compania" class="form-control" disabled value="@Model.razonsocial" />
+                    </div>
+
+                    <div class="col-md-2" style="text-align:left">
+                        <label><b>Centro de costos:</b></label>
+                    </div>
+                    <div class="col-md-4" style="text-align:left">
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                        <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
+                                        <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                                    </svg>
+                                </span>
+                            </div>
+
+                            <input type="text" name="centrocosto" id="centrocosto" class="form-control" disabled value="@Model.centrocosto" />
+                        </div>
+
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-2" style="text-align:left">
+                        <label><b>Área:</b></label>
+                    </div>
+                    <div class="col-md-3" style="text-align:left">
+
+                        <input type="text" name="area" id="area" class="form-control" disabled value="@Model.area" />
+                    </div>
+
+
+                    <div class="col-md-2" style="text-align:left">
+
+                        <label><b>Centro de costo cargado a:</b></label>
+                    </div>
+                    <div class="col-md-4" style="text-align:left">
+
+
+
+                        <input type="checkbox" name="checkIn" id="checkIn" class="checkbox" onclick="checkIn1()" value="" />     &nbsp  &nbsp
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                        <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
+                                        <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                                    </svg>
+                                </span>
+                            </div>
+                            @Html.DropDownList("SlctCentroCostoa", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+
+
+                    <div class="col-md-2" style="text-align:left">
+
+                        <label id="af"><b>Autoridad Financiera:</b></label>
+                    </div>
+                    <div class="col-md-3" style="text-align:left">
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend" id="afi">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-shaded" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8 14.933a.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067v13.866zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z" />
+                                    </svg>
+                                </span>
+                            </div>
+
+                            @Html.DropDownList("SlctGerentes", null, htmlAttributes: new { @class = "form-control", Disabled = "Disabled" })
+
+
+                        </div>
+
+
+
+                        @*<label style="font-size:14px" id="afff"><input type="checkbox" name="CheckDirect" id="CheckDirect" onclick="CheckDirector()" value="" /><b> En ausencia del Gerente del Área que apruebe el Director del Área</b></label>*@
+                    </div>
+
+
+                    <div class="col-md-2" style="text-align:left;display:none" id="dir">
+                        <label id="lblDirector"><b>Director:</b></label>
+                    </div>
+                    <div class="col-md-4" style="text-align:left;display:none" id="SlctDirectores">
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-shaded" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8 14.933a.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067v13.866zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z" />
+                                    </svg>
+                                </span>
+                            </div>
+                            @Html.DropDownList("SlctDirectores", null, htmlAttributes: new { @class = "form-control sel1", id = "SlctDirectores1" })
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="col-md-3" style="border-left:1px solid; border-color:green; text-align:center;box-sizing:border-box">
+
+                @foreach (var i in Model.FlujoApro)
+                {
+
+
+
+                    if (i.Nivel == 1)
+                    {
+
+                        <div style="text-align:left">
+                            <b style="color:black">APROBADOR 1 </b>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-3" style="margin-right:10px;padding-right:0px ; margin-top:8px">
+
+                                @if (i.Estado == "P")
+                                {
+
+                                    <svg style="display:initial" xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
+                                        <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z" />
+                                        <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z" />
+                                    </svg>
+
+
+                                }
+                                else
+                                {
+                                    if (i.Estado == "R")
+                                    {
+                                        <svg xmlns="http://www.w3.org/2000/svg" style="color:red" width="26" height="26" fill="currentColor" class="bi bi-r-circle-fill" viewBox="0 0 16 16">
+                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM5.5 4.002V12h1.335V8.924H8.52L9.98 12h1.52L9.856 8.701c.828-.299 1.495-1.101 1.495-2.238 0-1.488-1.03-2.461-2.74-2.461H5.5Zm1.335 1.09v2.777h1.549c.995 0 1.573-.463 1.573-1.36 0-.913-.596-1.417-1.537-1.417H6.835Z" />
+                                        </svg>
+                                    }
+                                    else
+                                    {
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" style="color:green" width="26" height="26" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                        </svg>
+
+                                    }
+                                }
+
+                            </div>
+                            <div class="col-md-9" style="margin-left:-30px;text-align:left">
+                                <div>
+                                    <label style="font-size:14px"> <b>@i.Aprobador</b> </label>
+                                </div>
+                                <div style="margin-top:-10px">
+                                    <label style="margin-bottom:15px">@i.FechaCreacion</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    }
+
+                    if (i.Nivel == 2)
+                    {
+
+                        <div style="text-align:left">
+                            <b style="color:black">APROBADOR 2 </b>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-3" style="margin-right:10px;padding-right:0px ; margin-top:8px">
+
+                                @if (i.Estado == "P")
+                                {
+
+                                    <svg style="display:initial" xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
+                                        <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z" />
+                                        <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z" />
+                                    </svg>
+
+
+                                }
+                                else
+                                {
+                                    if (i.Estado == "R")
+                                    {
+                                        <svg xmlns="http://www.w3.org/2000/svg" style="color:red" width="26" height="26" fill="currentColor" class="bi bi-r-circle-fill" viewBox="0 0 16 16">
+                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM5.5 4.002V12h1.335V8.924H8.52L9.98 12h1.52L9.856 8.701c.828-.299 1.495-1.101 1.495-2.238 0-1.488-1.03-2.461-2.74-2.461H5.5Zm1.335 1.09v2.777h1.549c.995 0 1.573-.463 1.573-1.36 0-.913-.596-1.417-1.537-1.417H6.835Z" />
+                                        </svg>
+                                    }
+                                    else
+                                    {
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" style="color:green" width="26" height="26" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                        </svg>
+
+                                    }
+                                }
+
+                            </div>
+                            <div class="col-md-9" style="margin-left:-30px;text-align:left">
+                                <div>
+                                    <label style="font-size:14px"> <b>@i.Aprobador</b> </label>
+                                </div>
+                                <div style="margin-top:-10px">
+                                    <label style="margin-bottom:15px">@i.FechaCreacion</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    }
+
+
+                }
+
+
+            </div>
+        </div>
+
+
+        <br />
+        <div class="col-md-12" style="text-align:center">
+            <h4> <u>Datos del anticipo de efectivo</u> </h4>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-2" style="text-align:left">
+                <label> <b>Destino: <abbr style="color:red">*</abbr></b></label>
+            </div>
+            <div class="col-md-3" style="text-align:left">
+
+                <select class="form-control" id="slDestino" name="slDestino" disabled>
+                    <option value="0">-Seleccione-</option>
+                    <option value="1">Nacional</option>
+                    <option value="2">Exterior</option>
+
+                </select>
+            </div>
+            <div class="col-md-2" style="text-align:left">
+
+                <label><b>Motivo del anticipo de efectivo:<abbr style="color:red">*</abbr></b></label>
+            </div>
+            <div class="col-md-4" style="text-align:left">
+
+                <select class="form-control" id="motanticefect" name="motanticefect" disabled>
+                    <option value="0">-Seleccione-</option>
+                    <option value="1">Capacitación</option>
+                    <option value="2">Eventos / Ferias</option>
+                    <option value="3">Otros</option>
+                    <option value="4">Reuniones de trabajo</option>
+                    <option value="5">Trabajos en otras cias.DOLE</option>
+                    <option value="6">Tramites Visa (trabajo)</option>
+                </select>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-2" style="text-align:left">
+                <label> <b>Pais: <abbr style="color:red">*</abbr></b></label>
+            </div>
+            <div class="col-md-3" style="text-align:left">
+                @Html.DropDownList("SlPais", null, htmlAttributes: new { @class = "form-control", Disabled = "Disabled" })
+
+                @*<select class="form-control" id="pais" name="pais" disabled>
+                    <option value="0">-Seleccione-</option>
+                    <option value="1">Afganiztan</option>
+                    <option value="2">Albania</option>
+                    <option value="3">Alemania</option>
+                    <option value="4">Andorra</option>
+
+                </select>*@
+            </div>
+            <div class="col-md-2" style="text-align:left">
+                <label> <b>Ciudad: <abbr style="color:red">*</abbr></b></label>
+            </div>
+            <div class="col-md-4" style="text-align:left">
+                @Html.DropDownList("Ciudades", null, htmlAttributes: new { @class = "form-control", Disabled = "Disabled" })
+                @*<select class="form-control" id="ciudad" name="ciudad" disabled>
+                    <option value="0">-Seleccione-</option>
+                    <option value="1">Afganiztan</option>
+                    <option value="2">Albania</option>
+                    <option value="3">Alemania</option>
+                    <option value="4">Andorra</option>
+
+                </select>*@
+            </div>
+
+        </div>
+
+        <br />
+        <div class="row">
+            <div class="col-md-2" style="text-align:left">
+                <label><b>Desde:<abbr style="color:red">*</abbr></b></label>
+            </div>
+            <div class="col-md-3" style="text-align:left">
+
+                <input type="date" name="fechadesde" id="fechadesde" class="form-control fecha" value="@Model.fechadesde" disabled />
+            </div>
+            <div class="col-md-2" style="text-align:left">
+                <label><b>  Hasta:<abbr style="color:red">*</abbr></b></label>
+            </div>
+            <div class="col-md-4" style="text-align:left">
+
+                <input type="date" name="fechahasta" id="fechahasta" class="form-control fecha" value="@Model.fechahasta" disabled />
+            </div>
+        </div>
+        <br />
+
+        <div class="row" style="display:none" id="CalFecha">
+            <div class="col-md-12">
+                <div style="text-align:center" id="CalculoFecha">
+
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-2" style="text-align:left">
+                <label> <b>Usara TC corporativa:<abbr style="color:red">*</abbr> </b></label>
+            </div>
+            <div class="col-md-3" style="text-align:left">
+
+                <select class="form-control fecha" id="slTC" name="slTC" disabled>
+                    <option value="0">-Seleccione-</option>
+                    <option value="1">Si</option>
+                    <option value="2">No</option>
+
+
+                </select>
+            </div>
+
+            <div class=" col-md-2" style="text-align:left">
+                <div class="row">
+                    <div class="col-md-7">
+                        <label><b>Asistentes</b>  </label>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" name="conteoAsist" class="form-control fecha" style="text-align:center;font-size:14px;background-color:white" value="@Model.cantInvitados" id="conteoAsist" disabled />
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="col-md-3">
+                <input type="text" name="asistentes" id="asistentes" class="form-control" value="" />
+            </div>
+            @*<div class="col-md-1">
+
+                <button type="button" title="Agregar Asistente" class="btn btn-success fecha" onclick="GenerarAsitente();" style="border: none; background-color: #FFFFFF">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" style="color: #52B63F" height="26" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                    </svg>
+                </button>
+
+            </div>*@
+        </div>
+
+        <div style="display:initial" id="GenerateAsistente">
+
+
+
+
+        </div>
+
+
+        @*<div class="row">
+            <div class="col-md-12" style="text-align:center">
+                <label><b>Aprobación:</b></label><br />
+                <input type="file" class="Pdfs" name="fileAprobacion" id="fileAprobacion" value="" accept="application/pdf" />
+
+            </div>
+        </div>*@
+
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-12" style="text-align:center">
+                <a href="#" onclick="VisorImagenes('FAE');" data-toggle="modal" title="Visor Imagenes" data-target="#btnVisorImg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">
+                        <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                        <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z" />
+                    </svg> Ver Imagenes
+                </a>
+            </div>
+
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12" style="text-align:left">
+                <label><b>Comentarios:</b></label>
+                <textarea class="form-control" id="Comentarios" disabled>@Model.Comentario</textarea>
+            </div>
+
+        </div>
+        <hr />
+        <!--<h4 style="color:red; font-family:'Bodoni MT'"> DETALLES DE GASTOS</h4>
+    <div style="background-color: #F7F7F7;" class="col-md-12">
+        <div style="background-color: #EEECEB; padding: 8px; border-bottom: solid black; border-block: solid black;" class="row">
+
+            <div class="col-md-3"><label> Concepto </label></div>
+            <div class="col-md-2"> <label>Valor</label> </div>
+
+            <div class="col-md-2"> <label>Total</label> </div>
+            <div class="col-md-"> <label>Comentarios</label> </div>
+        </div>
+        <br />
+
+        <div class="row">
+
+            <div class="col-md-3">
+
+                <select class="form-control" id="tipoconsumo" name="tipoconsumo">
+                    <option value="0" style="border-style:dotted;border-color:red ">-Seleccione-</option>
+                    <option value="1">Almuerzo</option>
+                    <option value="2">Alquiler de auto</option>
+                    <option value="3">Atenciones</option>
+                    <option value="4">Cena</option>
+                    <option value="5">Combustible</option>
+                    <option value="6">Desayuno</option>
+                    <option value="7">Hospedaje</option>
+                    <option value="9">Otros</option>
+                    <option value="10">Peajes</option>
+                    <option value="11">Servicios Financieros</option>
+                    <option value="12">Taxis</option>
+
+                </select>
+            </div>
+            <div class="col-md-2" style="text-align:center">
+
+                <input type="number" name="valor" id="valor" class="form-control fecha" value="" style="border-style:dotted;border-color:red" />
+            </div>
+            <div class="col-md-2" style="text-align:center">
+
+
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 17 17">
+                                <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z" />
+                            </svg>
+
+
+                        </span>
+                    </div>-->
+        @*<input type="text" disabled style="text-align: right ; font-size:17px ; background-color:white; border-style:dotted;border-color:red" name="valor" id="valor" class="form-control valor" value="" />*@
+        <!--<input type="number" name="total" id="total" class="form-control" value="" style="text-align: right ; font-size:15px ; background-color:white; border-style:dotted;border-color:red" disabled />
+
+        </div>
+
+    </div>
+    <div class="col-md-4" style="text-align:center">
+
+        <textarea class="form-control" id="descripcionGastos"></textarea>
+    </div>
+    <div class="col-md-1">-->
+        @*<button style="background-color:black; color:white" type="button" id="btnAdd"><i class="fas fa-plus fa-3x"></i></button>*@
+        <!--<button type="button" title="Agregar detalle" class="btn btn-success" id="btnAdd" style="border: none; background-color: #F7F7F7">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" style="color: #52B63F" height="40" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                    </svg>
+                </button>
+            </div>
+
+        </div>
+
+
+
+
+        <br />
+    </div>
+
+    <br />-->
+
+
+        <div class="row">
+            <div class="col-md-12" style="text-align:center"><label style="color:red; font-size:22px"> <b>Gastos Agregados</b></label> </div>
+
+            <div class="col-md-12" id="tbl_list">
+
+
+                <br />
+
+            </div>
+
+        </div>
+        <div class="row" style="border-top: 3px solid black; border-bottom: 3px solid black">
+            <div class="col-md-5">
+
+            </div>
+            <div class="col-md-2" style="margin-left:-20px">
+                <label style="font-size:18px">$</label> <label style="font-size:18px" name="SumatoriaTotal" id="SumatoriaTotal"></label>
+
+            </div>
+            <div class="col-md-5">
+
+            </div>
+
+
+        </div>
+        <hr />
+
+        <br />
+
+        @if (Model.estado != "A" && Model.estado != "R")
+        {
+
+            <div class="col-md-12" style="text-align:center">
+                <h4> <u>Registro de aprobaciones</u> </h4>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-1"> <label><b>Nivel 1:</b></label></div>
+                <div class="col-md-10"> <textarea id="txtareanivel2" class="form-control" disabled>@Model.nivel1</textarea></div>
+
+            </div>
+            <br />
+            <button class="btn btn-success" type="button" onclick="EnviarFlujoA('FAE');" style="border-radius:30px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                </svg> APROBAR
+            </button>
+
+            <button class="btn btn-danger" type="button" onclick="Rechazar('FAE');" style="border-radius:30px;" data-toggle="modal" title="Agregar comentario" data-target="#btnaddComentario">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                </svg> RECHAZAR
+            </button>
+
+            <br />
+            <br />
+            <div class="row">
+                <div class="col-md-1"> <label><b>Nivel 2:</b></label></div>
+                <div class="col-md-10"> <textarea id="txtareanivel3" class="form-control"></textarea></div>
+            </div>
+            <br />
+
+            <br />
+
+
+        }
+
+        @if (Model.AlcanceFae == "1")
+        {
+
+            <div>
+                <a href="~/PIC/Alcance?id=@Model.Id" class="btn btn-success">Alcance</a>
+            </div>
+
+        }
+    </div>
+
+
+
+</form>
+
+<div id="secti">
+    <div class="modal fade" id="btnVisorImg" tabindex="-1" role="dialog" aria-labelledby="smallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #2D343D ">
+                    <h4 class="modal-title" id="smallModalLabel" style="font-family:'Times New Roman';color:white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-images" viewBox="0 0 16 16">
+                            <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                            <path d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z" />
+                        </svg> Visor de Imagenes
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" style="color:white" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body" id="sectionVisorImg">
+
+                </div>
+                <div class="modal-footer" style="background-color: #2D343D ">
+                    <button type="button" style="border-radius:30px" class="btn btn-light-2" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/alertify")
+    @Scripts.Render("~/bundles/SRG")
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        messageElementSol = $('#divMessageSol');
+
+
+    });
+         var secuen = @Model.secuencial;
+    $('#slDestino').val(@Model.destino).outerText;
+    $('#motanticefect').val(@Model.MotivoAnticipoEfectivo).outerText;
+    @*$('#ciudad').val(@Model.ciudad).outerText;
+    $('#pais').val(@Model.pais).outerText;*@
+    $('#slTC').val(@Model.usaTc).outerText;
+
+
+           alertify.set('notifier', 'position', 'top-left');
+        var DetGastos = {
+            codigoEmpleado: "",
+            destino: "",
+            motivoAnticipo: "",
+            pais: "",
+            ciudad: "",
+            usaTc: "",
+            fechadesde: "",
+            fechahasta: "",
+            secuencial:@Model.secuencial,
+            AutoFinanciera:"",
+
+            DetallGasto: []
+            }
+            var json = @Html.Raw(Json.Encode(@Model.DetallGasto));
+        DetGastos.DetallGasto = json;
+        IdCabecera = @Model.Id;
+        console.log(IdCabecera);
+    var idDetalle = DetGastos.DetallGasto.length + 1;
+
+    RenderTable(DetGastos.DetallGasto);
+    SumatoriaTotal1();
+
+    var SumatoriaTotal = 0;
+        var conteoAsist = 1;
+        var DetAsist = {
+            DetallAsist: []
+        }
+        $(document).ready(function () {
+
+            $("#formVFAE").validate({
+
+                errorElement: "em_error",
+                rules: {
+                    tipoconsumo: {
+                        required: true
+
+                    },
+                    valor: {
+                        required: true
+                    },
+                    total: {
+                        required: true
+                    },
+                    messages: {
+                        tipoconsumo: {
+                            required: "Campo requerido"
+                        },
+                        valor: {
+                            required: "Campo requerido"
+
+
+                        },
+                        total: {
+                            required: "Campo requerido"
+
+
+                        }
+                    }
+                }
+            });
+        });
+
+
+        //$("#btnAddAsistente").click(function () {
+        //    var DetallAsist = {
+        //        asistentes: $("#asistentes").val()
+        //    }
+        //    DetAsist.DetallAsist.push(DetallAsist);
+        //    RenderTable(DetAsist.DetallAsist);
+        //    $("#asistentes").val("");
+        //});
+
+
+        $("#btnAdd").click(function () {
+
+
+
+            if ($("#formVFAE").valid()) {
+
+                DetGastos.codigoEmpleado = $("#codigoempleado").val();
+                DetGastos.destino = $("#slDestino option:selected").val();
+                DetGastos.motivoAnticipo = $("#motanticefect option:selected").val();
+                DetGastos.pais = $("#pais option:selected").val();
+                DetGastos.ciudad = $("#ciudad option:selected").val();
+                DetGastos.usaTc = $("#slTC option:selected").val();
+                DetGastos.fechadesde = $("#fechadesde").val();
+                DetGastos.fechahasta = $("#fechahasta").val();
+                DetGastos.nivel1 = $("#txtareanivel2").val();
+                DetGastos.nivel2 = $("#txtareanivel3").val();
+
+                DetGastos.DetallGasto[idDetalle] = {
+                        id: idDetalle,
+                    idtipoconsumo: $("#tipoconsumo option:selected").val(),
+                    tipoconsumo: $("#tipoconsumo option:selected").text(),
+                        valor: $("#valor").val(),
+                        total: $("#total").val(),
+                        descripcionGastos: $("#descripcionGastos").val(),
+                        cantInvitados: conteoAsist,
+                        ArrayAsistente: []
+                }
+
+                var acceso = 0;
+                var arreglo = 0;
+                for (var a = 1; a <= 50; a++) {
+
+
+                    if (document.getElementById("asistentes-" + a) !== null) {
+
+                        var nombre = $('#asistentes-' + a).val();
+                        console.log(nombre);
+
+                        if (nombre.length > 3 && nombre !== null) {
+
+                            DetGastos.DetallGasto[idDetalle].ArrayAsistente[arreglo] = {
+
+                                nombre: nombre
+
+                            }
+                            arreglo = arreglo + 1;
+                        } else {
+                            acceso = 1;
+
+
+                        }
+                    }
+
+                }
+
+                if (acceso == 0) {
+
+                    //var total = $("#total").val();
+                    //SumatoriaTotal = SumatoriaTotal + parseInt(total);
+                    //document.getElementById('SumatoriaTotal').innerHTML = parseInt(SumatoriaTotal);
+                    idDetalle = idDetalle + 1;
+                   /* DetGastos.DetallGasto.push(DetallGasto);*/
+                    RenderTable(DetGastos.DetallGasto);
+                    SumatoriaTotal1();
+                    EliminarAsistente(559);
+                    LimpiarVariable();
+                } else {
+                    toastr.warning("llene todos los asistentes.")
+                }
+
+
+
+
+            }
+
+
+        });
+    function LimpiarVariable() {
+
+            $("#valor").val("");
+            $("#total").val("");
+            $("#descripcionGastos").val("");
+
+
+
+    }
+
+
+
+
+        function BuscarRepetidos(tipoconsumo) {
+
+
+
+            if (DetGastos.DetallGasto.length > 0) {
+
+                for (var i = 0; i < DetGastos.DetallGasto.length; i++) {
+
+
+                    if (DetGastos.DetallGasto[i].tipoconsumo == tipoconsumo) {
+
+
+                        return false;
+
+                    }
+                }
+
+                return true;
+            } else {
+                return true;
+            }
+
+        }
+
+        function RenderTable(producto) {
+
+            $("#tbl_list1").empty();
+
+
+
+            var html = '<table id="tbl_detalleConsumo" class="table"><thead><tr>';
+            html += '<th>#</th>';
+            html += '<th>Tipo de consumo</th>';
+            html += '<th>Valor</th>';
+            html += '<th>Total</th>';
+            html += '<th>Asistente</th>';
+            html += '<th>Descripcion</th>';
+            html += '</tr></thead>';
+
+
+            $.each(DetGastos.DetallGasto, function (index, item) {
+
+                html += '<tbody> <tr>';
+                html += '<td>' + index + '</td>';
+                html += '<td>' + item.tipoconsumo + '</td>';
+                html += '<td>' + item.valor + '</td>';
+                html += '<td>' + item.total + '</td>';
+                html += '<td>' + item.cantInvitados + '</td>';
+                html += '<td>' + item.descripcionGastos + '</td>';
+                html += '<td  style = "display:none" >' + item.tipoconsumo + '<class="hide"/td>';
+                html += '<td><button type="button" id="btnDelete" onClick="Delete(\'' + item.tipoconsumo + '\')"><i class="fas fa-trash"></i ></button></td>';
+                html += '</tr> ';
+            });
+            html += '</tbody></table>';
+
+            /*SetTipoUsuario(listU.tipoUsuario);*/
+
+
+
+            $("#tbl_list").append(html);
+            //Appy Datatable
+            //$("#tbl_cias").DataTable({
+            //    "language": {
+            //        "url": "Scripts/datatables/Spanish_Datatable.json"
+            //    }
+
+            //});
+        }
+
+        function RenderTable(producto) {
+
+            $("#tbl_list").empty();
+
+
+
+            var html = '<table id="tbl_detalleConsumo" class="table"><thead><tr>';
+            html += '<th>#</th>';
+            html += '<th>Tipo de consumo</th>';
+            html += '<th>Valor</th>';
+            html += '<th>Total</th>';
+            html += '<th>Asistente</th>';
+            html += '<th>Descripcion</th>';
+            html += '</tr></thead>';
+
+
+            $.each(DetGastos.DetallGasto, function (index, item) {
+                if (item !== undefined) {
+
+                    html += '<tbody> <tr>';
+                    html += '<td>' + index + '</td>';
+                    html += '<td>' + item.tipoconsumo + '</td>';
+                    html += '<td>' + item.valor + '</td>';
+                    html += '<td>' + item.total + '</td>';
+                    html += '<td>' + item.cantInvitados + '</td>';
+                    html += '<td>' + item.descripcionGastos + '</td>';
+                    html += '<td  style = "display:none" >' + item.tipoconsumo + '<class="hide"/td>';
+                    html += '<td><button type="button" id="btnDelete" onClick="Delete(\'' + item.id + '\')"><i class="fas fa-trash"></i ></button></td>';
+                    html += '</tr> ';
+
+                }
+
+            });
+            html += '</tbody></table>';
+
+            /*SetTipoUsuario(listU.tipoUsuario);*/
+
+
+
+            $("#tbl_list").append(html);
+            //Appy Datatable
+            //$("#tbl_cias").DataTable({
+            //    "language": {
+            //        "url": "Scripts/datatables/Spanish_Datatable.json"
+            //    }
+
+            //});
+    }
+
+
+
+    function SumatoriaTotal1() {
+        var total = 0;
+        document.getElementById('SumatoriaTotal').innerHTML = total;
+        for (var i = 0; i < DetGastos.DetallGasto.length; i++) {
+            if (DetGastos.DetallGasto[i] !== undefined) {
+
+                //if (DetGastos.DetallGasto[i].id == index1) {
+                //
+
+                //}
+
+                console.log(DetGastos.DetallGasto.length);
+                console.log(DetGastos.DetallGasto[i].total)
+                console.log(DetGastos.DetallGasto)
+                total = total + parseInt(DetGastos.DetallGasto[i].total);
+
+                document.getElementById('SumatoriaTotal').innerHTML = total ;
+
+
+            }
+
+
+
+        }
+
+
+    }
+
+
+
+
+        function Delete(index1) {
+
+
+
+            DetGastos.DetallGasto = $.grep(DetGastos.DetallGasto, function (element, index) {
+                if (element !== undefined) {
+                    console.log(element)
+                    return element.id !== parseInt(index1);
+                }
+
+
+            });
+
+            RenderTable(DetGastos);
+            SumatoriaTotal1();
+
+        }
+
+
+        $(document).on('change', '.fecha', function () {
+
+
+
+            var fechah = $("#fechahasta").val();
+            var fechad = $("#fechadesde").val();
+            var valor = $("#valor").val();
+            if (fechah != "" && fechad != "") {
+
+                var fecha1 = moment(fechad);
+                var fecha2 = moment(fechah);
+                document.getElementById("CalFecha").style.display = "Initial";
+                $("#CalculoFecha").empty();
+                var html = '   <label style="color:red">  Son ' + fecha2.diff(fecha1, 'days') +' día(s)</label>';
+                $("#CalculoFecha").append(html);
+
+            }
+
+            if (fechah != "" && fechad != "" && valor != "") {
+                var fecha1 = moment(fechad);
+                var fecha2 = moment(fechah);
+
+                var total = fecha2.diff(fecha1, 'days') * valor * conteoAsist;
+
+
+
+                $("#total").val(total);
+
+                var tc = $("#slTC option:selected").val();
+                if (tc == 2 && valor > 250) {
+                    toastr.warning("Excedio el valor máximo de $250")
+                }
+                if (tc == 1 && valor > 50) {
+                    toastr.warning("Excedio el valor máximo de $50")
+                }
+
+            }
+        });
+
+        function CalcularTotal() {
+            console.log("calculartotal")
+            var fechah = $("#fechahasta").val();
+            var fechad = $("#fechadesde").val();
+            var valor = $("#valor").val();
+            if (fechah != "" && fechad != "") {
+
+                var fecha1 = moment(fechad);
+                var fecha2 = moment(fechah);
+                document.getElementById("CalFecha").style.display = "Initial";
+                $("#CalculoFecha").empty();
+                var html = '   <label style="color:red">  Son ' + fecha2.diff(fecha1, 'days') + ' día(s)</label>';
+                $("#CalculoFecha").append(html);
+
+            }
+
+            if (fechah != "" && fechad != "" && valor != "") {
+                var fecha1 = moment(fechad);
+                var fecha2 = moment(fechah);
+
+                var total = fecha2.diff(fecha1, 'days') * valor * conteoAsist;
+
+                var tc = $("#slTC option:selected").val();
+                if (tc == 2 && valor > 250) {
+                    toastr.warning("Excedio el valor máximo de $250")
+                }
+                if (tc == 1 && valor > 50) {
+                    toastr.warning("Excedio el valor máximo de $50")
+                }
+
+
+                $("#total").val(total);
+            }
+        }
+
+
+</script>
+
+}

@@ -1,0 +1,66 @@
+﻿@model DoleEcIntranet.Models.TipoEmpaqueModels
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TipoEmpaqueModels</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pais)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pais)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PesoLibraIni)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PesoLibraIni)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PesoLibraFin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PesoLibraFin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PesoCaja)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PesoCaja)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

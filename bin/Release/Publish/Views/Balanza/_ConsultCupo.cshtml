@@ -1,0 +1,54 @@
+﻿@model IEnumerable<DoleEcIntranet.Models.DataConsultaCupo>
+
+@if (Model.Any())
+{
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Finca-Empacadora
+            </th>
+            <th>
+                Empaque
+            </th>
+            <th>
+                Cajas Procesadas
+            </th>
+            <th>
+                Cupo
+            </th>
+            <th></th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.finca)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tipoEmpaque)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cajasProcesadas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cupo)
+                </td>
+               
+            </tr>
+        }
+
+
+    </tbody>
+
+
+</table>
+}
+else { 
+    <p>No existe Data</p>
+
+}

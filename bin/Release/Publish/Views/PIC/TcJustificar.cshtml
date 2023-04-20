@@ -1,0 +1,670 @@
+﻿@model DoleEcIntranet.Models.PicModel.EstadCuentaTcViewModel
+@{
+    ViewBag.Title = "TcJustificar";
+}
+<style type="text/css">
+    #titulo {
+        font-size: 34px;
+        font-weight: bold
+    }
+
+    label {
+        color: black
+    }
+
+    #Valor {
+        height: 10px;
+    }
+
+    .error {
+        color: red
+    }
+</style>
+@Styles.Render("~/bundles/alertify/css")
+
+<form id="form">
+    <div id="miId" data-mi-id="@Model.EstadCuenta.Id"></div>
+
+    <div class="container">
+        <br />
+        <div class="row" style="text-align:center">
+            <div class="col-md-12">
+                <label id="titulo"> Estado de cuenta</label><br />
+                <label id="titulo"> Consumos tarjeta de crédito corporativa</label>
+            </div>
+
+        </div>
+        <br />
+        <hr />
+
+        <div class="col-md-12">
+
+            <label style="font-size:15px"><b>Información del estado de cuenta:</b></label>
+        </div>
+
+        <br />
+        <div class="row">
+
+            <div class="col-md-4 offset-1">
+                <p>
+                    <label><b> Identificador:</b>   </label> @Model.EstadCuenta.Identificador <br />
+                    <label><b> Cédula:</b>   </label>@Model.EstadCuenta.Cedula <br />
+                    <label><b> Consumo:</b>   </label>@Model.EstadCuenta.FechaConsumo <br />
+                    <label><b> Descripción:</b>   </label>@Model.EstadCuenta.Descripcion <br />
+                </p>
+            </div>
+            <div class="col-md-4">
+                <label><b> Documento:</b>  </label> @Model.EstadCuenta.Documento <br />
+                <label><b> Nombre:</b>  </label> @Model.EstadCuenta.Nombre <br />
+                <label><b> Corte:</b>  </label> @Model.EstadCuenta.Corte <br />
+                <label><b> Consumo TC:  </b>  </label><label style="font-size:18px" id="ValorConsumo"> <b>@Model.EstadCuenta.Valor</b>  </label> <br />
+            </div>
+
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-2 offset-8" style="text-align:right;padding-right:0px">
+
+                <label style="font-size:16px"><b>Gasto Justificado</b></label>
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-1 offset-8" style="text-align:right;padding-right:6px">
+                <svg xmlns="http://www.w3.org/2000/svg" id="SvgVisto" display="none" width="30" height="30" style="color:green" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                </svg>
+            </div>
+            <div class="col-md-1" id="Divalorjustificado" style="border-color:black;border:1px solid; text-align:center">
+                <label style="font-size:18px" id="ValorLbl"><b>0.00</b></label>
+            </div>
+        </div>
+
+        <br />
+        <div class="col-md-12">
+            <label style="font-size:15px"><b>Datos del consumo:</b></label>
+        </div>
+
+        <br />
+        <div class="row" style="text-align:center">
+            <div class="col-md-2 offset-1">
+                <label><b>Tipo</b></label>
+            </div>
+            <div class="col-md-3">
+                <label><b>Moneda - Tipo de cambio</b></label>
+            </div>
+            <div class="col-md-2">
+                <label><b>Valor de la factura</b></label>
+            </div>
+            <div class="col-md-3">
+                <label><b>Comentarios</b></label>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-2 offset-1">
+                @Html.DropDownList("tipoconsumo", null, htmlAttributes: new { @class = "form-control Monto", Styles = "font-size: 15px" })
+
+            </div>
+            <div class="col-md-2">
+                @Html.DropDownList("slMoneda", null, htmlAttributes: new { @class = "js-example-basic-single calcularValor Moneda", name = "state" })
+            </div>
+
+            <div class="col-md-1">
+                <input type="number" name="Tcambio" id="Tcambio" class="form-control" value="@Model.Tc.Tcambio" />
+            </div>
+            <div class="col-md-2">
+                <input type="number" name="valorFactura" id="valorFactura" class="form-control" oninput="ValorFactura();" value="@Model.Tc.valorFactura" />
+            </div>
+            <div class="col-md-3">
+                <textarea class="form-control" id="comentario" name="comentario">@Model.Tc.comentario</textarea>
+            </div>
+
+        </div>
+        <br />
+
+        <div class="col-md-12">
+
+            <label style="font-size:15px"><b>Datos de la factura:</b></label>
+        </div>
+
+        <br />
+        <div class="row" style="text-align:center">
+            <div class="col-md-2 offset-1">
+                <label><b>Tipo</b></label>
+            </div>
+            <div class="col-md-2">
+                <label><b>Número</b></label>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <label><b>Fecha</b></label>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="col-md-2  offset-1">
+                <select class="form-control Monto" style="font-size: 13px" id="tipofactura" name="tipofactura">
+                    <option value="">-Seleccione-</option>
+                    <option value="1">Nacional</option>
+                    <option value="2">Exterior</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <input type="number" class="form-control" name="numfactura" id="numfactura" value="@Model.Tc.numfactura" />
+            </div>
+
+            <div class="col-md-3">
+                <input type="date" class="form-control" name="fecha" id="fecha" value="@Model.Tc.fecha" />
+            </div>
+
+        </div>
+        <br />
+        <br />
+        <div class="col-md-12">
+            <label style="font-size:15px"><b>Datos del proveedor:</b></label>
+        </div>
+        <br />
+        <br />
+        <div class="row" style="text-align:center">
+            <div class="col-md-2 offset-1">
+                <label><b>Tipo</b></label>
+            </div>
+            <div class="col-md-2">
+                <label><b>Ruc</b></label>
+            </div>
+            <div class="col-md-3">
+                <label><b>Razón Social</b></label>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-2 offset-1">
+                <select class="form-control Monto" style="font-size: 13px" id="tipoproveedor" name="tipoproveedor">
+                    <option value="">-Seleccione-</option>
+                    <option value="1">Nacional</option>
+                    <option value="2">Exterior</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <input type="number" class="form-control RucVal" name="rucproveedor" id="rucproveedor" value="@Model.Tc.rucproveedor" />
+            </div>
+            <div style="text-align:right">
+                <a href="#" id="btnaddProveedor" onclick="AddProveedor();" data-toggle="modal" title="Add Proveedor" data-target="#btnaddProoveedor" style="color: #67BE63;display:none">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                        <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                    </svg>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" name="razonsocial" id="razonsocial" value="@Model.Tc.razonsocial" />
+            </div>
+
+        </div>
+
+        <br />
+        <br />
+        <div class="col-md-12">
+            <label style="font-size:15px"><b>Datos de los Invitados:</b></label>
+        </div>
+
+
+        <div>
+
+
+            <br />
+            <div class="col-md-10 offset-1" style="background-color: white;color:white; border-radius: 6px">
+                <br />
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex">
+                            <button type="button" class="btn btn-success btn-sm mr-2" data-toggle="modal" id="detalleP" data-target="#detInvitado" onclick="DetalleConsumo();">NUEVO</button>
+
+                            <button type="button" class="btn btn-primary btn-sm mr-2" data-toggle="modal" id="editar" data-target="#detInvitado" onclick="Editar();" disabled>EDITAR</button>
+
+                            <button type="button" class="btn btn-danger btn-sm" id="eliminar" onclick="EliminarDataTable();" disabled>ELIMINAR</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <br />
+                <table id="tabla-invitados" class="table table-striped table-bordered" style="border-radius:6px">
+                    <thead>
+
+
+                        <tr style="background-color: #E2E0E0; color: black;text-align:center">
+
+                            <th></th>
+                            <th></th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody style="background-color: white;text-align:center ">
+                        @if (Model != null && Model.Tc != null && Model.Tc.invitados != null)
+                        {
+                            foreach (var invitado in Model.Tc.invitados)
+                            {
+                                <tr data-id="@invitado.Id">
+
+                                    <td>@invitado.nombre</td>
+                                    <td>@invitado.empresa</td>
+                                    <td>@invitado.cargo</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+
+
+
+
+            </div>
+
+            <br />
+            <br />
+            @if (@Model.Tc.ArchivoString != null)
+            {
+         
+                <div class="col-md-12" style="text-align:center">
+                    <a href="@Url.Action("Show", "PIC", new { imageId = "fullSizeImage" })" target="_blank">
+                        
+                            <img src="data:image/png;base64,@Model.Tc.ArchivoString" style="display: block; margin-left: auto; margin-right: auto; max-width: 30%; max-height: 30%;" alt="Imagen" />
+                        </a>
+
+                </div>
+               
+            }
+           <br />
+            <br />
+            <div class=" row">
+                <div class="col-md-4 offset-4" style="text-align: center; border: 1px solid; border-radius: 3px; box-sizing: border-box; padding: 20px; background-color: #E2E0E0 ">
+                    <label><b>ADJUNTAR UN ARCHIVO</b></label>
+                    <input type="file" name="archivo" id="archivo" value="" />
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+        <br />
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-success btn-md mr-3" type="button" data-toggle="modal" data-target="#detConfirmar" onclick="Enviar();">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-send-fill mr-1" viewBox="0 0 16 16">
+                            <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z" />
+                        </svg>ENVIAR
+                    </button>
+
+                    <button class="btn btn-danger btn-md" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill mr-1" viewBox="0 0 16 16">
+                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                        </svg> ELIMINAR JUSTIFICADO
+                    </button>
+                </div>
+
+            </div>
+        </div>
+     
+
+    </div>
+    <br /><br />
+    <div class="modal fade" id="detInvitado" tabindex="-1" role="dialog" aria-labelledby="smallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="smallModalLabel">Create New</h4>
+
+                </div>
+                <div class="modal-body modal-lg" id="sectionDetInvitado">
+
+                </div>
+                <div class="modal-footer">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-2" id="btnNuevo" style="display:initial">
+                        <button type="button" onclick="Nuevo();" data-dismiss="modal" class="btn btn-success">Crear</button>
+                    </div>
+                    <div class="col-md-2" id="btnEditar" style="display:none">
+                        <button type="button" onclick="EditarDataTable();" data-dismiss="modal" class="btn btn-success">Editar</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="detConfirmar" tabindex="-1" role="dialog" aria-labelledby="smallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="color:white;background-color:black">
+                    <h4 class="modal-title" id="smallModalLabel" style="color:white">CONFIRMACIÓN</h4>
+
+                </div>
+                <div class="modal-body modal-lg" id="sectionDetConfirmar">
+
+                </div>
+                <div class="modal-footer">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-2" id="btnNuevo" style="display:initial">
+
+                        <button type="button" onclick="Ok();" class="btn btn-success">Confirmar</button>
+                    </div>
+
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="secti">
+        <div class="modal fade" id="btnaddProoveedor" tabindex="-1" role="dialog" aria-labelledby="smallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #2D343D ">
+                        <h4 class="modal-title" id="smallModalLabel" style="font-family:'Times New Roman';color:white">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                            </svg>    Agregar Proveedor
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" style="color:white" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body" id="sectionAddProveedor">
+
+                    </div>
+                    <div class="modal-footer" style="background-color: #2D343D ">
+                        <button type="button" style="border-radius:30px" class="btn btn-light-2" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/alertify")
+    @Scripts.Render("~/bundles/SRG")
+    <link href="~/Content/CustomSelect.css" rel="stylesheet" />
+    <script type="text/javascript">
+
+
+
+            $(document).ready(function () {
+                // Establece la opción seleccionada por defecto en el elemento <select> "
+                $("#tipoproveedor").val(@Model.Tc.tipoproveedor);
+                $("#tipoconsumo").val(@Model.Tc.tipoconsumo);
+                $("#tipofactura").val(@Model.Tc.tipofactura);
+                $("#slMoneda").val(@Model.Tc.slMoneda);
+                         var miLabel = document.getElementById("ValorLbl");
+
+                @if (Model != null && Model.Tc != null && Model.Tc.valorFactura != null)
+                {
+                    <text>
+                    miLabel.getElementsByTagName("b")[0].innerHTML = @Model.Tc.valorFactura;
+                    </text>
+                }
+
+
+            });
+        //#region Select2
+
+
+
+        //#endregion
+
+
+        var Tcambio = document.getElementById("Tcambio");
+        var valorFactura = document.getElementById("valorFactura");
+        var numfactura = document.getElementById("numfactura");
+        var slMoneda = document.getElementById("slMoneda");
+        var tipoconsumo = document.getElementById("tipoconsumo");
+        var tipofactura = document.getElementById("tipofactura");
+        var tipoproveedor = document.getElementById("tipoproveedor");
+        var ruc = document.getElementById("rucproveedor");
+        var razonsocial = document.getElementById("razonsocial");
+        var fecha = document.getElementById("fecha");
+        // Crear objeto de validación
+
+        $(document).ready(function () {
+            $("#form").validate({
+                // Reglas de validación para cada campo
+                errorElement: "em_error",
+                rules: {
+                    Tcambio: {
+                        required: true
+                    },
+                    valorFactura: {
+                        required: true
+                    },
+                    numfactura: {
+                        required: true
+                    },
+                    slMoneda: {
+                        required: true,
+                        min: 0.01
+                    },
+                    tipoconsumo: {
+                        required: true,
+                        min: 0.01
+                    },
+                    tipofactura: {
+                        required: true,
+                        min: 0.01
+                    },
+                    tipoproveedor: {
+                        required: true,
+                        min: 0.01
+                    },
+                    rucproveedor: {
+                        required: true
+                    },
+                    razonsocial: {
+                        required: true
+                    },
+                    fecha: {
+                        required: true
+                    }
+                },
+                // Mensajes de error personalizados para cada campo
+                messages: {
+                    Tcambio: {
+                        required: "Por favor, ingrese un valor."
+                    },
+                    valorFactura: {
+                        required: "Por favor, ingrese un valor."
+                    },
+                    numfactura: {
+                        required: "Por favor, ingrese un valor."
+                    },
+                    slMoneda: {
+                        required: "Por favor, seleccione una moneda.",
+                        min: "Por favor, seleccione una moneda."
+                    },
+                    tipoconsumo: {
+                        required: "Por favor, seleccione un consumo.",
+                        min: "Por favor, seleccione un consumo."
+                    },
+                    tipofactura: {
+                        required: "Por favor, seleccione un tipo de factura.",
+                        min: "Por favor, seleccione un tipo de factura."
+                    },
+                    tipoproveedor: {
+                        required: "Por favor, seleccione un tipo de proveedor.",
+                        min: "Por favor, seleccione un tipo de proveedor."
+                    },
+                    rucproveedor: {
+                        required: "Por favor, ingrese un valor."
+                    },
+                    razonsocial: {
+                        required: "Por favor, ingrese un valor."
+                    },
+                    fecha: {
+                        required: "Por favor, seleccione una fecha."
+                    }
+                }
+            });
+        });
+
+        var input1 = document.getElementById("Tcambio");
+        var input2 = document.getElementById("valorFactura");
+        var input3 = document.getElementById("slMoneda");
+        input1.addEventListener("input", ValorFactura);
+        input2.addEventListener("input", ValorFactura);
+        input3.addEventListener("change", ValorFactura);
+
+
+        function ValorFactura() {
+
+            var tcambio = document.getElementById("Tcambio").value;
+
+            var nuevoValor = document.getElementById("valorFactura").value;
+            var miLabel = document.getElementById("ValorLbl");
+            miLabel.getElementsByTagName("b")[0].innerHTML = nuevoValor * tcambio;
+            var div = document.getElementById("Divalorjustificado");
+            div.style.border = "1px solid black"; // o "2px solid red"
+            var miLabel = parseFloat(document.getElementById("ValorConsumo").innerText);
+            var valor = parseFloat(document.getElementById("ValorLbl").innerText);
+            document.getElementById("SvgVisto").style.display = "none";
+            if (miLabel == valor) {
+                var div = document.getElementById("Divalorjustificado");
+                div.style.border = "2px solid green"; // o "2px solid red"
+                document.getElementById("SvgVisto").style.display = "initial";
+            }
+
+        }
+
+        function Enviar() {
+
+            $('#sectionDetConfirmar').empty();
+            $('#sectionDetConfirmar').append("<div> <H4>Seguro desea continuar?</H4></div>");
+
+
+        }
+        function Ok() {
+
+            if ($("#form").valid()) {
+                var miLabel = parseFloat(document.getElementById("ValorConsumo").innerText);
+                var valor = parseFloat(document.getElementById("ValorLbl").innerText);
+                if (miLabel == valor) {
+
+                    $.blockUI({ message: messageElementSol });
+                    // Obtener la tabla
+                    var tabla = $("#tabla-invitados").DataTable();
+                    // Obtener todas las filas
+                    var filas = tabla.rows();
+                    // Crear un arreglo para almacenar los datos
+                    var datos = [];
+                    // Recorrer todas las filas
+                    filas.every(function () {
+                        var obj = {
+                            nombre: "",
+                            empresa: "",
+                            cargo: ""
+                        }
+                        // Obtener el dato de la columna "Nombre" de la fila actual
+                 
+                        obj.nombre = this.data()[0];
+                        obj.empresa = this.data()[1];
+                        obj.cargo = this.data()[2];
+
+                        // Agregar el dato al arreglo
+                        datos.push(obj);
+
+                        // Continuar con la siguiente fila
+                        return true;
+                    });
+
+
+
+                    var modelo = new FormData();
+                    var id = document.getElementById("miId").dataset.miId;
+                    console.log(id)
+                    modelo.append("Id", id);
+                    modelo.append("Tcambio", $("#Tcambio").val());
+                    modelo.append("valorFactura", $("#valorFactura").val());
+                    modelo.append("numfactura", $("#numfactura").val());
+                    modelo.append("slMoneda", $("#slMoneda").val());
+                    modelo.append("tipoconsumo", $("#tipoconsumo").val());
+                    modelo.append("tipofactura", $("#tipofactura").val());
+                    modelo.append("tipoproveedor", $("#tipoproveedor").val());
+                    modelo.append("comentario", $("#comentario").val());
+                    modelo.append("rucproveedor", $("#rucproveedor").val());
+                    modelo.append("fecha", $("#fecha").val());
+                    modelo.append("razonsocial", $("#razonsocial").val());
+                    modelo.append("Archivo", $("#archivo")[0].files[0]);
+
+                    for (var i = 0; i < datos.length; i++) {
+                        modelo.append('invitados[' + i + '].nombre', datos[i].nombre);
+                        modelo.append('invitados[' + i + '].empresa', datos[i].empresa);
+                        modelo.append('invitados[' + i + '].cargo', datos[i].cargo);
+                    }
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/PIC/TcEnviar",
+                        data: modelo,
+                        contentType: false,
+                        processData: false,
+                        success: function (response) {
+
+                            $.unblockUI();
+                            window.location.href = "/PIC/tarjetasCredito";
+                        },
+                        error: function (error) {
+                            console.log("errorrr")
+                        }
+                    });
+                } else {
+                    $('#detConfirmar').modal('hide');
+                    toastr.error("El valor a justificar no es igual al consumo.");
+                    var div = document.getElementById("Divalorjustificado");
+                    div.style.border = "1px solid red"; // o "2px solid red"
+
+                    $('html, body').animate({ scrollTop: 0 }, 'slow');
+
+
+
+                }
+
+
+            } else {
+                $('#detConfirmar').modal('hide');
+                toastr.error("Complete todos los campos necesarios.");
+                $('html, body').animate({ scrollTop: 0 }, 'slow');
+
+
+
+            }
+
+        }
+
+    </script>
+}
+
+
+

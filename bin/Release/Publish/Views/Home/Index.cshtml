@@ -1,0 +1,269 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@Styles.Render("~/bundles/calendarspicker/css")
+
+
+<div class="owl-carousel owl-theme full-width owl-loaded owl-drag owl-carousel-init m-0 mb-2" data-plugin-options="{'items': 1, 'loop': true, 'nav': true, 'dots': false, 'animateOut': 'fadeOut'}">
+    <div>
+        <img src="~/Content/img/Portada2.png" class="img-fluid" alt="">
+    </div>
+    @*<div>
+        <img src="~/Content/img/Portada2.png" class="img-fluid" alt="">
+    </div>*@
+</div>
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-3">
+
+            <div class="row">
+                <aside class="sidebar" id="sidebar" data-plugin-sticky data-plugin-options="{'minWidth': 991, 'containerSelector': '.container', 'padding': {'top': 110}}">
+
+                    @*Seccion Calendario*@
+                    <div class="row">
+
+                        <div class="container col-md-12">
+                            <div class="featured-box featured-box-secondary featured-box-effect-2" style="height: 300px; width:280px;">
+                                <div class="box-content">
+
+                                    <h4 class="text-uppercase" style="color:darkgreen"><strong>Calendario Dole</strong></h4>
+
+                                    <div id="calendars_picker">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*Seccion Links Externos*@
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="featured-box featured-box-secondary featured-box-effect-2" style="height: 385px; width:280px;">
+                                <div class="box-content">
+                                    <i class="icon-featured fas fa-link"></i>
+                                    <h4 class="text-uppercase" style="color:darkgreen"><strong>Accessos Directos</strong></h4>
+                                    <div class="text-left">
+                                        <a href="https://bpms.dole.com" target="_blank">
+                                            <i class="fa fa-link"></i>
+                                            OpenText BMPM
+                                        </a>
+                                        <br />
+                                        <a href="https://s1-2.ariba.com/Buyer/Main/ad/loginPage/SSOActions?awsso_cc=cGFzc3dvcmRhZGFwdGVyOlVHRnpjM2R2Y21SQlpHRndkR1Z5TVE9PTtyZWFsbTpSRzlzWlE9PTthd3Nzb19ydTphSFIwY0hNNkx5OXpNUzB5TG1GeWFXSmhMbU52YlM5Q2RYbGxjaTlOWVdsdVAzSmxZV3h0UFVSdmJHVW1jR0Z6YzNkdmNtUmhaR0Z3ZEdWeVBWQmhjM04zYjNKa1FXUmhjSFJsY2pFPTthd3Nzb19sdTphSFIwY0hNNkx5OXpNUzB5TG1GeWFXSmhMbU52YlM5Q2RYbGxjaTlOWVdsdUwyRmtMMk5zYVdWdWRFeHZaMjkxZEM5VFUwOUJZM1JwYjI1ejthd3Nzb19hcDpRblY1WlhJPTthd3Nzb19hcmlkOk1UVTFNemN3TlRNeE16WTFNdz09O2F3c3NvX2t1OmFIUjBjSE02THk5ek1TMHlMbUZ5YVdKaExtTnZiUzlDZFhsbGNpOU5ZV2x1TDJGa0wyTnNhV1Z1ZEV0bFpYQkJiR2wyWlM5VFUwOUJZM1JwYjI1ejthd3Nzb19mbDpNUT09%3A6y2oFgjKjEVpjbpk5%2Fc2s3ORILo%3D&awsso_ap=Buyer&awsso_hpk=true&passwordadapter=PasswordAdapter1&realm=Dole&awsr=true" target="_blank">
+                                            <i class="fa fa-link"></i>
+                                            Ariba On-Demand
+                                        </a>
+                                        <br />
+                                        <a href="http://sharepoint-ecuador/" target="_blank">
+                                            <i class="fa fa-link"></i>
+                                            Control Combustible
+                                        </a>
+                                        <br />
+                                        <a href="https://outlook.office.com/" target="_blank">
+                                            <i class="fa fa-link"></i>
+                                            Correo - Outlook 365
+                                        </a>
+                                        <br />
+                                        <a href="http://ecu-lbn-shp/" target="_blank">
+                                            <i class="fa fa-link"></i>
+                                            Sharepoint Documental
+                                        </a>
+
+                                        <br />
+                                        <a href="http://www.sri.gob.ec/web/guest/home" target="_blank">
+                                            <i class="fa fa-link"></i>
+                                            SRI
+                                        </a>
+                                        <br />
+                                        <a href="https://dole.myetweb.com/ETWeb11Dole/ASP/System/LoginProvider/NamePasswordProvider.asp" target="_blank">
+                                            <i class="fa fa-link"></i>
+                                            Lumesse
+                                        </a>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    @*Seccion Formularios*@
+                    <div class="row">
+
+                        <div class="container col-md-12">
+
+                            <div class="featured-box featured-box-secondary featured-box-effect-1" style="height: 385px;width:280px;">
+                                <div class="box-content">
+                                    <i class="icon-featured fas fa-book"></i>
+                                    <h4 class="text-uppercase" style="color:darkgreen"> <strong>Formularios</strong></h4>
+                                    <div class="text-left">
+                                        <a href="~/Content/files/formularios/FORMATO_ANTICIPO_CTA._MEDICA.xls">
+                                            <i class="fas fa-book"></i>
+                                            Anticipo Cuenta Medica
+                                        </a>
+                                        <br />
+                                        <a href="~/Content/files/formularios/Aviso_de_Reclamo_EBS.pdf" target="_blank">
+                                            <i class="fas fa-book"></i>
+                                            Aviso de Reclamo
+                                        </a>
+                                        <br />
+                                        <a href="~/Content/files/formularios/Instructivo_para_elaboracion_ y_aprobacion_de_FAV.pdf">
+                                            <i class="fas fa-book"></i>
+                                            Instructivo para Elab. y Aprobacion FAV
+                                        </a>
+                                        <br />
+                                        
+                                    </div>
+                                    @Html.ActionLink("Todos los Formularios", "MostrarFormularios", "Home", null, new { @class = "lnk-secondary learn-more" })
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    </aside>
+
+            </div>
+
+            <br />
+
+
+
+
+        </div>
+        <div class="col-lg-9">
+
+            <hr class="d-lg-none tall" />
+
+
+
+            <div class="toggle toggle-primary" data-plugin-toggle data-plugin-options="{ 'isAccordion': true }">
+                <section class="toggle active">
+                    <label class="text-center">Noticias</label>
+                    <div class="toggle-content">
+
+
+
+
+                        <section id="Seccion1" class="container">
+                            <div class="row">
+                              
+                                <div class="col-md-12">
+                                    <a href="http://ecu-lbn-wpress:8080/WP-DOLE/" target="_blank">
+                                        <img src="~/Content/img/virtual.jpg" width="800" height="1100" />
+                                    </a>
+                                   
+                                </div>
+                            </div>
+                            <br />
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a href="http://ecu-lbn-wpress:8080/WP-DOLE/" target="_blank"><h4 style="color:#00346D;">CAMPUS VIRTUAL DOLE</h4></a>
+                                    <p>Bienvenidos a nuestro portal de capacitación virtual Dole.  Diviértete mientras adquieres conocimientos. Accede a la página dando clic en..<a href="http://ecu-lbn-wpress:8080/WP-DOLE/" target="_blank">Dolevirtual. </a> </p>
+                                    <div class="embed-responsive embed-responsive-16by9 mb-0">
+                                        <video controls="controls" autoplay="autoplay" id="video2423" name="video2423">
+                                            <source src="~/Content/media/video-promocional-campus-dole.mp4" type="video/mp4" />
+                                        </video>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            @Html.Partial("_Noticias")
+                        </section>
+                        <div class="col-md-5 offset-md-4">
+                            <br />
+                            <input type="button" value="Cargar Más Articulos" class="btn btn-primary btn-lg" onclick="cargarNoticiasExternas(false)" />
+                            <div id="loading1"></div>
+                        </div>
+
+
+
+
+
+                    </div>
+                </section>
+                @*<section class="toggle">
+                    <label>Noticias Externas</label>
+                    <div class="toggle-content">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget leo at velit imperdiet varius. In eu ipsum vitae velit congue iaculis vitae at risus. Nullam tortor nunc, bibendum vitae semper a, volutpat eget massa. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fringilla, orci sit amet posuere auctor, orci eros pellentesque odio, nec pellentesque erat ligula nec massa. Aenean consequat lorem ut felis ullamcorper posuere gravida tellus faucibus. Maecenas dolor elit, pulvinar eu vehicula eu, consequat et lacus. Duis et purus ipsum. In auctor mattis ipsum id molestie. Donec risus nulla, fringilla a rhoncus vitae, semper a massa. Vivamus ullamcorper, enim sit amet consequat laoreet, tortor tortor dictum urna, ut egestas urna ipsum nec libero. Nulla justo leo, molestie vel tempor nec, egestas at massa. Aenean pulvinar, felis porttitor iaculis pulvinar, odio orci sodales odio, ac pulvinar felis quam sit.</p>
+                    </div>
+                </section>*@
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    @Scripts.Render("~/bundles/calendarspicker")
+
+<script type="text/javascript">
+    //Variables
+    var pageSeccion1 = 0;
+    var pageSeccion2 = 0;
+    var _inCallback1 = false;
+    var _inCallback2 = false;
+
+    //$(window).on('pageshow', function () {
+    //    var vids = document.getElementById('video2423');
+    //    //for (var i = 0; i < vids.length;) {
+    //        vids.play();
+    // //   }
+    //})
+
+    $(document).ready(function () {
+
+        cargarNoticiasExternas(true);
+      //  $("video2423").play();
+       
+
+            //Aplicar calendario
+            $("#calendars_picker").calendarsPicker({
+                calendar: $.calendars.instance('gregorian', 'es')
+
+
+
+            });
+
+        });
+
+        //Se cargan las secciones de noticias 
+        function cargarNoticiasExternas(inicioC) {
+            if (pageSeccion1 > -1 && !_inCallback1) {
+                _inCallback1 = true;
+                pageSeccion1++;
+                $('div' + "#loading1").html('<p><img src="/Content/img/loading.gif"></p>');
+                $.get("/Home/CargarSeccion/", { seccionCat: 2, pagina: pageSeccion1, primeraVez: inicioC }, function (data) {
+                    if (data != '') {
+                        $("#Seccion1").append(data);
+                        if (inicioC) {
+                            pageSeccion1 = 0;
+                        }
+
+                    }
+                    else {
+                        pageSeccion1 = -1;
+                    }
+
+                    _inCallback1 = false;
+                    $('div' + "#loading1").empty();
+                });
+            }
+        }
+
+
+
+    </script>
+
+
+}

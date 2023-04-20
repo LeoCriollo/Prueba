@@ -1,0 +1,85 @@
+﻿@model IEnumerable<DoleEcIntranet.Models.ColaboradoresIngresoMes>
+
+
+@{
+    ViewBag.Title = "Nuevo Colaborador del Mes";
+}
+
+
+<section class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="breadcrumb">
+                    <li>Personal</li>
+                    <li>Selección y Desempeño</li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>Nuevos Colaboradores del Mes</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-lg-8 offset-2"></div>
+
+        @if (Model.Any())
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.trabajador)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.fechaIngreso)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.fechaInicio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.nombreCia)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => item.trabajador)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.fechaIngreso)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.fechaInicio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.nombreCia)
+                        </td>
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+
+        }
+        else
+        {
+            <p class="text-center">No hay ingresos actuales.</p>
+
+        }
+
+
+
+    </div>
+</div>
+

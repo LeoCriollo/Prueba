@@ -1,0 +1,98 @@
+﻿@model DoleEcIntranet.Models.FileUploadModel
+
+
+
+@{
+    ViewBag.Title = "Envio Correo Masivos";
+}
+
+
+<section class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="breadcrumb">
+                    <li>Naportec</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>Envio de Correos</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<div class="container">
+    @using (Html.BeginForm("IndexEnvio", "NaportecMenu", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-md-6">
+                @Html.TextBoxFor(model => model.fileUpload, "", new { @type = "file", @accept = ".xlsx" })
+                @Html.ValidationMessageFor(model => model.fileUpload, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-6">
+                <input type="submit" class="btn btn-primary" value="Procesar" />
+            </div>
+
+        </div>
+
+
+    }
+</div>
+
+
+
+@section scripts{
+
+    <script type="text/javascript">
+
+        let messageElementSol;
+
+        $(document).ready(function () {
+            messageElementSol = $('#divMessageSol');
+        });
+
+        $('form').ajaxForm({
+            dataType: 'json',
+
+            beforeSubmit: function () {
+                $.blockUI({ message: messageElementSol });
+
+            },
+
+            success: function (responseText) {
+
+                $.unblockUI();
+                if (responseText.length == 0) {
+                    alert("Proceso terminado correctamente");                    
+                }
+                else {
+                    alert(responseText);
+                }
+
+            },
+
+            error: function () {
+
+                $.unblockUI();
+                alert(responseText);
+
+            }
+        });
+
+
+
+
+
+
+
+    </script>
+    
+}

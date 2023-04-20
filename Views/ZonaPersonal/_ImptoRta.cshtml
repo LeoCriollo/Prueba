@@ -1,0 +1,330 @@
+﻿@model DoleEcIntranet.Models.ImptoRta
+
+@{ 
+    string label1 = "(-) APORTES IESS (sobre " + Model.totalSueldos + ")";
+}
+
+@if (Model.det.Any())
+{
+
+    <div class="col-md-12">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.cab.compania, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.cab.compania, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                </div>
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.cab.fechaPago, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.cab.fechaPago, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.cab.nombre, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.cab.nombre, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                </div>
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.cab.codEmpleado, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.cab.codEmpleado, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.cab.cedula, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.cab.cedula, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                </div>
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.cab.cargo, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.cab.cargo, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.cab.mes, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.cab.mes, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                </div>
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.cab.centroCosto, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.cab.centroCosto, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                </div>
+            </div>
+          
+        </div>
+        <hr />
+
+        <div class="container">
+
+
+            <h5 class="text-center heading-light col-lg-12 background-color-primary" style="padding: 8px;">INGRESOS ANUALES</h5>
+
+
+            @foreach (var item1 in Model.det.Where(w => w.tipoGrupo == 1))
+            {
+                <div class="row">
+                    <div class="col-md-2">
+
+                        <label class="control-label">@item1.idConcepto</label>
+
+
+                    </div>
+                    <div class="col-md-6">
+                        @if (item1.idConcepto == 16520)
+                        {
+                            <label class="control-label">@item1.descConcepto @ViewBag.desc1</label>
+                        }
+                        else if (item1.idConcepto == 16500)
+                        {
+                            <label class="control-label">@item1.descConcepto @ViewBag.desc2</label>
+                        }
+                        else
+                        {
+                            <label class="control-label">@item1.descConcepto</label>
+                        }
+
+                    </div>
+                    <div class="col-md-4" style="text-align:right">
+                        @Html.DisplayFor(model => item1.valor, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            }
+            <br />
+
+            <div class="row">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-6">
+                    <h5><strong>TOTAL SUELDOS......</strong></h5>
+                </div>
+                <div class="col-md-4" style="text-align:right;text-decoration-line:underline">
+                    <h4>
+                        @Html.DisplayFor(model => model.totalSueldos, new { htmlAttributes = new { @class = "form-control" } })
+
+                    </h4>
+                </div>
+            </div>
+            <br />
+            @foreach (var item2 in Model.det.Where(w => w.tipoGrupo == 2))
+            {
+                <div class="row">
+                    <div class="col-md-2">
+                        <label class="control-label">@item2.idConcepto</label>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label">@item2.descConcepto</label>
+                    </div>
+                    <div class="col-md-4" style="text-align:right">
+                        @Html.DisplayFor(model => item2.valor, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            }
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-6">
+                    <h5><strong>TOTAL INGRESOS ANUALES</strong></h5>
+                </div>
+                <div class="col-md-4" style="text-align:right;text-decoration-line:underline">
+                    <h4>
+                        @Html.DisplayFor(model => model.totalIngresosAnuales, new { htmlAttributes = new { @class = "form-control" } })
+                    </h4>
+                </div>
+            </div>
+            @foreach (var item3 in Model.det.Where(w => w.tipoGrupo == 3).OrderBy(o=>o.idConcepto))
+            {
+                <div class="row">
+                    <div class="col-md-2">
+                        <label class="control-label">@item3.idConcepto</label>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label">@item3.descConcepto</label>
+                    </div>
+                    <div class="col-md-4" style="text-align:right">
+                        @Html.DisplayFor(model => item3.valor, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            }
+
+
+
+            <div class="row">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-6">
+                    <h5> @label1 </h5>
+                </div>
+                <div class="col-md-4" style="text-align:right">
+                    <strong>
+                        @Html.DisplayFor(model => model.aporteIess, new { htmlAttributes = new { @class = "form-control" } })
+                    </strong>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-6">
+                    <h5><strong> BASE IMPONIBLE </strong></h5>
+                </div>
+                <div class="col-md-4" style="text-align:right;text-decoration-line:underline">
+                    <h4>
+                        @Html.DisplayFor(model => model.baseImponible, new { htmlAttributes = new { @class = "form-control" } })
+                    </h4>
+                </div>
+            </div>
+            <br />
+            <h5 class="text-center heading-light col-lg-12 background-color-primary" style="padding: 8px;">IMPUESTOS A PAGAR</h5>
+            @if (Model.det.Any(w => w.tipoGrupo == 4))
+            {
+                foreach (var item4 in Model.det.Where(w => w.tipoGrupo == 4))
+                {
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label class="control-label">@item4.idConcepto</label>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="control-label">@item4.descConcepto</label>
+                        </div>
+                        <div class="col-md-4" style="text-align:right">
+                            @Html.DisplayFor(model => item4.valor, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                }
+
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-md-2">
+                        <label class="control-label">16560</label>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label">@ViewBag.g41</label>
+                    </div>
+                    <div class="col-md-4" style="text-align:right">
+                        0.00
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label">@ViewBag.g42</label>
+                    </div>
+                    <div class="col-md-4" style="text-align:right">
+                        0.00
+                    </div>
+                </div>
+
+            }
+
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-6">
+                    <h5><strong> DIFERENCIA </strong></h5>
+                </div>
+                <div class="col-md-4" style="text-align:right;text-decoration-line:underline">
+                    <h4>
+                        @Html.DisplayFor(model => model.diferencia, new { htmlAttributes = new { @class = "form-control" } })
+                    </h4>
+                </div>
+            </div>
+
+
+
+            @foreach (var item5 in Model.det.Where(w => w.tipoGrupo == 5))
+            {
+                <div class="row">
+                    <div class="col-md-2">
+                        <label class="control-label">@item5.idConcepto</label>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label">@item5.descConcepto</label>
+                    </div>
+                    <div class="col-md-4" style="text-align:right">
+                        @Html.DisplayFor(model => item5.valor, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            }
+
+            <div class="row">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-6">
+                    <h6> [Formula: Diferencia / Meses Restantes] </h6>
+                </div>
+                <div class="col-md-4">
+
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-6">
+                    <h5><strong> TOTAL IR RETENIDO A LA FECHA </strong></h5>
+                </div>
+                <div class="col-md-4" style="text-align:right;text-decoration-line:underline">
+                    <h4>
+                        @Html.DisplayFor(model => model.totalRetFecha, new { htmlAttributes = new { @class = "form-control" } })
+                    </h4>
+                </div>
+            </div>
+
+            <br />
+            <div class="row no-print">
+                <div class="col-md-3"></div>
+                <div class="col-md-6" style="text-align:center">
+                    <button type="button" class="btn btn-primary" onclick="print();"><i class="fas fa-print"></i> Imprimir</button>
+
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+
+
+
+        </div>
+      
+
+
+    </div>
+
+}
+else
+{
+    <div class="col-md-12">
+        <p>
+            No se encontraron datos.
+        </p>
+    </div>
+
+}

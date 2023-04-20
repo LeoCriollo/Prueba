@@ -1,0 +1,66 @@
+﻿@model IEnumerable<DoleEcIntranet.Models.CiudadHoteles>
+
+
+
+@if (Model.Any())
+{
+    <div class="col-md-12">
+        <table class="table table-striped" id="tbl_ciudadh" name="tbl_ciudadh">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ciudad)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.hoteles)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.habitacionSencilla)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.telefono)
+                    </th>
+                    <th></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ciudad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.hoteles)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.habitacionSencilla)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.telefono)
+                        </td>
+                        <td>
+
+                            <button type="button" data-toggle="modal" data-target="#dethotel" data-id-codigo='@item.codHotel' onclick="MostrarDetalle(this);" class="btn btn-3d btn-quaternary "><i class="fas fa-search"></i>  Detalle </button>
+
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="row">
+        <p>No existen datos</p>
+    </div>
+}

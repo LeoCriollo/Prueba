@@ -1,0 +1,87 @@
+﻿@model DoleEcIntranet.Models.TipoEmpaqueModels
+
+@{
+    ViewBag.Title = "Nuevo Tipo de Empaque";
+}
+
+<section class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul class="breadcrumb">
+                    <li>Captura Balanza</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>Crear Tipos de Empaque</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+       
+           
+         
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            @Html.LabelFor(model => model.Codigo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Codigo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Codigo, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+           <br />
+
+        <div class="row">
+            @Html.LabelFor(model => model.Pais, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.Pais, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Pais, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.PesoLibraIni, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.PesoLibraIni, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @step = "0.01", @value = "0" } })
+                @Html.ValidationMessageFor(model => model.PesoLibraIni, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+         
+
+        <div class="row">
+            @Html.LabelFor(model => model.PesoLibraFin, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.PesoLibraFin, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @step = "0.01", @value = "0" } })
+                @Html.ValidationMessageFor(model => model.PesoLibraFin, "", new { @class = "text-danger" })
+            </div>
+          
+        </div>
+
+          <br />
+
+            <div class="row">
+                <div class="col-md-2 offset-5">
+                    <input type="submit" value="Registrar" class="btn btn-primary" />
+                </div>
+            </div>
+       
+    }
+
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,54 @@
+﻿@model DoleEcIntranet.Models.ArticuloViewModel
+
+
+@{
+    ViewBag.Title = "Noticias";
+}
+
+<div class="container">
+
+   
+
+    <div class="body rounded">
+        <div class="container rounded">
+
+            <div class="row rounded ">
+                @*<div class="col-md-1 ">
+
+
+                    </div>*@
+                <div class="col-md-12 shadow  badge-dark rounded ">
+                    <hr />
+                    <h1 class="lnk-light nav-link "> <strong> @Model.titulo </strong></h1>
+                    <hr />
+                </div>
+
+                <hr />
+            </div>
+            <br />
+            <br />
+            <div class="container">
+                <div class="row" style=" text-decoration:none; text-align:initial">
+
+                    <span class="col-md-12 ">  @Html.Raw(Model.contenido)</span>
+                </div>
+            </div>
+            <hr />
+            <div>
+                <h5 class=" lnk-light nav-link ">  @Html.ActionLink("Regresar", "Index")</h5>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+    </div>
+
+</div>
+
+
+
